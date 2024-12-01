@@ -1,0 +1,70 @@
+CRITICAL - 2024-11-14 13:42:01 --> Error: Class "App\Models\ArticleRechercheModel" not found
+[Method: GET, Route: articlesrecherche]
+in APPPATH/Controllers/ArticlesRecherche.php on line 30.
+ 1 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesRecherche->index()
+ 2 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/public/index.php')
+CRITICAL - 2024-11-14 13:42:35 --> ErrorException: Undefined variable $perPage
+[Method: GET, Route: articlesrecherche]
+in APPPATH/Views/articlesrecherche.php on line 20.
+ 1 APPPATH/Views/articlesrecherche.php(20): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/app/Views/articlesrecherche.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/ArticlesRecherche.php(41): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesRecherche->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/public/index.php')
+CRITICAL - 2024-11-14 13:42:38 --> ErrorException: Undefined variable $perPage
+[Method: GET, Route: articlesrecherche]
+in APPPATH/Views/articlesrecherche.php on line 20.
+ 1 APPPATH/Views/articlesrecherche.php(20): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/app/Views/articlesrecherche.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/ArticlesRecherche.php(41): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesRecherche->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/public/index.php')
+CRITICAL - 2024-11-14 13:44:18 --> ErrorException: Undefined variable $perPage
+[Method: GET, Route: articlesrecherche]
+in APPPATH/Views/articlesrecherche.php on line 20.
+ 1 APPPATH/Views/articlesrecherche.php(20): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/app/Views/articlesrecherche.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/ArticlesRecherche.php(41): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesRecherche->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/public/index.php')
+CRITICAL - 2024-11-14 13:50:10 --> ErrorException: Undefined variable $sortField
+[Method: GET, Route: articlesrecherche]
+in APPPATH/Views/articlesrecherche.php on line 32.
+ 1 APPPATH/Views/articlesrecherche.php(32): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/app/Views/articlesrecherche.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/ArticlesRecherche.php(43): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesRecherche->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/home/etudiant/lc222516/CodeIgniter/TP9/GestionPagination/public/index.php')

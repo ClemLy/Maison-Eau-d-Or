@@ -1,0 +1,200 @@
+CRITICAL - 2024-10-25 11:22:33 --> CodeIgniter\Pager\Exceptions\PagerException: modif_full n'est pas un template de pagination valide.
+[Method: GET, Route: articles/index]
+in SYSTEMPATH/Pager/Pager.php on line 124.
+ 1 SYSTEMPATH/Pager/Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate()
+ 2 SYSTEMPATH/Pager/Pager.php(87): CodeIgniter\Pager\Pager->displayLinks()
+ 3 APPPATH/Views/articles.php(39): CodeIgniter\Pager\Pager->links()
+ 4 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP8/GestionPagination/app/Views/articles.php')
+ 5 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 7 APPPATH/Controllers/Articles.php(18): view()
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Articles->index()
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 11:23:18 --> CodeIgniter\Pager\Exceptions\PagerException: ./pagination/modif_full n'est pas un template de pagination valide.
+[Method: GET, Route: articles/index]
+in SYSTEMPATH/Pager/Pager.php on line 124.
+ 1 SYSTEMPATH/Pager/Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate()
+ 2 SYSTEMPATH/Pager/Pager.php(87): CodeIgniter\Pager\Pager->displayLinks()
+ 3 APPPATH/Views/articles.php(49): CodeIgniter\Pager\Pager->links()
+ 4 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP8/GestionPagination/app/Views/articles.php')
+ 5 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 7 APPPATH/Controllers/Articles.php(18): view()
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Articles->index()
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 11:23:24 --> CodeIgniter\Pager\Exceptions\PagerException: pagination/modif_full n'est pas un template de pagination valide.
+[Method: GET, Route: articles/index]
+in SYSTEMPATH/Pager/Pager.php on line 124.
+ 1 SYSTEMPATH/Pager/Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate()
+ 2 SYSTEMPATH/Pager/Pager.php(87): CodeIgniter\Pager\Pager->displayLinks()
+ 3 APPPATH/Views/articles.php(49): CodeIgniter\Pager\Pager->links()
+ 4 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP8/GestionPagination/app/Views/articles.php')
+ 5 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 7 APPPATH/Controllers/Articles.php(18): view()
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Articles->index()
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 11:23:38 --> CodeIgniter\Pager\Exceptions\PagerException: modif_full n'est pas un template de pagination valide.
+[Method: GET, Route: articles/index]
+in SYSTEMPATH/Pager/Pager.php on line 124.
+ 1 SYSTEMPATH/Pager/Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate()
+ 2 SYSTEMPATH/Pager/Pager.php(87): CodeIgniter\Pager\Pager->displayLinks()
+ 3 APPPATH/Views/articles.php(49): CodeIgniter\Pager\Pager->links()
+ 4 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP8/GestionPagination/app/Views/articles.php')
+ 5 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 7 APPPATH/Controllers/Articles.php(18): view()
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Articles->index()
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:09:40 --> ErrorException: Undefined property: Config\Pager::$perPage
+[Method: GET, Route: articles/index]
+in SYSTEMPATH/Pager/Pager.php on line 407.
+ 1 SYSTEMPATH/Pager/Pager.php(407): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/Pager/Pager.php(217): CodeIgniter\Pager\Pager->ensureGroup()
+ 3 SYSTEMPATH/BaseModel.php(1282): CodeIgniter\Pager\Pager->getCurrentPage()
+ 4 APPPATH/Controllers/Articles.php(14): CodeIgniter\BaseModel->paginate()
+ 5 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Articles->index()
+ 6 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 7 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 8 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+10 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+11 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:11:59 --> Error: Class "App\Models\ArticlePersoModel" not found
+[Method: GET, Route: articles-perso]
+in APPPATH/Controllers/ArticlesPerso.php on line 12.
+ 1 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 2 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 4 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 6 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+ 7 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:13:05 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articles/index.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:13:47 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articlesPerso/index.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:15:02 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articles-perso/index.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:15:55 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articles-perso.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:15:56 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articles-perso.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:15:56 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articles-perso.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:15:56 --> CodeIgniter\View\Exceptions\ViewException: Fichier non valide : articles-perso.php
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Exceptions/FrameworkException.php on line 41.
+ 1 SYSTEMPATH/View/View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile()
+ 2 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 3 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 4 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 5 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')
+CRITICAL - 2024-10-25 12:18:26 --> CodeIgniter\Pager\Exceptions\PagerException: perso n'est pas un template de pagination valide.
+[Method: GET, Route: articles-perso]
+in SYSTEMPATH/Pager/Pager.php on line 124.
+ 1 SYSTEMPATH/Pager/Pager.php(124): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate()
+ 2 SYSTEMPATH/Pager/Pager.php(87): CodeIgniter\Pager\Pager->displayLinks()
+ 3 APPPATH/Views/articlesPerso.php(39): CodeIgniter\Pager\Pager->links()
+ 4 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP8/GestionPagination/app/Views/articlesPerso.php')
+ 5 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 7 APPPATH/Controllers/ArticlesPerso.php(27): view()
+ 8 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ArticlesPerso->index()
+ 9 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+10 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+11 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+13 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+14 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP8/GestionPagination/public/index.php')

@@ -1,0 +1,75 @@
+CRITICAL - 2024-09-16 08:26:02 --> ErrorException: Undefined variable $lienHome
+[Method: GET, Route: Competence1]
+in APPPATH/Views/pageComp1.php on line 2.
+ 1 APPPATH/Views/pageComp1.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $lienHome', '/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/app/Views/pageComp1.php', 2)
+ 2 SYSTEMPATH/View/View.php(234): include('/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/app/Views/pageComp1.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render('pageComp1.php', [], true)
+ 5 APPPATH/Controllers/ControleurComp1/Competence1.php(10): view('pageComp1.php')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ControleurComp1\Competence1->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ControleurComp1\Competence1))
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH/rewrite.php(44): require_once('/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/public/index.php')
+CRITICAL - 2024-09-16 08:26:38 --> ErrorException: Undefined variable $lienHome
+[Method: GET, Route: Competence1]
+in APPPATH/Views/pageComp1.php on line 2.
+ 1 APPPATH/Views/pageComp1.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $lienHome', '/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/app/Views/pageComp1.php', 2)
+ 2 SYSTEMPATH/View/View.php(234): include('/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/app/Views/pageComp1.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render('pageComp1.php', [], true)
+ 5 APPPATH/Controllers/ControleurComp1/Competence1.php(10): view('pageComp1.php')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ControleurComp1\Competence1->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ControleurComp1\Competence1))
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH/rewrite.php(44): require_once('/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/public/index.php')
+CRITICAL - 2024-09-16 08:28:06 --> ErrorException: Undefined variable $lienHome
+[Method: GET, Route: Competence1]
+in APPPATH/Views/pageComp1.php on line 8.
+ 1 APPPATH/Views/pageComp1.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $lienHome', '/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/app/Views/pageComp1.php', 8)
+ 2 SYSTEMPATH/View/View.php(234): include('/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/app/Views/pageComp1.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render('pageComp1.php', [], true)
+ 5 APPPATH/Controllers/ControleurComp1/Competence1.php(10): view('pageComp1.php')
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ControleurComp1\Competence1->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ControleurComp1\Competence1))
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH/rewrite.php(44): require_once('/Users/clemly/Desktop/IUT/TP/s5/r5.05_prog_avancee/TP3-Clémentin-LY/public/index.php')
+CRITICAL - 2024-09-16 13:17:38 --> ErrorException: Undefined variable $baseColor
+[Method: GET, Route: Competence2]
+in APPPATH/Views/commun/haut.php on line 5.
+ 1 APPPATH/Views/commun/haut.php(5): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP3-Clémentin-LY/app/Views/commun/haut.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/ControleurComp2/Competence2.php(13): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\ControleurComp2\Competence2->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP3-Clémentin-LY/public/index.php')
+CRITICAL - 2024-09-16 13:17:43 --> ErrorException: Undefined variable $baseColor
+[Method: GET, Route: /]
+in APPPATH/Views/commun/haut.php on line 5.
+ 1 APPPATH/Views/commun/haut.php(5): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/View/View.php(234): include('/di/codeigniter/lc222516/TP3-Clémentin-LY/app/Views/commun/haut.php')
+ 3 SYSTEMPATH/View/View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH/Common.php(1169): CodeIgniter\View\View->render()
+ 5 APPPATH/Controllers/Home.php(13): view()
+ 6 SYSTEMPATH/CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH/CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController()
+ 8 SYSTEMPATH/CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest()
+ 9 SYSTEMPATH/Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH/Boot.php(67): CodeIgniter\Boot::runCodeIgniter()
+11 FCPATH/index.php(56): CodeIgniter\Boot::bootWeb()
+12 SYSTEMPATH/rewrite.php(44): require_once('/di/codeigniter/lc222516/TP3-Clémentin-LY/public/index.php')

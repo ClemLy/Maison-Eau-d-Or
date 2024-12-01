@@ -1,0 +1,25 @@
+ERROR - 2024-09-20 06:15:09 --> Email: Impossible d'envoyer des emails avec la méthode SMTP de PHP. Votre serveur n'est peut-être pas configuré pour pouvoir utiliser cette méthode.
+ERROR - 2024-09-20 06:15:09 --> 220 smtp.mail.yahoo.com ESMTP ready
+
+hello: 250-hermes--production-ir2-6664f499fc-68tng Hello localhost [194.254.109.180])
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-SIZE 41697280
+250 STARTTLS
+
+starttls: 220 2.0.0 Ready to start TLS
+
+hello: 250-hermes--production-ir2-6664f499fc-68tng Hello localhost [194.254.109.180])
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-SIZE 41697280
+250 AUTH PLAIN LOGIN XOAUTH2 OAUTHBEARER
+
+from: 550 Request failed; Mailbox unavailable
+
+L'erreur SMTP suivante s'est produite : 550 Request failed; Mailbox unavailable
+
+quit: 221 Service Closing transmission
+
