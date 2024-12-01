@@ -1,0 +1,11 @@
+# Fichier de configuration contenant des données sensibles
+.env
+
+# Dossiers contenant des fichiers générés
+**/writable/
+
+# Ignore les fichiers de dépendances installées par Composer & node
+/vendor
+
+# Ignore le fichier de verrouillage de Composer
+composer.lock
