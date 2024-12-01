@@ -19,7 +19,7 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
 
 ```bash
    git clone git@github.com:ClemLy/Maison-Eau-d-Or.git
-   cd MaisonEaudOr
+   cd Maison-Eau-d-Or
 
 2. **Installer les dépendances**
 
