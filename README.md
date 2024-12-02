@@ -58,14 +58,14 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
 
    Afin d'exécuter votre fichier `.env`, installez la bibliothèque vlucas/phpdotenv en exécutant cette commande dans le terminal :
    ```cmd
-    cd SGT
+    cd Maison-Eau-d-Or
     composer require vlucas/phpdotenv
    ```
 
 5. **Démarrer le serveur local**
   
    ```bash
-    cd SGT
+    cd Maison-Eau-d-Or
     php spark serve
    ```
    
