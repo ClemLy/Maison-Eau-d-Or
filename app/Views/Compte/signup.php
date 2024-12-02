@@ -37,7 +37,7 @@ label {
 }
 
 input[type="text"],
-input[type="email_user"],
+input[type="email"],
 input[type="password"] {
 	width: 100%;
 	padding: 10px;
@@ -51,7 +51,7 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="email_user"]:focus,
+input[type="email"]:focus,
 input[type="password"]:focus {
 	border-color: #80bdff;
 	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -141,18 +141,18 @@ button[type="submit"]:hover {
 
 		<form action="<?= site_url('signup/store') ?>" method="post">
 			<div class="form-group">
-				<label for="nom_user">Nom</label>
-				<input type="text" name="nom_user" id="nom_user" value="<?= set_value('nom_user') ?>" required>
+				<label for="first_name">Nom</label>
+				<input type="text" name="first_name" id="first_name" value="<?= set_value('first_name') ?>" required>
 			</div>
 
 			<div class="form-group">
-				<label for="prenom_user">Prenom</label>
-				<input type="text" name="prenom_user" id="prenom_user" value="<?= set_value('prenom_user') ?>" required>
+				<label for="last_name">Prénom</label>
+				<input type="text" name="last_name" id="last_name" value="<?= set_value('last_name') ?>" required>
 			</div>
 
 			<div class="form-group">
-				<label for="email_user">Adresse email</label>
-				<input type="email_user" name="email_user" id="email_user" value="<?= set_value('email_user') ?>" required>
+				<label for="email">Adresse email</label>
+				<input type="email" name="email" id="email" value="<?= set_value('email') ?>" required>
 			</div>
 
 			<div class="form-group">

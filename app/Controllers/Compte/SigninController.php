@@ -1,7 +1,7 @@
 <?php
 	namespace App\Controllers\Compte;
-	use CodeIgniter\Controller;
-	use App\Models\UserModel;
+
+	use App\Models\AccountModel;
 	use App\Controllers\BaseController;
 
 	class SigninController extends BaseController
@@ -15,7 +15,6 @@
 		{
 			if (session()->get('isLoggedIn'))
 			{
-				// Si la session a été marquée pour la redirection
 				if (session()->get('auto_redirect'))
 				{
 					return redirect()->to('/account');
@@ -31,32 +30,29 @@
 			echo view('commun/footer');
 		}
 
-
 		public function loginAuth()
 		{
+			$session      = session();
+			$accountModel = new AccountModel();
+			$email        = $this->request->getVar('email');
+			$password     = $this->request->getVar('password');
+			$remember     = $this->request->getVar('remember');
 
-			$session   = session();
-			$userModel = new UserModel();
-			$email     = $this->request->getVar('email_user');
-			$password  = $this->request->getVar('password');
-			$remember  = $this->request->getVar('remember');
+			$data = $accountModel->where('email', $email)->first();
 
-
-			$data      = $userModel->where('email_user', $email)->first();
-			
-			if($data)
+			if ($data)
 			{
 				$pass = $data['password'];
 				$authenticatePassword = password_verify($password, $pass);
 
-				if($authenticatePassword)
+				if ($authenticatePassword)
 				{
 					$ses_data = [
 						'id_user'     => $data['id_user'],
-						'nom_user'    => $data['nom_user'],
-						'prenom_user' => $data['prenom_user'],
-						'email_user'  => $data['email_user'],
-						'isLoggedIn'  => TRUE
+						'first_name'  => $data['first_name'],
+						'last_name'   => $data['last_name'],
+						'email'       => $data['email'],
+						'isLoggedIn'  => true
 					];
 
 					$session->set($ses_data);
@@ -70,17 +66,12 @@
 					// Gestion du "Se souvenir de moi"
 					if ($remember)
 					{
-						// Génère un token unique pour "Se souvenir de moi"
 						$rememberToken = bin2hex(random_bytes(16)); // Génère un token unique
-
-						// Met à jour le `remember_token` dans la base de données
-						$userModel->update($data['id_user'], ['remember_token' => $rememberToken]);
-
-						// Définir le cookie
+						$accountModel->update($data['id_user'], ['remember_token' => $rememberToken]);
 						set_cookie('remember_cookie', $rememberToken, 84600);  // Cookie valide pour 24 heures
 					}
-					// Redirection après l'envoi du cookie
-					echo "<script>window.location.href='/tasks';</script>";
+
+					echo "<script>window.location.href='/account';</script>";
 				}
 				else
 				{
@@ -90,7 +81,7 @@
 			}
 			else
 			{
-				$session->setFlashdata('error', `Cet email n'existe pas.`);
+				$session->setFlashdata('error', 'Cet email n\'existe pas.');
 				return redirect()->to('/signin');
 			}
 		}
