@@ -16,5 +16,32 @@
 			echo view('Compte/compte');
 			echo view('commun/footer');
 		}
+
+        public function connexion()
+        {
+
+        }
+
+        public function inscription()
+        {
+
+        }
+
+        public function deconnexion()
+        {
+
+        }
+
+        public function modifier()
+        {
+
+        }
+
+        public function supprimer()
+        {
+
+        }
+
+
 	}
 ?>
