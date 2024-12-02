@@ -1,19 +1,19 @@
 <?php
 
-	namespace App\Controllers;
+	namespace App\Controllers\Panier;
 
 	use App\Controllers\BaseController;
 
-	class Home extends BaseController
+	class PanierController extends BaseController
 	{
 		public function index()
 		{
 			$data = [
-				'pageTitle' => 'Accueil'
+				'pageTitle' => 'Panier'
 			];
 
 			echo view('commun/header', $data);
-			echo view('Accueil/accueil');
+			echo view('Panier/panier');
 			echo view('commun/footer');
 		}
 	}

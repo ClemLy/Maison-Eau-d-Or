@@ -1,19 +1,19 @@
 <?php
 
-	namespace App\Controllers;
+	namespace App\Controllers\Compte;
 
 	use App\Controllers\BaseController;
 
-	class Home extends BaseController
+	class CompteController extends BaseController
 	{
 		public function index()
 		{
 			$data = [
-				'pageTitle' => 'Accueil'
+				'pageTitle' => 'Mon Compte'
 			];
 
 			echo view('commun/header', $data);
-			echo view('Accueil/accueil');
+			echo view('Compte/compte');
 			echo view('commun/footer');
 		}
 	}

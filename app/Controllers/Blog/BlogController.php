@@ -1,19 +1,19 @@
 <?php
 
-	namespace App\Controllers;
+	namespace App\Controllers\Blog;
 
 	use App\Controllers\BaseController;
 
-	class Home extends BaseController
+	class BlogController extends BaseController
 	{
 		public function index()
 		{
 			$data = [
-				'pageTitle' => 'Accueil'
+				'pageTitle' => 'Blog'
 			];
 
 			echo view('commun/header', $data);
-			echo view('Accueil/accueil');
+			echo view('Blog/blog');
 			echo view('commun/footer');
 		}
 	}

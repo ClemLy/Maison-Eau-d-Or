@@ -1,19 +1,19 @@
 <?php
 
-	namespace App\Controllers;
+	namespace App\Controllers\APropos;
 
 	use App\Controllers\BaseController;
 
-	class Home extends BaseController
+	class AProposController extends BaseController
 	{
 		public function index()
 		{
 			$data = [
-				'pageTitle' => 'Accueil'
+				'pageTitle' => 'À propos'
 			];
 
 			echo view('commun/header', $data);
-			echo view('Accueil/accueil');
+			echo view('APropos/apropos');
 			echo view('commun/footer');
 		}
 	}
