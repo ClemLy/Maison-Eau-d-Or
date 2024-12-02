@@ -50,11 +50,10 @@
 					]
 				],
 				'email' => [
-					'rules'  => 'required|valid_email|is_unique[users.email]',
+					'rules'  => 'required|valid_email',
 					'errors' => [
 						'required'    => 'Le champ Email est obligatoire.',
-						'valid_email' => 'Le champ Email doit contenir une adresse email valide.',
-						'is_unique'   => 'Cet email est déjà utilisé.'
+						'valid_email' => 'Le champ Email doit contenir une adresse email valide.'
 					]
 				]
 			];
@@ -62,9 +61,9 @@
 			if ($this->validate($rules))
 			{
 				$accountModel->update($userId, [
-					'nom_user'    => $this->request->getPost('nom_user'),
-					'prenom_user' => $this->request->getPost('prenom_user'),
-					'email_user'  => $this->request->getPost('email_user')
+					'last_name'    => $this->request->getPost('last_name'),
+					'first_name' => $this->request->getPost('first_name'),
+					'email'  => $this->request->getPost('email')
 				]);
 	
 				session()->setFlashdata('success', 'Informations modifiées avec succès.');
