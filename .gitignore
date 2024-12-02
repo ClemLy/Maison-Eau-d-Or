@@ -2,7 +2,7 @@
 .env
 
 # Dossiers contenant des fichiers générés
-**/writable/
+/writable
 
 # Ignore les fichiers de dépendances installées par Composer & node
 /vendor
