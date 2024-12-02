@@ -26,17 +26,18 @@ $routes->get('blog/article/(:num)', 'Blog\BlogController::article/$1');
 $routes->get('faq', 'Faq\FaqController::index');
 
 // Compte
-$routes->get('user', 'Compte\CompteController::index'); // affiche le profil
-$routes->get('user/inscription', 'Compte\CompteController::inscription'); // affiche le formulaire d'inscription
-$routes->get('user/connexion', 'Compte\CompteController::connexion'); // affiche le formulaire de connexion
-$routes->get('user/deconnexion', 'Compte\CompteController::deconnexion'); // déconnecte l'utilisateur
+$routes->get('account', 'Compte\CompteController::index'); // affiche le profil
+$routes->get('account/update', 'Compte\CompteController::update');
+$routes->post('account/update', 'Compte\CompteController::update');
+$routes->get('account/delete', 'Compte\CompteController::delete');
+$routes->get('logout', 'Compte\CompteController::logout');
+
 $routes->get('user/mot-de-passe-oublie', 'Compte\CompteController::motDePasseOublie'); // affiche le formulaire de mot de passe oublié
 $routes->get('user/mot-de-passe-oublie/(:alphanum)', 'Compte\CompteController::motDePasseOublie/$1'); 
 $routes->get('user/valider/(:alphanum)', 'Compte\CompteController::valider/$1'); // valider l'inscription
 $routes->get('user/commandes', 'Compte\CompteController::commandes', ['filter' => 'auth']); // affiche les commandes de l'utilisateur
 
 // Connexion
-$routes->get('compte', 'Compte\SigninController::index');
 $routes->get('/signin', 'Compte\SigninController::index');
 $routes->match(['get', 'post'], 'signin/auth', 'Compte\SigninController::loginAuth');
 

@@ -23,38 +23,38 @@
 			helper(['form']);
 			$rules = [
 				'nom_user' => [
-					'rules' => 'required|max_length[50]',
+					'rules'  => 'required|max_length[50]',
 					'errors' => [
-						'required' => 'Le champ Nom est obligatoire.',
+						'required'   => 'Le champ Nom est obligatoire.',
 						'max_length' => 'Le Nom ne doit pas dépasser 50 caractères.'
 					]
 				],
 				'prenom_user' => [
-					'rules' => 'required|max_length[50]',
+					'rules'  => 'required|max_length[50]',
 					'errors' => [
-						'required' => 'Le champ Prénom est obligatoire.',
+						'required'   => 'Le champ Prénom est obligatoire.',
 						'max_length' => 'Le Prénom ne doit pas dépasser 50 caractères.'
 					]
 				],
 				'email_user' => [
-					'rules' => 'required|valid_email',
+					'rules'  => 'required|valid_email',
 					'errors' => [
-						'required' => 'Le champ Email est obligatoire.',
+						'required'    => 'Le champ Email est obligatoire.',
 						'valid_email' => 'Le champ Email doit contenir une adresse email valide.'
 					]
 				],
 				'password' => [
-					'rules' => 'required|min_length[4]',
+					'rules'  => 'required|min_length[4]',
 					'errors' => [
-						'required' => 'Le champ Mot de passe est obligatoire.',
+						'required'  => 'Le champ Mot de passe est obligatoire.',
 						'min_length' => 'Le Mot de passe doit comporter au moins 4 caractères.'
 					]
 				],
 				'confirmpassword' => [
-					'rules' => 'required|matches[password]',
+					'rules'  => 'required|matches[password]',
 					'errors' => [
 						'required' => 'Le champ Confirmation du mot de passe est obligatoire.',
-						'matches' => 'Le champ Confirmation ne coïncide pas avec le mot de passe.'
+						'matches'  => 'Le champ Confirmation ne coïncide pas avec le mot de passe.'
 					]
 				]
 			];			
@@ -103,9 +103,9 @@
 			{
 				// Mettre à jour l'utilisateur comme vérifié
 				$userModel->set('is_verified', true)
-						->set('activation_code', null) // Supprime le code d'activation
-						->where('id_user', $user['id_user'])
-						->update();
+						  ->set('activation_code', null) // Supprime le code d'activation
+						  ->where('id_user', $user['id_user'])
+						  ->update();
 
 				return redirect()->to('/signin')->with('success', 'Votre compte a été activé avec succès.');
 			}

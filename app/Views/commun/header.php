@@ -34,7 +34,7 @@
 
 				<div class="header-droite">
 					<?php if (session()->get('isLoggedIn')): ?>
-						<li><a href="<?= site_url('compte'); ?>">Mon Compte</a></li>
+						<li><a href="<?= site_url('account'); ?>">Mon Compte</a></li>
 					<?php else: ?>
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
