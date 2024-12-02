@@ -13,7 +13,7 @@
 			];
 
 			echo view('commun/header', $data);
-			echo view('Accueil/accueil');
+			echo view('Home/home');
 			echo view('commun/footer');
 		}
 	}
