@@ -18,7 +18,7 @@
 				// Si la session a été marquée pour la redirection
 				if (session()->get('auto_redirect'))
 				{
-					return redirect()->to('/compte');
+					return redirect()->to('/account');
 				}
 			}
 
