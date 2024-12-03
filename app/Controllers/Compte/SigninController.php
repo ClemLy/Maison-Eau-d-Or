@@ -48,11 +48,12 @@
 				if ($authenticatePassword)
 				{
 					$ses_data = [
-						'id_user'     => $data['id_user'],
-						'first_name'  => $data['first_name'],
-						'last_name'   => $data['last_name'],
-						'email'       => $data['email'],
-						'isLoggedIn'  => true
+						'id_user'      => $data['id_user'],
+						'first_name'   => $data['first_name'],
+						'last_name'    => $data['last_name'],
+						'email'        => $data['email'],
+						'phone_number' => $data['phone_number'] ?? null,
+						'isLoggedIn'   => true
 					];
 
 					$session->set($ses_data);

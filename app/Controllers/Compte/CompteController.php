@@ -55,16 +55,29 @@
 						'required'    => 'Le champ Email est obligatoire.',
 						'valid_email' => 'Le champ Email doit contenir une adresse email valide.'
 					]
+				],
+				'phone_number' => [
+					'rules'  => 'permit_empty|numeric|max_length[10]',
+					'errors' => [
+						'numeric'    => 'Le numéro de téléphone doit contenir uniquement des chiffres.',
+						'max_length' => 'Le numéro de téléphone ne doit pas dépasser 10 chiffres.'
+					]
 				]
 			];
 	
 			if ($this->validate($rules))
 			{
-				$accountModel->update($userId, [
+				$updateData = [
 					'last_name'    => $this->request->getPost('last_name'),
-					'first_name' => $this->request->getPost('first_name'),
-					'email'  => $this->request->getPost('email')
-				]);
+					'first_name'   => $this->request->getPost('first_name'),
+					'email'        => $this->request->getPost('email'),
+					'phone_number' => $this->request->getPost('phone_number')
+				];
+		
+				$accountModel->update($userId, $updateData);
+		
+				// Mettre à jour les données de session immédiatement
+				session()->set($updateData);
 	
 				session()->setFlashdata('success', 'Informations modifiées avec succès.');
 				return redirect()->to('/account');
@@ -111,7 +124,7 @@
 			}
 
 			// Supprimer la session
-			session()->remove(['id_user', 'first_name', 'last_name', 'email', 'isLoggedIn']);
+			session()->remove(['id_user', 'first_name', 'last_name', 'email', 'phone_number', 'isLoggedIn']);
 
 			// Supprimer le cookie "remember_token"
 			helper('cookie');

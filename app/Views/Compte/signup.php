@@ -156,6 +156,11 @@ button[type="submit"]:hover {
 			</div>
 
 			<div class="form-group">
+				<label for="phone_number">Numéro de téléphone (facultatif)</label>
+				<input type="text" name="phone_number" id="phone_number" value="<?= set_value('phone_number') ?>" placeholder="Ex : 0601020304">
+			</div>
+
+			<div class="form-group">
 				<label for="password">Mot de passe</label>
 				<input type="password" name="password" id="password" required>
 			</div>

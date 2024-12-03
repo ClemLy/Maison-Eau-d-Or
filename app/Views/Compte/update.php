@@ -10,6 +10,9 @@
 	<label for="email">Email :</label>
 	<input type="email" id="email" name="email" value="<?= old('email', session()->get('email')); ?>" required>
 
+	<label for="phone_number">Numéro de téléphone :</label>
+	<input type="text" id="phone_number" name="phone_number" value="<?= old('phone_number', session()->get('phone_number')); ?>">
+
 	<button type="submit">Enregistrer les modifications</button>
 </form>
 

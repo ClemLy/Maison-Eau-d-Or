@@ -46,6 +46,13 @@
 						'is_unique'   => 'Cet email est déjà utilisé.'
 					]
 				],
+				'phone_number' => [
+					'rules'  => 'permit_empty|numeric|max_length[10]',
+					'errors' => [
+						'numeric'    => 'Le numéro de téléphone doit contenir uniquement des chiffres.',
+						'max_length' => 'Le numéro de téléphone ne doit pas dépasser 10 chiffres.'
+					]
+				],
 				'password' => [
 					'rules'  => 'required|min_length[4]',
 					'errors' => [
@@ -65,15 +72,18 @@
 			if ($this->validate($rules))
 			{
 				$accountModel    = new AccountModel();
+				$expiration      = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
 				// Insérer les informations de l'utilisateur
 				$data = [
-					'first_name' => $this->request->getVar('first_name'),
-					'last_name'  => $this->request->getVar('last_name'),
-					'email'      => $this->request->getVar('email'),
-					'password'   => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-					'newsletter' => $this->request->getPost('newsletter') ? true : false,
-					'activ_token' => bin2hex(random_bytes(16))
+					'first_name'    => $this->request->getVar('first_name'),
+					'last_name'     => $this->request->getVar('last_name'),
+					'email'         => $this->request->getVar('email'),
+					'password'      => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+					'phone_number'  => $this->request->getVar('phone_number'),
+					'newsletter'    => $this->request->getPost('newsletter') ? true : false,
+					'activ_token'   => bin2hex(random_bytes(16)),
+					'activ_exp'     => date('Y-m-d H:i:s', strtotime('+1 day'))
 				];
 
 				$accountModel->save($data);
