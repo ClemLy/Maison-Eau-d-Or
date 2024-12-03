@@ -519,3 +519,94 @@ header li a:hover  {
     font-size: 1.2rem;
     color: #333;
 }
+
+/* Styles pour la page À propos */
+/* Container principal */
+.faq-container {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Titre principal */
+.faq-container h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.faq-container h1::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    margin: 10px auto 0;
+}
+
+/* Sections */
+.faq-container h3 {
+    font-size: 1.3rem;
+    color: #000;
+    margin-top:50px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.faq-container h3.h3-right, .faq-container p.p-right{
+    text-align: right;
+}
+
+.faq-container p {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* Listes */
+.faq-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.faq-container li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #333;
+    padding-left: 20px;
+    position: relative;
+}
+
+.faq-container li::before {
+    content: '•';
+    color: #d4af37;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Liens */
+.faq-container a {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.faq-container a:hover {
+    color: #b8860b;
+}
