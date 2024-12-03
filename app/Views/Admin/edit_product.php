@@ -1,26 +1,29 @@
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Ajouter un produit</h1>
+    <h1 class="text-center mb-4">Modifier le produit</h1>
 
-    <form action="/admin/produit/ajouter" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
+    <form action="/admin/produit/modifier" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
+        <!-- ID du produit -->
+        <input type="hidden" name="id_prod" value="<?= esc($product['id_prod']) ?>">
+
         <!-- Nom du produit -->
         <div class="mb-3">
             <label for="p_name" class="form-label">Nom du produit :</label>
-            <input type="text" id="p_name" name="p_name" class="form-control" required>
+            <input type="text" id="p_name" name="p_name" class="form-control" value="<?= esc($product['p_name']) ?>" required>
         </div>
 
         <!-- Prix du produit -->
         <div class="mb-3">
             <label for="p_price" class="form-label">Prix :</label>
-            <input type="number" id="p_price" name="p_price" class="form-control" step="0.01" min="0" required>
+            <input type="number" id="p_price" name="p_price" class="form-control" step="0.01" min="0" value="<?= esc($product['p_price']) ?>" required>
         </div>
 
         <!-- Description du produit -->
         <div class="mb-3">
             <label for="description" class="form-label">Description :</label>
-            <textarea id="description" name="description" class="form-control" rows="5" required></textarea>
+            <textarea id="description" name="description" class="form-control" rows="5" required><?= esc($product['description']) ?></textarea>
         </div>
 
-
+        <!-- Catégories -->
         <label for="categories-container" class="form-label">Catégories :</label>
         <div class="input-group mb-3">
             <input type="text" id="new-category" class="form-control" placeholder="Nouvelle catégorie">
@@ -29,13 +32,14 @@
 
         <div class="mb-3">
             <div id="categories-container" class="border p-2 rounded text-muted" style="opacity:80%!important;min-height: 40px;">
-                <!-- Les catégories saisies seront ajoutées ici -->
+                <!-- Pré-remplir avec les catégories existantes -->
+                <?php foreach ($product['categories'] as $category): ?>
+                    <div class="category-tag"><?= esc($category) ?> <span>&times;</span></div>
+                <?php endforeach; ?>
             </div>
-            <input class="text-muted" type="hidden" id="categories" name="categories">
+            <input type="hidden" id="categories" name="categories" value='<?= json_encode($product['categories']) ?>'>
             <small class="text-muted">Ajoutez une catégorie, puis appuyez sur "Ajouter". Utilisez la croix pour en retirer.</small>
         </div>
-
-
 
         <!-- Médiathèque : Sélection d'une image existante -->
         <div class="mb-3">
@@ -44,16 +48,15 @@
                 <!-- Boucle PHP pour afficher les images -->
                 <?php foreach ($images as $image): ?>
                     <div class="col-md-3">
-                        <div class="card image-card" data-id="<?= $image['id_img'] ?>">
+                        <div class="card image-card <?= $image['id_img'] == $product['id_img'] ? 'border-primary' : '' ?>" data-id="<?= $image['id_img'] ?>">
                             <img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top" style="cursor: pointer;">
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
 
-            <input type="hidden" id="existing_img" name="existing_img">
+            <input type="hidden" id="existing_img" name="existing_img" value="<?= esc($product['id_img']) ?>">
         </div>
-
 
         <!-- Nouvelle image -->
         <div class="mb-3">
@@ -63,22 +66,23 @@
 
         <!-- Activer dans la boutique -->
         <div class="form-check mb-3">
-            <input type="checkbox" id="on_sale" name="on_sale" class="form-check-input" value="1">
+            <input type="checkbox" id="on_sale" name="on_sale" class="form-check-input" value="t" <?= $product['on_sale'] === 't' ? 'checked' : '' ?>>
             <label for="on_sale" class="form-check-label">Activer sur la boutique ?</label>
         </div>
 
         <!-- Produit mis en avant -->
         <div class="form-check mb-3">
-            <input type="checkbox" id="is_star" name="is_star" class="form-check-input" value="1">
+            <input type="checkbox" id="is_star" name="is_star" class="form-check-input" value="t" <?= $product['is_star'] === 't' ? 'checked' : '' ?>>
             <label for="is_star" class="form-check-label">Produit vedette</label>
         </div>
 
         <!-- Bouton d'envoi -->
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Ajouter le produit</button>
+            <button type="submit" class="btn btn-primary">Modifier le produit</button>
         </div>
     </form>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

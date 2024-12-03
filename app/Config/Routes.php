@@ -78,7 +78,7 @@ $routes->post('admin/produit/ajouter', 'Product\ProductController::ajouterProdui
 $routes->get('admin/produit/modifier/(:num)', 'Product\ProductController::modifierProduitGet/$1', ['filter' => 'admin']); // produit entier
 $routes->post('admin/produit/modifier/', 'Product\ProductController::modifierProduitPost', ['filter' => 'admin']); // produit entier
 
-$routes->post('admin/produit/supprimer/', 'Product\ProductController::supprimerProduit', ['filter' => 'admin']); // id_produit
+$routes->get('admin/produit/supprimer/(:num)', 'Product\ProductController::supprimerProduitGet/$1', ['filter' => 'admin']); // id_produit
 $routes->post('admin/produit/activer/', 'Product\ProductController::activerProduit', ['filter' => 'admin']); // id_produit
 $routes->post('admin/produit/desactiver/', 'Product\ProductController::desactiverProduit', ['filter' => '  admin']); // id_produit
 

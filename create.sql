@@ -93,10 +93,11 @@ CREATE TABLE CATEGORY (
 );
 
 CREATE TABLE PRODUCT_CATEGORY (
-    id_prod INT NOT NULL,
-    id_cat INT NOT NULL,
-    FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod),
-    FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat)
+                                  id_prod INT NOT NULL,
+                                  id_cat INT NOT NULL,
+                                  PRIMARY KEY (id_prod, id_cat), -- Clé primaire composite
+                                  FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod) ON DELETE CASCADE, -- Suppression en cascade
+                                  FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat) ON DELETE CASCADE -- Suppression en cascade
 );
 
 CREATE TABLE SHOWCASE (
