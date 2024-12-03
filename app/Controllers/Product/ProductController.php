@@ -3,6 +3,8 @@
 namespace App\Controllers\Product;
 
 use App\Controllers\BaseController;
+use App\Controllers\Media\MediaController;
+use App\Models\MediaModel;
 use App\Models\ProductModel;
 
 class ProductController extends BaseController
@@ -26,28 +28,45 @@ class ProductController extends BaseController
         return View('layout/main', $data);
 
 
-
-
     }
-    // Ajouter un produit
     public function ajouterProduitPost()
     {
-        $data = $this->request->getPost();
+        $productModel = new ProductModel();
+        $mediaController = new MediaController();
 
-        if (!$this->productModel->save($data)) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'errors' => $this->productModel->errors()
-            ]);
+        // Récupérer les données du formulaire
+        $data = $this->request->getPost();
+        $file = $this->request->getFile('new_img');
+        $imageId = null;
+
+        // Priorité : Image existante
+        if (!empty($data['existing_img'])) {
+            $imageId = $data['existing_img'];
+        }
+        // Sinon, uploader une nouvelle image via MediaController
+        elseif ($file) {
+            $imageId = $mediaController->uploadImage($file);
         }
 
-        return $this->response->setJSON(['status' => 'success', 'message' => 'Produit ajouté.']);
+        if ($imageId) {
+            // Ajouter les informations du produit
+            $data['id_img'] = $imageId;
+
+            if ($productModel->save($data)) {
+                return redirect()->to('/admin/products')->with('success', 'Produit ajouté avec succès.');
+            }
+        }
+
+        return redirect()->back()->with('error', 'Erreur lors de l\'ajout du produit.');
     }
 
     public function ajouterProduitGet()
     {
+        $imageModel = new \App\Models\MediaModel(); // Charger le modèle Image
+
         $data = [
-            'pageTitle' => 'Ajouter Produit'
+            'pageTitle' => 'Ajouter Produit',
+            'images' => $imageModel->findAll(), // Récupérer toutes les images
         ];
 
         echo view('commun/header', $data);

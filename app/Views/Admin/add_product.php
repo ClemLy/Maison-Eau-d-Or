@@ -20,10 +20,28 @@
             <textarea id="description" name="description" class="form-control" rows="5" required></textarea>
         </div>
 
-        <!-- Image -->
+        <!-- Médiathèque : Sélection d'une image existante -->
         <div class="mb-3">
-            <label for="id_img" class="form-label">Image :</label>
-            <input type="file" id="id_img" name="id_img" class="form-control" accept="image/*" required>
+            <label class="form-label">Choisir une image existante :</label>
+            <div class="row">
+                <!-- Boucle PHP pour afficher les images -->
+                <?php foreach ($images as $image): ?>
+                    <div class="col-md-3">
+                        <div class="card image-card" data-id="<?= $image['id_img'] ?>">
+                            <img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top" style="cursor: pointer;">
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <input type="hidden" id="existing_img" name="existing_img">
+        </div>
+
+
+        <!-- Nouvelle image -->
+        <div class="mb-3">
+            <label for="new_img" class="form-label">Ou uploader une nouvelle image :</label>
+            <input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
         </div>
 
         <!-- Activer dans la boutique -->
@@ -44,3 +62,38 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageCards = document.querySelectorAll('.image-card');
+
+        imageCards.forEach(card => {
+            card.addEventListener('click', function () {
+                // Retirer la classe active de toutes les images
+                imageCards.forEach(c => c.classList.remove('border-primary'));
+
+                // Ajouter une bordure pour indiquer la sélection
+                this.classList.add('border-primary');
+
+                // Mettre à jour la valeur de l'input caché
+                const selectedId = this.getAttribute('data-id');
+                document.getElementById('existing_img').value = selectedId;
+            });
+        });
+    });
+</script>
+
+<style>
+    .image-card {
+        border: 2px solid transparent;
+        transition: border-color 0.3s;
+    }
+
+    .image-card:hover {
+        border: 2px solid #007bff;
+    }
+
+    .border-primary {
+        border: 10px solid #007bff !important;
+    }
+</style>
