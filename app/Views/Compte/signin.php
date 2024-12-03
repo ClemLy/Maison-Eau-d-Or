@@ -123,8 +123,8 @@ button[type="submit"]:hover {
 		<!-- Formulaire de connexion -->
 		<form action="<?= site_url('signin/auth') ?>" method="post">
 			<div class="form-group">
-				<label for="email_user">Adresse email</label>
-				<input type="email_user" name="email_user" id="email_user" required>
+				<label for="email">Adresse email</label>
+				<input type="email" name="email" id="email" required>
 			</div>
 
 			<div class="form-group">

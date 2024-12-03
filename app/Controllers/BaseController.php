@@ -9,6 +9,8 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+use App\Models\AccountModel;
+
 /**
  * Class BaseController
  *
@@ -51,8 +53,46 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        // Preload any models, libraries, etc, here.
-
-        // E.g.: $this->session = \Config\Services::session();
+		// Automatic login if a valid "remember_token" cookie exists
+		$this->autoLogin();
     }
+
+    /**
+	 * Checks for a valid "remember_token" cookie and logs in the user automatically.
+	 *
+	 * @return void
+	 */
+	private function autoLogin(): void
+	{
+		helper('cookie');
+		
+		$request = service('request');
+		$rememberToken = $this->request->getCookie('remember_cookie');
+
+		if ($rememberToken)
+		{
+			$accountModel = new AccountModel();
+			$account = $accountModel->where('remember_token', $rememberToken)->first();
+
+			if ($account)
+			{
+				// Crée la session pour l'utilisateur
+				session()->set([
+					'id_user'     => $account['id_user'],
+					'first_name'  => $account['first_name'],
+					'last_name'   => $account['last_name'],
+					'email'       => $account['email'],
+					'isLoggedIn'  => true
+				]);
+
+				// Ajoute un flag de redirection dans la session
+				session()->set('auto_redirect', true);
+			}
+		}
+		else
+		{
+			session()->set('auto_redirect', false);
+			delete_cookie('remember_cookie');
+		}
+	}
 }

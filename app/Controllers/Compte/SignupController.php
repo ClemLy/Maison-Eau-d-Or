@@ -1,6 +1,8 @@
 <?php
 	namespace App\Controllers\Compte;
-	use App\Models\UserModel;
+
+	use App\Models\AccountModel;
+	use App\Models\ValidationModel;
 	use App\Controllers\BaseController;
 
 	class SignupController extends BaseController
@@ -21,26 +23,28 @@
 		public function store()
 		{
 			helper(['form']);
+
 			$rules = [
-				'nom_user' => [
-					'rules'  => 'required|max_length[50]',
-					'errors' => [
-						'required'   => 'Le champ Nom est obligatoire.',
-						'max_length' => 'Le Nom ne doit pas dépasser 50 caractères.'
-					]
-				],
-				'prenom_user' => [
+				'first_name' => [
 					'rules'  => 'required|max_length[50]',
 					'errors' => [
 						'required'   => 'Le champ Prénom est obligatoire.',
 						'max_length' => 'Le Prénom ne doit pas dépasser 50 caractères.'
 					]
 				],
-				'email_user' => [
-					'rules'  => 'required|valid_email',
+				'last_name' => [
+					'rules'  => 'required|max_length[50]',
+					'errors' => [
+						'required'   => 'Le champ Nom est obligatoire.',
+						'max_length' => 'Le Nom ne doit pas dépasser 50 caractères.'
+					]
+				],
+				'email' => [
+					'rules'  => 'required|valid_email|is_unique[users.email]',
 					'errors' => [
 						'required'    => 'Le champ Email est obligatoire.',
-						'valid_email' => 'Le champ Email doit contenir une adresse email valide.'
+						'valid_email' => 'Le champ Email doit contenir une adresse email valide.',
+						'is_unique'   => 'Cet email est déjà utilisé.'
 					]
 				],
 				'password' => [
@@ -57,36 +61,36 @@
 						'matches'  => 'Le champ Confirmation ne coïncide pas avec le mot de passe.'
 					]
 				]
-			];			
+			];
 
 			if ($this->validate($rules))
 			{
-				$userModel = new UserModel();
+				$accountModel    = new AccountModel();
 
+				// Insérer les informations de l'utilisateur
 				$data = [
-					'nom_user'        => $this->request->getVar('nom_user'),
-					'prenom_user'     => $this->request->getVar('prenom_user'),
-					'email_user'      => $this->request->getVar('email_user'),
-					'password'        => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+					'first_name' => $this->request->getVar('first_name'),
+					'last_name'  => $this->request->getVar('last_name'),
+					'email'      => $this->request->getVar('email'),
+					'password'   => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+					'newsletter' => $this->request->getPost('newsletter') ? true : false,
 					'activation_code' => bin2hex(random_bytes(16))
 				];
 
-				$userModel->save($data);
-				$from = env('email_user', '');
+				$accountModel->save($data);
 
-				// Envoyer l'email
+				// Envoi de l'email d'activation
 				$email = \Config\Services::email();
-				$email->setFrom($from, 'TaskPlanner');
-				$email->setTo($data['email_user']);
-				$email->setSubject('Activation du compte');
+				$email->setFrom(env('email_user', ''), 'Maison Eau d\'Or');
+				$email->setTo($data['email']);
+				$email->setSubject('Activation de votre compte');
 				$email->setMessage('Cliquez sur ce lien pour activer votre compte : ' . site_url('activate/' . $data['activation_code']));
 				$email->send();
 
 				return redirect()->to('/signin')->with('msg', 'Un lien d\'activation a été envoyé à votre adresse email. Veuillez vérifier votre boîte mail.');
-
 			}
 			else
-			{	
+			{
 				$data['validation'] = $this->validator;
 				echo view('Compte/signup', $data);
 			}
@@ -94,18 +98,18 @@
 
 		public function activate($activation_code)
 		{
-			$userModel = new UserModel();
+			$accountModel    = new AccountModel();
 
 			// Recherche l'utilisateur avec le code d'activation
-			$user = $userModel->where('activation_code', $activation_code)->first();
+			$user = $accountModel->where('activation_code', $activation_code)->first();
 
 			if ($user)
 			{
 				// Mettre à jour l'utilisateur comme vérifié
-				$userModel->set('is_verified', true)
-						  ->set('activation_code', null) // Supprime le code d'activation
-						  ->where('id_user', $user['id_user'])
-						  ->update();
+				$accountModel->set('is_verified', true)
+						->set('activation_code', null) // Supprime le code d'activation
+						->where('id_user', $user['id_user'])
+						->update();
 
 				return redirect()->to('/signin')->with('success', 'Votre compte a été activé avec succès.');
 			}
