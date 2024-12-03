@@ -5,15 +5,16 @@ use CodeIgniter\Model;
 
 class ProductModel extends Model
 {
-    protected $table      = 'product';
+    protected $table = 'product';
     protected $primaryKey = 'id_prod';
-    protected $allowedFields = [
-        'p_name', 
-        'p_price', 
-        'description', 
-        'id_img', 
-        'on_sale', 
-        'is_star'
+
+    protected $allowedFields = ['p_name', 'p_price', 'description', 'id_img', 'on_sale', 'is_star'];
+
+    // Validation des données
+    protected $validationRules = [
+        'p_name'      => 'required|min_length[3]',
+        'p_price'     => 'required|numeric',
+        'description' => 'required|min_length[10]',
     ];
 
     public function getStarProduct()
@@ -23,5 +24,7 @@ class ProductModel extends Model
                     ->where('product.is_star', true) 
                     ->first();
     }
+
+
 
 }

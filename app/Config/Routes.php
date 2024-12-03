@@ -70,12 +70,17 @@ $routes->post('panier/modifier/', 'Panier\PanierController::modifier', ['filter'
 // Admin 
 $routes->get('admin', 'Admin\AdminController::index', ['filter' => 'admin']);
 
-$routes->get('admin/produits', 'Admin\AdminController::produits', ['filter' => 'admin']);
-$routes->post('admin/produit/ajouter', 'Admin\AdminController::ajouterProduit', ['filter' => 'admin']); // un produit entier
-$routes->post('admin/produit/modifier/', 'Admin\AdminController::modifierProduit', ['filter' => 'admin']); // produit entier
-$routes->post('admin/produit/supprimer/', 'Admin\AdminController::supprimerProduit', ['filter' => 'admin']); // id_produit
-$routes->post('admin/produit/activer/', 'Admin\AdminController::activerProduit', ['filter' => 'admin']); // id_produit
-$routes->post('admin/produit/desactiver/', 'Admin\AdminController::desactiverProduit', ['filter' => '  admin']); // id_produit
+$routes->get('admin/produits', 'Product\ProductController::index', ['filter' => 'admin']);
+
+$routes->get('admin/produit/ajouter', 'Product\ProductController::ajouterProduitGet', ['filter' => 'admin']); // un produit entier
+$routes->post('admin/produit/ajouter', 'Product\ProductController::ajouterProduitPost', ['filter' => 'admin']); // un produit entier
+
+$routes->get('admin/produit/modifier/(:num)', 'Product\ProductController::modifierProduitGet/$1', ['filter' => 'admin']); // produit entier
+$routes->post('admin/produit/modifier/', 'Product\ProductController::modifierProduitPost', ['filter' => 'admin']); // produit entier
+
+$routes->post('admin/produit/supprimer/', 'Product\ProductController::supprimerProduit', ['filter' => 'admin']); // id_produit
+$routes->post('admin/produit/activer/', 'Product\ProductController::activerProduit', ['filter' => 'admin']); // id_produit
+$routes->post('admin/produit/desactiver/', 'Product\ProductController::desactiverProduit', ['filter' => '  admin']); // id_produit
 
 $routes->get('admin/categories', 'Admin\AdminController::categories', ['filter' => 'admin']);
 $routes->post('admin/categorie/ajouter', 'Admin\AdminController::ajouterCategorie', ['filter' => 'admin']);
