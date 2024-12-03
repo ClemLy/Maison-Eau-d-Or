@@ -2,7 +2,6 @@
 	namespace App\Controllers\Compte;
 
 	use App\Models\AccountModel;
-	use App\Models\ValidationModel;
 	use App\Controllers\BaseController;
 
 	class SignupController extends BaseController
