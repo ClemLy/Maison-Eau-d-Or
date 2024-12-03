@@ -1,14 +1,19 @@
 <style>
     .carousel-inner .carousel-item img {
-        width: 100%;        /* L'image prend toute la largeur du carrousel */
-        height: 400px;      /* Hauteur fixe pour les images du carrousel */
-        object-fit: cover;  /* L'image se découpe pour remplir la zone sans déformer son aspect */
-        object-position: center; /* Centre l'image si elle est recadrée */
+        width: 100%;
+        /* L'image prend toute la largeur du carrousel */
+        height: 400px;
+        /* Hauteur fixe pour les images du carrousel */
+        object-fit: cover;
+        /* L'image se découpe pour remplir la zone sans déformer son aspect */
+        object-position: center;
+        /* Centre l'image si elle est recadrée */
     }
 
     /* Optionnel : Pour ajuster le carrousel s'il y a des problèmes de marges ou de dépassement */
     .carousel-inner {
-        overflow: hidden;   /* Masque tout excédent d'image qui dépasse */
+        overflow: hidden;
+        /* Masque tout excédent d'image qui dépasse */
     }
 </style>
 
@@ -36,14 +41,14 @@
 
 
     <div class="categories-vedette d-flex justify-content-around py-4">
-
         <?php
         if (isset($categories) && !empty($categories)) {
             foreach ($categories as $categ) {
-                echo '<h3><a href="?category_id=' . $categ['id_cat'] . '">' . $categ['cat_name'] . '</a></h3>';
+                // Vérifier si la catégorie est sélectionnée
+                $activeClass = ($categ['id_cat'] == $selectedCategoryId) ? 'active' : '';
+                echo '<h3><a href="?category_id=' . $categ['id_cat'] . '" class="' . $activeClass . '">' . $categ['cat_name'] . '</a></h3>';
             }
         }
-        
         ?>
     </div>
 
@@ -136,10 +141,8 @@
                 </div>
             </div>
         </div>
-    <?php }
-            else
-            {
-                echo '<p class="alert alert-info">Aucun article en vedette</p>';
-            } 
-    ?>  
+    <?php } else {
+        echo '<p class="alert alert-info">Aucun article en vedette</p>';
+    }
+    ?>
 </div>

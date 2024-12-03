@@ -13,9 +13,9 @@ class Home extends BaseController
         $productModel = new ProductModel();
         $categoryModel = new CategoryModel();
 
-
-		$starProduct = $productModel->getStarProduct();
+        $starProduct = $productModel->getStarProduct();
         $categories = $categoryModel->findAll();
+		$defaultCategoryId = $categories[0]['id_cat'];  
 
         $productsByCategory = [];
         foreach ($categories as $category) {
@@ -27,10 +27,10 @@ class Home extends BaseController
                 ->findAll();
         }
 
-        $selectedCategoryId = isset($_GET['category_id']) ? (int) $_GET['category_id'] : null;
+        $selectedCategoryId = isset($_GET['category_id']) ? (int) $_GET['category_id'] : $defaultCategoryId;
 
         $selectedProducts = [];
-        if ($selectedCategoryId && isset($productsByCategory[$selectedCategoryId])) {
+        if (isset($productsByCategory[$selectedCategoryId])) {
             $selectedProducts = $productsByCategory[$selectedCategoryId];
         }
 
@@ -38,7 +38,9 @@ class Home extends BaseController
             'pageTitle' => 'Accueil',
             'categories' => $categories,
             'selectedProducts' => $selectedProducts,
-			'starProduct' => $starProduct
+            'starProduct' => $starProduct,
+            'defaultCategoryId' => $defaultCategoryId,
+            'selectedCategoryId' => $selectedCategoryId  // Passer l'ID de la catégorie sélectionnée
         ];
 
         echo view('commun/header', $data);
@@ -46,4 +48,3 @@ class Home extends BaseController
         echo view('commun/footer');
     }
 }
-?>
