@@ -14,4 +14,7 @@
             <?php endforeach; ?>
         </ul>
     <?php endforeach; ?>
+
 </div>
+
+<?php

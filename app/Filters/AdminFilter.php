@@ -10,10 +10,10 @@ class AdminFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Vérifiez si l'utilisateur est connecté
-        if (!session()->get('isLoggedIn') && !session()->get('userRole') != 'admin') {
+        // Vérifiez si l'utilisateur est connecté & admin
+        if (!session()->get('isLoggedIn') || !session()->get('admin') ) {
             // Redirigez vers la page de connexion
-            return redirect()->to('/login');
+            return redirect()->to('/signin');
         }
     }
 
