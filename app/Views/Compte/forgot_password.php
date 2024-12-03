@@ -35,7 +35,7 @@ label {
 	color: #333;
 }
 
-input[type="email_user"] {
+input[type="email"] {
 	width: 100%;
 	padding: 10px;
 	font-size: 0.9rem;
@@ -47,7 +47,7 @@ input[type="email_user"] {
 	transition: border-color 0.3s ease;
 }
 
-input[type="email_user"]:focus {
+input[type="email"]:focus {
 	border-color: #80bdff;
 	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
@@ -141,8 +141,8 @@ a.return-link:hover {
 
 		<form action="<?= site_url('forgot-password/send-reset-link') ?>" method="post">
 			<div class="form-group">
-				<label for="email_user">Email</label>
-				<input type="email_user" name="email_user" id="email_user" required>
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" required>
 			</div>
 			<button type="submit">Envoyer le lien de réinitialisation</button>
 		</form>

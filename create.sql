@@ -21,6 +21,8 @@ CREATE TABLE USERS (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     newsletter BOOLEAN NOT NULL DEFAULT FALSE,
+    reset_token     VARCHAR(255),
+	reset_token_exp TIMESTAMP,
     activation_code VARCHAR(255),
     is_verified     BOOLEAN DEFAULT FALSE,
     remember_token  VARCHAR(255),

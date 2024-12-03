@@ -1,14 +1,14 @@
 <h1>Modifier Mon Compte</h1>
 
-<form action="<?= site_url('compte/update'); ?>" method="post">
-	<label for="nom_user">Nom :</label>
-	<input type="text" id="nom_user" name="nom_user" value="<?= old('nom_user', session()->get('nom_user')); ?>" required>
+<form action="<?= site_url('account/update'); ?>" method="post">
+	<label for="last_name">Nom :</label>
+	<input type="text" id="last_name" name="last_name" value="<?= old('last_name', session()->get('last_name')); ?>" required>
 
-	<label for="prenom_user">Prénom :</label>
-	<input type="text" id="prenom_user" name="prenom_user" value="<?= old('prenom_user', session()->get('prenom_user')); ?>" required>
+	<label for="first_name">Prénom :</label>
+	<input type="text" id="first_name" name="first_name" value="<?= old('first_name', session()->get('first_name')); ?>" required>
 
-	<label for="email_user">Email :</label>
-	<input type="email" id="email_user" name="email_user" value="<?= old('email_user', session()->get('email_user')); ?>" required>
+	<label for="email">Email :</label>
+	<input type="email" id="email" name="email" value="<?= old('email', session()->get('email')); ?>" required>
 
 	<button type="submit">Enregistrer les modifications</button>
 </form>

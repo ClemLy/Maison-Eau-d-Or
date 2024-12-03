@@ -1,11 +1,10 @@
 <?php
 	namespace App\Controllers\Compte;
-	use App\Models\UserModel;
-	use App\Models\UserModelB;
+	use App\Models\AccountModel;
 	use CodeIgniter\Controller;
 	use App\Controllers\BaseController;
 
-	class ResetPasswordController extends Controller
+	class ResetPasswordController extends BaseController
 	{
 		public function index($token)
 		{
@@ -17,8 +16,8 @@
 		
 			echo view('commun/header', $data);
 			
-			$userModel = new UserModelB();
-			$user      = $userModel->where('reset_token', $token)
+			$accountModel = new AccountModel();
+			$user      = $accountModel->where('reset_token', $token)
 
 			->where('reset_token_exp >', date('Y-m-d H:i:s'))
 			->first();
@@ -41,8 +40,8 @@
 			$confirmPassword = $this->request->getPost('confirm_password');
 			
 			// Vérification de la validité du token
-			$userModelB = new UserModelB();
-			$user = $userModelB->where('reset_token', $token)
+			$accountModel = new AccountModel();
+			$user = $accountModel->where('reset_token', $token)
 							   ->where('reset_token_exp >', date('Y-m-d H:i:s'))
 							   ->first();
 		
@@ -51,17 +50,11 @@
 				// Hachage du nouveau mot de passe
 				$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 		
-				// Mise à jour dans la table users via UserModel
-				$userModel = new UserModel();
-				$userModel->set('password', $hashedPassword) // Met à jour le mot de passe
-						  ->where('email_user', $user['email_user']) // Utiliser l'email de l'utilisateur pour trouver l'enregistrement
-						  ->update();
-		
-				// Mise à jour dans la table mdp via UserModelB
-				$userModelB->set('password', $hashedPassword) // Met à jour le mot de passe
+				// Mise à jour dans la table mdp via AccountModel
+				$accountModel->set('password', $hashedPassword) // Met à jour le mot de passe
 							->set('reset_token', null) // Invalider le token
 							->set('reset_token_exp', null) // Réinitialiser l'expiration
-							->where('email_user', $user['email_user']) // Utiliser l'email pour trouver l'enregistrement dans mdp
+							->where('email', $user['email']) // Utiliser l'email pour trouver l'enregistrement dans mdp
 							->update();
 		
 				session()->setFlashdata('success-reset', 'Mot de passe réinitialisé avec succès.');

@@ -1,10 +1,10 @@
 <?php
 	namespace App\Controllers\Compte;
 	use CodeIgniter\Controller;
-	use App\Models\UserModelB;
+	use App\Models\AccountModel;
 	use App\Controllers\BaseController;
 
-	class ForgotPasswordController extends Controller
+	class ForgotPasswordController extends BaseController
 	{
 		public function index()
 		{
@@ -21,19 +21,19 @@
 
 		public function sendResetLink()
 		{
-			$email     = $this->request->getPost('email_user');
-			$userModel = new UserModelB();
-			$user      = $userModel->where('email_user', $email)->first();
+			$email     = $this->request->getPost('email');
+			$accountModel = new AccountModel();
+			$user      = $accountModel->where('email', $email)->first();
 
 			// Dans la méthode sendResetLink du contrôleur ForgotPasswordController
-			$email = $this->request->getPost('email_user');
+			$email = $this->request->getPost('email');
 
 			if ($user)
 			{
 				// Générer un jeton de réinitialisation de MDP et enregistrer-le dans BD
 				$token = bin2hex(random_bytes(16));
 				$expiration = date('Y-m-d H:i:s', strtotime('+1 hour'));
-				$userModel->set('reset_token', $token)
+				$accountModel->set('reset_token', $token)
 				->set('reset_token_exp', $expiration)
 				->update($user['id_user']);
 
@@ -47,7 +47,7 @@
 				//paramètres du mail
 				$to = $this->request->getPost('to');
 				$subject = $this->request->getPost('subject');
-				$from = env('email_user', '');
+				$from = env('email', '');
 				
 				//envoi du mail
 				$emailService->setTo($email);

@@ -2,6 +2,7 @@
 
 	namespace App\Controllers\Compte;
 
+	use App\Models\AccountModel;
 	use App\Controllers\BaseController;
 
 	class CompteController extends BaseController
@@ -30,21 +31,39 @@
 			}
 	
 			helper(['form']);
-			$userModel = new UserModel();
+			$accountModel = new AccountModel();
 			$userId = session()->get('id_user');
 	
 			$rules = [
-				'nom_user'    => 'required|max_length[50]',
-				'prenom_user' => 'required|max_length[50]',
-				'email_user'  => 'required|valid_email'
+				'first_name' => [
+					'rules'  => 'required|max_length[50]',
+					'errors' => [
+						'required'   => 'Le champ Prénom est obligatoire.',
+						'max_length' => 'Le Prénom ne doit pas dépasser 50 caractères.'
+					]
+				],
+				'last_name' => [
+					'rules'  => 'required|max_length[50]',
+					'errors' => [
+						'required'   => 'Le champ Nom est obligatoire.',
+						'max_length' => 'Le Nom ne doit pas dépasser 50 caractères.'
+					]
+				],
+				'email' => [
+					'rules'  => 'required|valid_email',
+					'errors' => [
+						'required'    => 'Le champ Email est obligatoire.',
+						'valid_email' => 'Le champ Email doit contenir une adresse email valide.'
+					]
+				]
 			];
 	
 			if ($this->validate($rules))
 			{
-				$userModel->update($userId, [
-					'nom_user'    => $this->request->getPost('nom_user'),
-					'prenom_user' => $this->request->getPost('prenom_user'),
-					'email_user'  => $this->request->getPost('email_user')
+				$accountModel->update($userId, [
+					'last_name'    => $this->request->getPost('last_name'),
+					'first_name' => $this->request->getPost('first_name'),
+					'email'  => $this->request->getPost('email')
 				]);
 	
 				session()->setFlashdata('success', 'Informations modifiées avec succès.');
@@ -69,10 +88,10 @@
 				return redirect()->to('/signin');
 			}
 	
-			$userModel = new UserModel();
+			$accountModel = new AccountModel();
 			$userId = session()->get('id_user');
 	
-			$userModel->delete($userId);
+			$accountModel->delete($userId);
 			session()->destroy();
 	
 			session()->setFlashdata('success', 'Compte supprimé avec succès.');
@@ -82,17 +101,17 @@
 		public function logout()
 		{
 			// Récupérer l'utilisateur connecté (s'il existe)
-			$userModel = new UserModel();
+			$accountModel = new AccountModel();
 			$userId = session()->get('id_user');
 			
 			// Supprimer le remember_token dans la base de données pour cet utilisateur
 			if ($userId)
 			{
-				$userModel->update($userId, ['remember_token' => null]);
+				$accountModel->update($userId, ['remember_token' => null]);
 			}
 
 			// Supprimer la session
-			session()->remove(['id_user', 'nom_user', 'prenom_user', 'email_user', 'isLoggedIn']);
+			session()->remove(['id_user', 'first_name', 'last_name', 'email', 'isLoggedIn']);
 
 			// Supprimer le cookie "remember_token"
 			helper('cookie');
