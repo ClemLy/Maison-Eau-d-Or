@@ -25,7 +25,7 @@ class ProductController extends BaseController
             'content'   => view('Admin/products') // Contenu principal
         ];
 
-        return View('layout/main', $data);
+        return View('Layout/main', $data);
 
 
     }

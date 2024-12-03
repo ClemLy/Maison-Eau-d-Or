@@ -6,15 +6,15 @@ use App\Controllers\BaseController;
 
 class AdminController extends BaseController
 {
-    public function index()
-    {
+	public function index()
+	{
 
-        $data = [
-            'pageTitle' => 'Mon Compte'
-        ];
+		$data = [
+			'pageTitle' => 'Mon Compte'
+		];
 
-        echo view('commun/header', $data);
-        echo view('Admin/index');
-        echo view('commun/footer');
-    }
+		echo view('commun/header', $data);
+		echo view('Admin/index');
+		echo view('commun/footer');
+	}
 }

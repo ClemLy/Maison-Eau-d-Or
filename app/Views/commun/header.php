@@ -49,15 +49,27 @@
 
 
 				<div class="header-droite">
+					<?php if (session()->get('admin')): ?>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="<?= site_url('admin'); ?>" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Admin
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
+								<li><a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/categories'); ?>">Gestion Catégories</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/blog/ajouter'); ?>">Ajouter un Article</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/faq/ajouter'); ?>">Modifier FAQ</a></li>
+							</ul>
+						</li>
+					<?php endif; ?>
 					<?php if (session()->get('isLoggedIn')): ?>
 						<li><a href="<?= site_url('account'); ?>">Mon Compte</a></li>
 					<?php else: ?>
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
 					    <li><a href="<?= site_url('panier'); ?>">Panier</a></li>
-                    <?php if (session()->get('admin')): ?>
-                        <li><a href="<?= site_url('admin'); ?>">Admin</a></li>
-                    <?php endif; ?>
 				</div>
 			</ul>
 		</nav>
