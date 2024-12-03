@@ -27,7 +27,21 @@
 				</div>
 
 				<div class="header-milieu">
-					<li><a href="<?= site_url('boutique'); ?>">Boutique</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Boutique
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<?php if (isset($categories) && !empty($categories)): ?>
+								<?php foreach ($categories as $category): ?>
+									<li><a class="dropdown-item" href="?category_id=<?php echo $category['id_cat']; ?>"><?php echo esc($category['cat_name']); ?></a></li>
+								<?php endforeach; ?>
+							<?php else: ?>
+								<li><a class="dropdown-item" href="#">Aucune catégorie dispo</a></li>
+							<?php endif; ?>
+						</ul>
+					</li>
+
 					<li><a href="<?= site_url('a-propos'); ?>">À propos</a></li>
 					<li><a href="<?= site_url('blog'); ?>">Blog</a></li>
 					<li><a href="<?= site_url('faq'); ?>">FAQ</a></li>
