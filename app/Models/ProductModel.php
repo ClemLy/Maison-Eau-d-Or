@@ -16,12 +16,6 @@ class ProductModel extends Model
         'is_star'
     ];
 
-    // public function getStarProduct()
-    // {
-    //     return $this->where('is_star', true)
-    //                 ->first(); 
-    // }
-
     public function getStarProduct()
     {
         return $this->select('product.*, image.img_path')

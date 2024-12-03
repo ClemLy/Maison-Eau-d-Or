@@ -1,3 +1,17 @@
+<style>
+    .carousel-inner .carousel-item img {
+        width: 100%;        /* L'image prend toute la largeur du carrousel */
+        height: 400px;      /* Hauteur fixe pour les images du carrousel */
+        object-fit: cover;  /* L'image se découpe pour remplir la zone sans déformer son aspect */
+        object-position: center; /* Centre l'image si elle est recadrée */
+    }
+
+    /* Optionnel : Pour ajuster le carrousel s'il y a des problèmes de marges ou de dépassement */
+    .carousel-inner {
+        overflow: hidden;   /* Masque tout excédent d'image qui dépasse */
+    }
+</style>
+
 <div class="container-fluid">
     <!-- Carrousel Image d'accueil -->
     <div id="carouselImgAcceuil" class="carousel slide mx-auto" data-bs-ride="carousel">
@@ -26,7 +40,7 @@
         <?php
         if (isset($categories) && !empty($categories)) {
             foreach ($categories as $categ) {
-                echo '<h3>'.$categ['cat_name'].'</h3>';
+                echo '<h3><a href="?category_id=' . $categ['id_cat'] . '">' . $categ['cat_name'] . '</a></h3>';
             }
         }
         
@@ -36,34 +50,48 @@
     <hr class="trait-doree">
 
     <!-- Carrousel Produits -->
-    <div id="carouselPrdouitsAcceuil" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselPrdouitsAcceuil" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselPrdouitsAcceuil" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
-
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/3f1302d3-be16-4ce7-b177-b4421213d687.jpeg">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/7f0da4d2-b42d-4b0b-ac2f-a2bd78422b0b.jpeg">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/e5972641-36bf-4b0a-aab4-62b7e5d5d17e.jpeg">
+    <?php if (isset($selectedProducts) && !empty($selectedProducts)): ?>
+        <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <?php
+                $activeClass = 'active';
+                foreach ($selectedProducts as $index => $product) {
+                    echo '<button type="button" data-bs-target="#carouselProduits" data-bs-slide-to="' . $index . '" class="' . $activeClass . '" aria-label="Slide ' . ($index + 1) . '"></button>';
+                    $activeClass = ''; // Seul le premier bouton doit être actif
+                }
+                ?>
             </div>
-            <div class="carousel-item">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/1200b8b3-272f-40e3-bc98-c928547e2ed1.jpeg">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/9a09a44c-aa30-41e2-a9f7-ad6ad41a66a3.jpeg">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/4f538ea5-703c-425d-88bc-3b01a935f18a.jpeg">
-            </div>
-        </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPrdouitsAcceuil" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselPrdouitsAcceuil" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Suivant</span>
-        </button>
-    </div>
+            <div class="carousel-inner">
+                <?php
+                $activeClass = 'active'; // Le premier produit sera actif
+                foreach ($selectedProducts as $product) {
+                    echo '<div class="carousel-item ' . $activeClass . '">';
+                    echo '<img src="' . esc($product['img_path']) . '" class="d-block w-100" alt="' . esc($product['p_name']) . '">';
+                    echo '<div class="carousel-caption d-none d-md-block">';
+                    echo '<h5>' . esc($product['p_name']) . '</h5>';
+                    echo '<p>' . esc($product['description']) . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    $activeClass = ''; // Seul le premier produit doit être actif
+                }
+                ?>
+            </div>
+
+            <!-- Contrôles du carrousel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduits" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Précédent</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselProduits" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Suivant</span>
+            </button>
+        </div>
+    <?php else: ?>
+        <p>Aucun produit disponible dans cette catégorie.</p>
+    <?php endif; ?>
+
 
 
     <div class="text-center mt-4">
