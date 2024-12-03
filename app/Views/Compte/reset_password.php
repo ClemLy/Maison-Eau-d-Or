@@ -155,6 +155,6 @@ a.return-link:hover {
 			<button type="submit">Réinitialiser Mot de Passe</button>
 		</form>
 
-		<a href="/sigin">Retour à la connexion</a>
+		<a href="/signin">Retour à la connexion</a>
 	</div>
 </div>

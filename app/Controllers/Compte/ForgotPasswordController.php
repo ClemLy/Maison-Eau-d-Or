@@ -47,11 +47,11 @@
 				//paramètres du mail
 				$to = $this->request->getPost('to');
 				$subject = $this->request->getPost('subject');
-				$from = env('email', '');
+				$from = env('email_user', '');
 				
 				//envoi du mail
 				$emailService->setTo($email);
-				$emailService->setFrom($from, 'TaskPlanner');
+				$emailService->setFrom($from, 'Maison Eau d\'Or');
 				$emailService->setSubject('Réinitialisation de mot de passe');
 				$emailService->setMessage($message);
 				

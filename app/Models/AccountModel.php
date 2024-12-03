@@ -12,6 +12,8 @@
 			'email',
 			'password',
 			'newsletter',
+			'reset_token',
+			'reset_token_exp',
 			'activation_code', 
 			'is_verified',
 			'remember_token',
