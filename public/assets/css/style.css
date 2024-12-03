@@ -5,6 +5,28 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+/* Assurez-vous que le menu dropdown reste caché par défaut */
+.nav-item.dropdown .dropdown-menu {
+    display: none;
+}
+
+/* Afficher le dropdown lors du survol du menu parent */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Personnalisation du style du dropdown */
+.dropdown-menu {
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    color: #333;
+}
+
 
 /* Titres */
 h1, h2, h3, h4, h5, h6 {
