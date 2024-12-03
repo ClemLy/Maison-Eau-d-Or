@@ -66,13 +66,14 @@
 						return redirect()->to('/signin');
 					}
 
-					// Gestion du "Se souvenir de moi"
-					if ($remember)
-					{
-						$rememberToken = bin2hex(random_bytes(16)); // Génère un token unique
+					if ($remember) {
+						$rememberToken = bin2hex(random_bytes(16));
 						$accountModel->update($data['id_user'], ['remember_token' => $rememberToken]);
-						set_cookie('remember_cookie', $rememberToken, 84600);  // Cookie valide pour 24 heures
+						set_cookie('remember_cookie', $rememberToken, 604800); // 7 jours
+					} else {
+						delete_cookie('remember_cookie');
 					}
+					
 
 					echo "<script>window.location.href='/account';</script>";
 				}

@@ -54,6 +54,7 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
 		// Automatic login if a valid "remember_token" cookie exists
+		$this->checkSessionLifetime();
 		$this->autoLogin();
     }
 
@@ -95,4 +96,19 @@ abstract class BaseController extends Controller
 			delete_cookie('remember_cookie');
 		}
 	}
+
+
+	private function checkSessionLifetime(): void
+	{
+		$session = session();
+		$lifetime = 3600; // 60 minutes en secondes
+
+		if ($session->get('lastActivity') && (time() - $session->get('lastActivity') > $lifetime)) {
+			$session->set(['isLoggedIn' => false]); // Détruit la session si le temps est écoulé
+		}
+
+		// Met à jour l'activité
+		$session->set('lastActivity', time());
+	}
+		
 }
