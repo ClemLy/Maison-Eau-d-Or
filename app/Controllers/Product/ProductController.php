@@ -25,8 +25,7 @@ class ProductController extends BaseController
             'content'   => view('Admin/products') // Contenu principal
         ];
 
-        return View('layout/main', $data);
-
+        return View('Layout/main', $data);
 
     }
     public function ajouterProduitPost()
@@ -39,25 +38,36 @@ class ProductController extends BaseController
         $file = $this->request->getFile('new_img');
         $imageId = null;
 
-        // Priorité : Image existante
-        if (!empty($data['existing_img'])) {
-            $imageId = $data['existing_img'];
-        }
-        // Sinon, uploader une nouvelle image via MediaController
-        elseif ($file) {
-            $imageId = $mediaController->uploadImage($file);
-        }
+        try {
+            // Priorité : Image existante
+            if (!empty($data['existing_img'])) {
+                $imageId = $data['existing_img'];
+            }
+            // Sinon, uploader une nouvelle image via MediaController
+            elseif ($file && $file->isValid()) {
+                $imageId = $mediaController->uploadImage($file);
+                if (!$imageId) {
+                    throw new \RuntimeException("L'upload de l'image a échoué.");
+                }
+            }
 
-        if ($imageId) {
+            if (!$imageId) {
+                throw new \RuntimeException("Aucune image sélectionnée ou uploadée.");
+            }
+
             // Ajouter les informations du produit
             $data['id_img'] = $imageId;
 
-            if ($productModel->save($data)) {
-                return redirect()->to('/admin/products')->with('success', 'Produit ajouté avec succès.');
+            if (!$productModel->save($data)) {
+                $errors = $productModel->errors(); // Récupérer les erreurs de validation
+                throw new \RuntimeException(implode(', ', $errors));
             }
-        }
 
-        return redirect()->back()->with('error', 'Erreur lors de l\'ajout du produit.');
+            return redirect()->to('/admin/produits')->with('success', 'Produit ajouté avec succès.');
+        } catch (\RuntimeException $e) {
+            // Renvoyer l'erreur avec un message flash
+            return redirect()->to('/admin/produit/ajouter')->withInput()->with('error', $e->getMessage());
+        }
     }
 
     public function ajouterProduitGet()

@@ -17,14 +17,27 @@ class ProductModel extends Model
         'description' => 'required|min_length[10]',
     ];
 
+    // Messages d'erreur explicites
+    protected $validationMessages = [
+        'p_name' => [
+            'required'   => 'Le nom du produit est obligatoire.',
+            'min_length' => 'Le nom du produit doit contenir au moins 3 caractères.',
+        ],
+        'p_price' => [
+            'required' => 'Le prix du produit est obligatoire.',
+            'numeric'  => 'Le prix doit être un nombre valide.',
+        ],
+        'description' => [
+            'required'   => 'La description est obligatoire.',
+            'min_length' => 'La description doit contenir au moins 10 caractères.',
+        ],
+    ];
+
     public function getStarProduct()
     {
         return $this->select('product.*, image.img_path')
-                    ->join('image', 'product.id_img = image.id_img') 
-                    ->where('product.is_star', true) 
-                    ->first();
+            ->join('image', 'product.id_img = image.id_img')
+            ->where('product.is_star', true)
+            ->first();
     }
-
-
-
 }

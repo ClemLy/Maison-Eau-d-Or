@@ -1,6 +1,10 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Ajouter un produit</h1>
 
+
+    <?php if (session()->has('error')): ?>
+        <div class="alert alert-danger"><?= session('error') ?></div>
+    <?php endif; ?>
     <form action="/admin/produit/ajouter" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
         <!-- Nom du produit -->
         <div class="mb-3">
