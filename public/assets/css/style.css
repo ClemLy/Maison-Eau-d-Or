@@ -209,3 +209,188 @@ header li a:hover  {
     width: 400px!important;
     height: 400px !important;
 } */
+
+
+
+
+
+/* Styles pour la page Mon Compte */
+.account-container {
+    max-width: 600px;
+    margin: 100px auto 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+}
+
+.account-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.account-container p {
+    font-size: 1.2rem;
+    color: #495057;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.account-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.account-container li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.account-container li a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.account-container li a:hover {
+    color: #0056b3;
+}
+
+.account-container .success-message {
+    color: green;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Style des boutons */
+.account-container a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+}
+
+.account-container a.button:hover {
+    background-color: #0056b3;
+}
+
+/* Message de confirmation */
+.account-container .confirm-delete {
+    color: red;
+    font-weight: bold;
+}
+
+.account-container li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
+
+/* Styles pour la page Modifier Mon Compte */
+.update-container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dee2e6;
+}
+
+.update-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.update-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.update-container input[type="text"],
+.update-container input[type="email"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #495057;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.update-container input[type="text"]:focus,
+.update-container input[type="email"]:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.update-container button[type="submit"] {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.update-container .error-list {
+    background-color: #ffe6e6;
+    border: 1px solid #ff4d4d;
+    padding: 10px;
+    border-radius: 5px;
+    color: #a94442;
+    margin-bottom: 20px;
+}
+
+.update-container .error-list li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.update-container a.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: #007bff;
+}
+
+.update-container a.btn-secondary:hover {
+    background-color: #0056b3;
+}
+
+.update-container i {
+    margin-right: 5px;
+}

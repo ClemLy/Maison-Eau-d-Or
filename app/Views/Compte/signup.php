@@ -141,18 +141,18 @@ button[type="submit"]:hover {
 
 		<form action="<?= site_url('signup/store') ?>" method="post">
 			<div class="form-group">
-				<label for="first_name">Nom</label>
-				<input type="text" name="first_name" id="first_name" value="<?= set_value('first_name') ?>" required>
-			</div>
-
-			<div class="form-group">
-				<label for="last_name">Prénom</label>
+				<label for="last_name">Nom</label>
 				<input type="text" name="last_name" id="last_name" value="<?= set_value('last_name') ?>" required>
 			</div>
 
 			<div class="form-group">
+				<label for="first_name">Prénom</label>
+				<input type="text" name="first_name" id="first_name" value="<?= set_value('first_name') ?>" required>
+			</div>
+
+			<div class="form-group">
 				<label for="email">Adresse email</label>
-				<input type="email" name="email" id="email" value="<?= set_value('email') ?>" required>
+				<input type="email" name="email" id="email" value="<?= set_value('email') ?>" placeholder="Ex : monemail@gmail.com" required>
 			</div>
 
 			<div class="form-group">
