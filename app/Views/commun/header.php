@@ -20,7 +20,7 @@
 				<div class="header-gauche">
 					<li>
 						<a href="<?= site_url('/'); ?>">
-							<img src="https://scontent-cdg4-1.xx.fbcdn.net/v/t39.30808-6/304807388_470884035036265_5060699602632772978_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=mn6vk33bZsQQ7kNvgGvoQ4e&_nc_zt=23&_nc_ht=scontent-cdg4-1.xx&_nc_gid=AwwRCg9YtF_gTG9rGVCUFGk&oh=00_AYB60jlbrQ20saAozc4VKSO-hnpiH7z6tUFRjB74A1qrYA&oe=6753AA50">
+							<img src="https://i.imgur.com/i2lO288.png">
 						</a>
 					</li>
 				</div>
