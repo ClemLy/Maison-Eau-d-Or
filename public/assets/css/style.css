@@ -3,9 +3,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
+/* Titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+}
 
 
 /* Messages */
@@ -393,4 +397,103 @@ header li a:hover  {
 
 .update-container i {
     margin-right: 5px;
+}
+
+
+
+
+/* Styles pour la page À propos */
+/* Container principal */
+.apropos-container {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Titre principal */
+.apropos-container h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.apropos-container h1::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    margin: 10px auto 0;
+}
+
+/* Sections */
+.apropos-container h2 {
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.apropos-container p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* Listes */
+.apropos-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.apropos-container li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #333;
+    padding-left: 20px;
+    position: relative;
+}
+
+.apropos-container li::before {
+    content: '•';
+    color: #d4af37;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Liens */
+.apropos-container a {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.apropos-container a:hover {
+    color: #b8860b;
+}
+
+/* Section contact */
+.section-contact {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.section-contact p {
+    font-size: 1.2rem;
+    color: #333;
 }
