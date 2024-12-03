@@ -20,7 +20,7 @@
 				<div class="header-gauche">
 					<li>
 						<a href="<?= site_url('/'); ?>">
-							<img src="https://i.imgur.com/i2lO288.png">
+							<img src="https://media.tenor.com/x8v1oNUOmg4AAAAM/rickroll-roll.gif">
 						</a>
 					</li>
 				</div>
