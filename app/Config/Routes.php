@@ -56,7 +56,7 @@ $routes->post('/reset-password/update', 'Compte\ResetPasswordController::updateP
 
 
 // Commander
-$routes->get('commander', 'Commander\CommanderController::index', ['filter' => 'auth']); // A modifier  !!!!!!!!!!!!!!!
+$routes->get('commander', 'Commander\CommanderController::index', ['filter' => 'auth']);
 
 
 // Panier
@@ -68,14 +68,14 @@ $routes->post('panier/modifier/', 'Panier\PanierController::modifier', ['filter'
 
 
 // Admin 
-$routes->get('admin', 'Admin\AdminController::index', ['filter' => 'auth']);
+$routes->get('admin', 'Admin\AdminController::index', ['filter' => 'admin']);
 
 $routes->get('admin/produits', 'Admin\AdminController::produits', ['filter' => 'admin']);
 $routes->post('admin/produit/ajouter', 'Admin\AdminController::ajouterProduit', ['filter' => 'admin']); // un produit entier
-$routes->post('admin/produit/modifier/', 'Admin\AdminController::modifierProduit/$1', ['filter' => 'admin']); // produit entier
-$routes->post('admin/produit/supprimer/', 'Admin\AdminController::supprimerProduit/$1', ['filter' => 'admin']); // id_produit
-$routes->post('admin/produit/activer/', 'Admin\AdminController::activerProduit/$1', ['filter' => 'admin']); // id_produit
-$routes->post('admin/produit/desactiver/', 'Admin\AdminController::desactiverProduit/$1', ['filter' => '  admin']); // id_produit
+$routes->post('admin/produit/modifier/', 'Admin\AdminController::modifierProduit', ['filter' => 'admin']); // produit entier
+$routes->post('admin/produit/supprimer/', 'Admin\AdminController::supprimerProduit', ['filter' => 'admin']); // id_produit
+$routes->post('admin/produit/activer/', 'Admin\AdminController::activerProduit', ['filter' => 'admin']); // id_produit
+$routes->post('admin/produit/desactiver/', 'Admin\AdminController::desactiverProduit', ['filter' => '  admin']); // id_produit
 
 $routes->get('admin/categories', 'Admin\AdminController::categories', ['filter' => 'admin']);
 $routes->post('admin/categorie/ajouter', 'Admin\AdminController::ajouterCategorie', ['filter' => 'admin']);

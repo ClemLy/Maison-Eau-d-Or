@@ -32,13 +32,17 @@
 					<li><a href="<?= site_url('faq'); ?>">FAQ</a></li>
 				</div>
 
+
 				<div class="header-droite">
 					<?php if (session()->get('isLoggedIn')): ?>
 						<li><a href="<?= site_url('account'); ?>">Mon Compte</a></li>
 					<?php else: ?>
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
-					<li><a href="<?= site_url('panier'); ?>">Panier</a></li>
+					    <li><a href="<?= site_url('panier'); ?>">Panier</a></li>
+                    <?php if (session()->get('admin')): ?>
+                        <li><a href="<?= site_url('admin'); ?>">Admin</a></li>
+                    <?php endif; ?>
 				</div>
 			</ul>
 		</nav>
