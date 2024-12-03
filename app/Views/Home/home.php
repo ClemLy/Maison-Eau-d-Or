@@ -22,13 +22,14 @@
 
 
     <div class="categories-vedette d-flex justify-content-around py-4">
+
         <?php
-        foreach ($categories as $categ) {
-            echo '<h3>'.$categ['cat_name'].'</h3>';
+        if (isset($categories) && !empty($categories)) {
+            foreach ($categories as $categ) {
+                echo '<h3>'.$categ['cat_name'].'</h3>';
+            }
         }
-        // for ($i = 1; $i < 5; $i++) {
-        //     echo '<h3>Catégorie ' . $i . '</h3>';
-        // }
+        
         ?>
     </div>
 
