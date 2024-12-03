@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    
+
     <div class="categories-vedette d-flex justify-content-around py-4">
         <?php
         for ($i = 1; $i < 5; $i++) {
@@ -61,7 +61,7 @@
         </button>
     </div>
 
-    <!-- Lien pour voir tous les produits -->
+
     <div class="text-center mt-4">
         <a href="#PRODUITS">
             <p>Voir tous les produits</p>
@@ -70,20 +70,24 @@
 
     <!-- Section Produit Vedette -->
     <div class="text-center mt-5">
-        <h2 class="texte-doree">Notre produit vedette</h2>
-        <hr class="trait-doree">
+    <h2 class="texte-doree">Notre produit vedette</h2>
+    <hr class="trait-doree">
 
-        <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/1200b8b3-272f-40e3-bc98-c928547e2ed1.jpeg">
+    <div class="row align-items-center produit-vedette mt-4">
+        <!-- Colonne de l'image -->
+        <div class="col-md-6 d-flex justify-content-center div-img-vedette">
+            <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/1200b8b3-272f-40e3-bc98-c928547e2ed1.jpeg" class="img-vedette" alt="Produit Vedette">
+        </div>
 
-        <p>GOKUUU</p>
-        <p>Lorem ipsum dolor est optio officiis vitae nisi ex llitia. Pariatur totam vitae repellendus assumenda possimus quae voluptatem aut.eque exercitationem culpa!</p>
-        <p class="texte-doree">10€</p>
+        <!-- Colonne texte -->
+        <div class="col-md-6 text-start vedette-texte ps-4">
+            <h3 class="fw-bold">GOKUUU</h3>
+            <p>Lorem ipsum dolor est optio officiis vitae nisi ex llitia. Pariatur totam vitae repellendus assumenda possimus quae voluptatem aut.eque exercitationem culpa!</p>
+            <p class="texte-doree fs-4 fw-bold">10€</p>
 
-        <button class="btn btn-black">Ajouter au panier<i class="fas fa-shopping-cart"></i></button>
+            <button class="btn btn-black mt-3">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
 
-        <!-- Contrôles de quantité -->
-        <div class="container mt-5">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-center mt-3">
                 <div class="input-group" style="width: 150px;">
                     <button class="btn btn-outline-primary" type="button" id="decrement" onclick="updateValue(-1)">-</button>
                     <input type="number" class="form-control text-center" id="numberInput" value="0" min="0" max="10" readonly>
