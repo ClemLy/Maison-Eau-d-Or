@@ -14,7 +14,7 @@
 			'newsletter',
 			'reset_token',
 			'reset_token_exp',
-			'activation_code', 
+			'activ_token', 
 			'is_verified',
 			'remember_token',
 			'is_admin'

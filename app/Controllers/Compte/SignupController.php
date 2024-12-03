@@ -74,7 +74,7 @@
 					'email'      => $this->request->getVar('email'),
 					'password'   => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
 					'newsletter' => $this->request->getPost('newsletter') ? true : false,
-					'activation_code' => bin2hex(random_bytes(16))
+					'activ_token' => bin2hex(random_bytes(16))
 				];
 
 				$accountModel->save($data);
@@ -84,7 +84,7 @@
 				$email->setFrom(env('email_user', ''), 'Maison Eau d\'Or');
 				$email->setTo($data['email']);
 				$email->setSubject('Activation de votre compte');
-				$email->setMessage('Cliquez sur ce lien pour activer votre compte : ' . site_url('activate/' . $data['activation_code']));
+				$email->setMessage('Cliquez sur ce lien pour activer votre compte : ' . site_url('activate/' . $data['activ_token']));
 				$email->send();
 
 				return redirect()->to('/signin')->with('msg', 'Un lien d\'activation a été envoyé à votre adresse email. Veuillez vérifier votre boîte mail.');
@@ -101,13 +101,13 @@
 			$accountModel    = new AccountModel();
 
 			// Recherche l'utilisateur avec le code d'activation
-			$user = $accountModel->where('activation_code', $activation_code)->first();
+			$user = $accountModel->where('activ_token', $activation_code)->first();
 
 			if ($user)
 			{
 				// Mettre à jour l'utilisateur comme vérifié
 				$accountModel->set('is_verified', true)
-						->set('activation_code', null) // Supprime le code d'activation
+						->set('activ_token', null) // Supprime le code d'activation
 						->where('id_user', $user['id_user'])
 						->update();
 
