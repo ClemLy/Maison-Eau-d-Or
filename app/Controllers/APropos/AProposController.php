@@ -9,12 +9,11 @@
 		public function index()
 		{
 			$data = [
-				'pageTitle' => 'À propos'
+				'pageTitle' => 'À propos',
+				'content'   => view('APropos/apropos') // Contenu principal
 			];
-
-			echo view('commun/header', $data);
-			echo view('APropos/apropos');
-			echo view('commun/footer');
+	
+			return View('Layout/main', $data);
 		}
 	}
 ?>

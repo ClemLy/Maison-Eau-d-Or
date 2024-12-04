@@ -104,8 +104,8 @@ $routes->post('admin/faq/ajouter', 'Admin\AdminController::ajouterQuestion', ['f
 $routes->post('admin/faq/modifier/', 'Admin\AdminController::modifierQuestion/$1', ['filter' => 'admin']);
 $routes->post('admin/faq/supprimer/', 'Admin\AdminController::supprimerQuestion/$1', ['filter' => 'admin']);
 
-$routes->get('admin/a-propos/modifier', 'Admin\AdminController::modifierAPropos', ['filter' => 'admin']);
-$routes->post('admin/a-propos/modifier', 'Admin\AdminController::modifierAPropos', ['filter' => 'admin']);
+$routes->get('admin/a-propos/modifier', 'Admin\AdminController::modifierAProposGet', ['filter' => 'admin']);
+$routes->post('admin/a-propos/modifier', 'Admin\AdminController::modifierAProposPost', ['filter' => 'admin']);
 
 
 $routes->post('admin/produit-vedette/ajouter', 'Admin\AdminController::ajouterProduitVedette', ['filter' => 'admin']);

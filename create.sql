@@ -88,16 +88,16 @@ CREATE TABLE CART (
 );
 
 CREATE TABLE CATEGORY (
-                          id_cat SERIAL PRIMARY KEY,
-                          cat_name VARCHAR(255) NOT NULL
+    id_cat SERIAL PRIMARY KEY,
+    cat_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE PRODUCT_CATEGORY (
-                                  id_prod INT NOT NULL,
-                                  id_cat INT NOT NULL,
-                                  PRIMARY KEY (id_prod, id_cat),
-                                  FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod) ON DELETE CASCADE,
-                                  FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat) ON DELETE CASCADE
+    id_prod INT NOT NULL,
+    id_cat INT NOT NULL,
+    PRIMARY KEY (id_prod, id_cat),
+    FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod) ON DELETE CASCADE,
+    FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat) ON DELETE CASCADE
 );
 
 
@@ -106,6 +106,10 @@ CREATE TABLE SHOWCASE (
     id_show SERIAL PRIMARY KEY,
     id_cat INT NOT NULL,
     FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat)
+);
+
+CREATE TABLE A_PROPOS (
+    content TEXT NOT NULL
 );
 
 CREATE TABLE FAQ (
