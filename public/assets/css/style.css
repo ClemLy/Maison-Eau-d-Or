@@ -497,6 +497,35 @@ header li a:hover  {
     top: 0;
 }
 
+/* Modif À Propos */
+#editor {
+    height: 300px; /* Ajustez la hauteur selon vos besoins */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style de la scrollbar */
+#editor::-webkit-scrollbar {
+    width: 8px;
+}
+
+#editor::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#editor::-webkit-scrollbar-thumb {
+    background: #b8860b; /* Couleur du dégradé ou personnalisation */
+    border-radius: 5px;
+}
+
+#editor::-webkit-scrollbar-thumb:hover {
+    background: #d4af37; /* Couleur au survol */
+}
+
+
+
+
 /* Liens */
 .apropos-container a {
     color: #d4af37;
