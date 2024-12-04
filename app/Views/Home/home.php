@@ -124,19 +124,18 @@
                     <p><?= esc($starProduct['description']) ?></p>
                     <p class="texte-doree fs-4 fw-bold"><?= esc($starProduct['p_price']) . '€' ?></p>
 
-                    <form action="<?= site_url('/panier/ajouter') ?>" method="post">
-
+                    <form action="<?= site_url('/panier/ajouter/' . $starProduct['id_prod']) ?>" method="post">
                         <div class="d-flex align-items-center mt-3">
                             <div class="input-group" style="width: 150px;">
                                 <button class="btn btn-outline-primary" type="button" id="decrement" onclick="updateValue(-1)">-</button>
-                                <input type="number" class="form-control text-center" id="numberInput" value="0" min="0" max="10" readonly>
+                                <input type="number" class="form-control text-center" id="numberInput" name="quantity" value="1" min="1" max="10" readonly>
                                 <button class="btn btn-outline-primary" type="button" id="increment" onclick="updateValue(1)">+</button>
                             </div>
                         </div>
 
                         <button class="btn btn-black mt-3">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
-
                     </form>
+
                 </div>
             </div>
         </div>
@@ -147,6 +146,17 @@
     ?>
 
     <br>
+
+    <script>
+        function updateValue(step) {
+            const input = document.getElementById('numberInput');
+            let value = parseInt(input.value);
+            const newValue = value + step;
+            if (newValue >= parseInt(input.min) && newValue <= parseInt(input.max)) {
+                input.value = newValue;
+            }
+        }
+    </script>
 
     <script src="https://static.elfsight.com/platform/platform.js" async></script>
     <div class="elfsight-app-5626288e-3079-4c8b-bf5b-af021b2da7f7" data-elfsight-app-lazy></div>
