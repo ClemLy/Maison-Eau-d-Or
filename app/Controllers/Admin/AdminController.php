@@ -70,6 +70,6 @@ class AdminController extends BaseController
             'content'      => view('Admin/index', ['adminRoutes' => $adminRoutes]), // Vue contenant les liens
         ];
 
-        return view('layout/main', $data);
+        return view('Layout/main', $data);
     }
 }
