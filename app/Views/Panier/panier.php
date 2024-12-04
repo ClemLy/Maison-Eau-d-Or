@@ -1,6 +1,16 @@
 <div class="container my-5">
     <h2 class="mb-4">Votre Panier</h2>
 
+
+    <?php if (session()->get('danger')): ?>
+
+        <div class="alert alert-danger">
+            <?= session()->get('danger') ?>
+        </div>
+
+    <?php endif; ?>
+
+
     <?php if (!empty($cartItems)): ?>
         <table class="table table-bordered">
             <thead>
@@ -40,7 +50,7 @@
                 <tr>
                     <td colspan="4" class="text-end"><strong>Total :</strong></td>
                     <td colspan="2">
-                        <?= number_format(array_reduce($cartItems, function($sum, $item) {
+                        <?= number_format(array_reduce($cartItems, function ($sum, $item) {
                             return $sum + $item['p_price'] * $item['quantity'];
                         }, 0), 2, ',', ' ') ?> €
                     </td>
@@ -50,7 +60,7 @@
 
         <div class="text-end">
             <a href="<?= site_url('panier/vider') ?>" class="btn btn-danger">
-                <i class="bi bi-trash"></i> Vider le Panier           
+                <i class="bi bi-trash"></i> Vider le Panier
             </a>
             <a href="<?= site_url('commander') ?>" class="btn btn-success">Passer la Commande</a>
         </div>

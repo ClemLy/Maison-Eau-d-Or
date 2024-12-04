@@ -67,7 +67,7 @@ $routes->post('panier/ajouter/(:num)', 'Panier\PanierController::ajouter/$1', ['
 
 $routes->get('panier/supprimer/(:num)', 'Panier\PanierController::supprimer/$1', ['filter' => 'auth']); // id_produit
 $routes->get('panier/vider', 'Panier\PanierController::vider', ['filter' => 'auth']); // id_produit
-$routes->post('panier/modifier/(:num)/(:num)', 'Panier\PanierController::modifier/$1/$2', ['filter' => 'auth']); // id_produit/qte
+$routes->post('panier/modifier/(:num)', 'Panier\PanierController::modifier/$1/$2', ['filter' => 'auth']); // id_produit/qte
 
 
 // Admin 

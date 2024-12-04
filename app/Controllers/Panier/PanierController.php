@@ -109,9 +109,27 @@
 		}
 
 
-		public function modifier()
+		public function modifier($id_prod)
 		{
+			$cartModel = new CartModel();
+			$id_user = session()->get('id_user');
+			$quantity = $this->request->getPost('quantity');
 
+			if (!$id_user) 
+			{
+				return redirect()->to('/');
+			}
+
+			if (empty($quantity)) {
+				return redirect()->to('/panier')->with('danger', 'La quantité doit etre indiqué');
+			}
+
+			$cartModel->where('id_user', $id_user)
+					  ->where('id_prod', $id_prod)
+					  ->set('quantity',$quantity)
+					  ->update();
+
+			return redirect()->to('/panier');
 		}
 
 
