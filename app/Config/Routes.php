@@ -60,11 +60,14 @@ $routes->get('commander', 'Commander\CommanderController::index', ['filter' => '
 
 
 // Panier
-$routes->get('panier', 'Panier\PanierController::index', ['filter' => 'auth']); 
-$routes->post('panier/ajouter/', 'Panier\PanierController::ajouter', ['filter' => 'auth']);  // id_produit/qte
-$routes->post('panier/supprimer/', 'Panier\PanierController::supprimer', ['filter' => 'auth']); // id_produit
-$routes->post('panier/vider', 'Panier\PanierController::vider', ['filter' => 'auth']); // id_produit
-$routes->post('panier/modifier/', 'Panier\PanierController::modifier', ['filter' => 'auth']); // id_produit/qte
+$routes->get('panier', 'Panier\PanierController::panierGet', ['filter' => 'auth']); 
+$routes->post('panier', 'Panier\PanierController::panierPost', ['filter' => 'auth']); 
+
+$routes->post('panier/ajouter/(:num)', 'Panier\PanierController::ajouter/$1', ['filter' => 'auth']);  // id_prod
+
+$routes->get('panier/supprimer/(:num)', 'Panier\PanierController::supprimer/$1', ['filter' => 'auth']); // id_produit
+$routes->get('panier/vider', 'Panier\PanierController::vider', ['filter' => 'auth']); // id_produit
+$routes->post('panier/modifier/(:num)', 'Panier\PanierController::modifier/$1/$2', ['filter' => 'auth']); // id_produit/qte
 
 
 // Admin 
