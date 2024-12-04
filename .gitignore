@@ -4,6 +4,9 @@
 # Dossiers contenant des fichiers générés
 /writable
 
+# Dossiers contenant des fichiers images
+/public/uploads
+
 # Ignore les fichiers de dépendances installées par Composer & node
 /vendor
 
