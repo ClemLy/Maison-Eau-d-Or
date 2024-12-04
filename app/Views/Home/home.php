@@ -137,12 +137,17 @@
                         <button class="btn btn-black mt-3">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
 
                     </form>
-
                 </div>
             </div>
         </div>
+
     <?php } else {
         echo '<p class="alert alert-info">Aucun article en vedette</p>';
     }
     ?>
+
+    <br>
+
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-5626288e-3079-4c8b-bf5b-af021b2da7f7" data-elfsight-app-lazy></div>
 </div>
