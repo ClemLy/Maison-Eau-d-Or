@@ -7,8 +7,8 @@
 		protected $table         = 'faq';
 		protected $primaryKey    = 'id_faq';
 		protected $allowedFields = [
-			'question',
-            'answer'
+			'content'
 		];
+
 	}
 ?>

@@ -58,7 +58,7 @@
 								<li><a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/blog/ajouter'); ?>">Ajouter un Article</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/faq/ajouter'); ?>">Modifier FAQ</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a></li>
 							</ul>
 						</li>
 					<?php endif; ?>

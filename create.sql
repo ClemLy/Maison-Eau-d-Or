@@ -122,6 +122,5 @@ CREATE TABLE A_PROPOS (
 
 CREATE TABLE FAQ (
     id_faq SERIAL PRIMARY KEY,
-    question VARCHAR(255) NOT NULL,
-    answer TEXT NOT NULL
+    content TEXT NOT NULL
 );

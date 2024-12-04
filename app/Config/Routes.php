@@ -103,9 +103,8 @@ $routes->post('admin/blog/modifier/', 'Admin\AdminController::modifierArticle', 
 $routes->get('admin/blog/supprimer/(:num)', 'Admin\AdminController::supprimerArticle/$1', ['filter' => 'admin']);
 
 
-$routes->post('admin/faq/ajouter', 'Admin\AdminController::ajouterQuestion', ['filter' => 'admin']);
-$routes->post('admin/faq/modifier/', 'Admin\AdminController::modifierQuestion/$1', ['filter' => 'admin']);
-$routes->post('admin/faq/supprimer/', 'Admin\AdminController::supprimerQuestion/$1', ['filter' => 'admin']);
+$routes->get('admin/faq/modifier', 'Admin\AdminController::modifierFaqGet', ['filter' => 'admin']);
+$routes->post('admin/faq/modifier', 'Admin\AdminController::modifierFaqPost', ['filter' => 'admin']);
 
 $routes->get('admin/a-propos/modifier', 'Admin\AdminController::modifierAProposGet', ['filter' => 'admin']);
 $routes->post('admin/a-propos/modifier', 'Admin\AdminController::modifierAProposPost', ['filter' => 'admin']);
