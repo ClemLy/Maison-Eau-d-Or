@@ -18,3 +18,7 @@
 		<p class="success-message"><?= session()->getFlashdata('success'); ?></p>
 	<?php endif; ?>
 </div>
+
+<?php
+return ($_SESSION);
+?>

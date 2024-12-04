@@ -12,9 +12,10 @@ class ProductModel extends Model
 
     // Validation des données
     protected $validationRules = [
-        'p_name'      => 'required|min_length[3]',
+        'p_name'      => 'required',
         'p_price'     => 'required|numeric',
-        'description' => 'required|min_length[10]',
+        'description' => 'required',
+        'id_img'      => 'required|numeric',
     ];
 
     // Messages d'erreur explicites
@@ -31,6 +32,10 @@ class ProductModel extends Model
             'required'   => 'La description est obligatoire.',
             'min_length' => 'La description doit contenir au moins 10 caractères.',
         ],
+        'id_img' => [
+            'required' => 'L\'image du produit est obligatoire.',
+            'numeric'  => 'L\'image du produit est invalide.',
+        ],
     ];
 
     public function getStarProduct()
@@ -40,4 +45,54 @@ class ProductModel extends Model
             ->where('product.is_star', true)
             ->first();
     }
+    public function getProducts()
+    {
+        $products = $this->select('
+                product.*, 
+                image.img_path, 
+                image.img_name
+            ')
+            ->join('image', 'product.id_img = image.id_img', 'left')
+            ->findAll();
+
+        foreach ($products as &$product) {
+            $categories = $this->db->table('category')
+                ->select('cat_name')
+                ->join('product_category', 'category.id_cat = product_category.id_cat')
+                ->where('product_category.id_prod', $product['id_prod'])
+                ->get()
+                ->getResultArray();
+
+            $product['categories'] = $categories; // Associer les catégories au produit
+        }
+
+        return $products;
+    }
+    public function getProductById($id_prod)
+    {
+        $product = $this->select('
+                product.*, 
+                image.img_path, 
+                image.img_name
+            ')
+            ->join('image', 'product.id_img = image.id_img', 'left')
+            ->where('product.id_prod', $id_prod)
+            ->first();
+
+        if ($product) {
+            // Récupérer les catégories associées au produit
+            $db = \Config\Database::connect();
+            $categories = $db->table('product_category')
+                ->select('category.cat_name')
+                ->join('category', 'product_category.id_cat = category.id_cat')
+                ->where('product_category.id_prod', $id_prod)
+                ->get()
+                ->getResultArray();
+
+            $product['categories'] = array_column($categories, 'cat_name');
+        }
+
+        return $product;
+    }
+
 }

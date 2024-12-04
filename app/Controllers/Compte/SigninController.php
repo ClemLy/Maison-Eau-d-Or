@@ -53,8 +53,8 @@
 						'first_name'   => $data['first_name'],
 						'last_name'    => $data['last_name'],
 						'email'        => $data['email'],
-                        'admin'       => $data['is_admin'],
-						'phone_number' => $data['phone_number'] ?? null,
+                        'admin' => $data['is_admin'] == 't' ? true : false,
+                        'phone_number' => $data['phone_number'] ?? null,
 						'isLoggedIn'   => true
 					];
 
