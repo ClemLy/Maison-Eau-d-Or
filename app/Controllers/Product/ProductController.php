@@ -11,12 +11,12 @@ use App\Models\ProductModel;
 
 class ProductController extends BaseController
 {
+    private ProductModel $productModel;
 
     // Liste des produits
     public function index()
     {
-        $productModel = new ProductModel();
-        $products = $productModel->getProducts();
+        $products = $this->productModel->getProducts();
         $data = [
             'pageTitle' => 'Produits',
             'products' => $products,
@@ -25,6 +25,11 @@ class ProductController extends BaseController
 
         return View('Layout/main', $data);
 
+    }
+
+    public function __construct()
+    {
+        $this->productModel = new ProductModel();
     }
     public function ajouterProduitPost()
     {
