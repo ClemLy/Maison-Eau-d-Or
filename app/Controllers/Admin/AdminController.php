@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\AProposModel;
+use App\Models\FaqModel;
 
 class AdminController extends BaseController
 {
@@ -73,6 +74,13 @@ class AdminController extends BaseController
 
         return view('Layout/main', $data);
     }
+
+
+
+
+    /* ------------------ */
+    /* -----À PROPOS----- */
+    /* ------------------ */
 
     public function modifierAProposGet()
     {
@@ -165,5 +173,102 @@ class AdminController extends BaseController
             'status' => 'error',
             'message' => 'Requête invalide.',
         ]);
+    }
+
+    /* ------------------ */
+    /* -------FAQ-------- */
+    /* ------------------ */
+
+    public function modifierFaqGet()
+    {
+        // Charger le modèle
+        $faqModel = new \App\Models\FaqModel();
+    
+        // Récupérer le contenu avec ID = 1
+        $contentData = $faqModel->find(1);
+    
+        // Préparer les données pour la vue partielle
+        $faqViewData = [
+            'currentContent' => $contentData['content'] ?? '', // Contenu existant ou valeur par défaut
+        ];
+    
+        // Préparer les données pour le layout principal
+        $data = [
+            'pageTitle' => 'Modifier FAQ',
+            'content'   => view('Admin/edit_faq', $faqViewData), // Charger la vue partielle avec ses données
+        ];
+    
+        // Charger la vue principale avec le contenu
+        return view('Layout/main', $data);
+    }
+
+    public function modifierFaqPost()
+    {
+        $faqModel = new FaqModel(); // Instanciation du modèle
+
+        // Vérifier si la requête est AJAX
+        if ($this->request->isAJAX())
+        {
+            // Récupérer les données POST
+            $content = $this->request->getPost('content');
+
+            if (empty($content))
+            {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Le contenu ne peut pas être vide.',
+                ]);
+            }
+
+            // Vérifier si une ligne avec id_apropos = 1 existe
+            $existingData = $faqModel->find(1);
+
+            if ($existingData)
+            {
+                // Mettre à jour le contenu si la ligne existe
+                $updated = $faqModel->update(1, ['content' => $content]);
+
+                if ($updated)
+                {
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Le contenu a été mis à jour avec succès.',
+                    ]);
+                }
+                else
+                {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Une erreur est survenue lors de la mise à jour.',
+                    ]);
+                }
+            } 
+            else
+            {
+                // Insérer une nouvelle ligne si elle n'existe pas
+                $inserted = $faqModel->insert(['id' => 1, 'content' => $content]);
+
+                if ($inserted)
+                {
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Le contenu a été créé avec succès.',
+                    ]);
+                }
+                else
+                {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Une erreur est survenue lors de la création du contenu.',
+                    ]);
+                }
+            }
         }
+
+        // Retourner une erreur si ce n'est pas une requête AJAX
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Requête invalide.',
+        ]);
+    }
 }

@@ -574,7 +574,7 @@ header li a:hover  {
 }
 
 /* Sections */
-.faq-container h3 {
+.faq-content h3 {
     font-size: 1.3rem;
     color: #000;
     margin-top:50px;
@@ -586,24 +586,19 @@ header li a:hover  {
     color: transparent;
 }
 
-.faq-container h3.h3-right, .faq-container p.p-right{
-    text-align: right;
-}
-
-.faq-container p {
+.faq-content p {
     font-size: 0.95rem;
     margin-bottom: 20px;
     line-height: 1.8;
-    text-align: justify;
 }
 
 /* Listes */
-.faq-container ul {
+.faq-content ul {
     list-style: none;
     padding-left: 0;
 }
 
-.faq-container li {
+.faq-content li {
     margin-bottom: 15px;
     font-size: 1.1rem;
     color: #333;
@@ -611,7 +606,7 @@ header li a:hover  {
     position: relative;
 }
 
-.faq-container li::before {
+.faq-content li::before {
     content: '•';
     color: #d4af37;
     font-size: 1.5rem;
@@ -621,13 +616,21 @@ header li a:hover  {
 }
 
 /* Liens */
-.faq-container a {
+.faq-content a {
     color: #d4af37;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
 }
 
-.faq-container a:hover {
+.faq-content a:hover {
     color: #b8860b;
+}
+
+.faq-content h3:nth-child(odd), p:nth-child(even):not(:empty) {
+    text-align: left;
+}
+
+.faq-content h3:nth-child(even), p:nth-child(odd):not(:empty) {
+   text-align: right;
 }
