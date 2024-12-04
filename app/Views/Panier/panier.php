@@ -49,6 +49,9 @@
         </table>
 
         <div class="text-end">
+            <a href="<?= site_url('panier/vider') ?>" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Vider le Panier           
+            </a>
             <a href="<?= site_url('commander') ?>" class="btn btn-success">Passer la Commande</a>
         </div>
     <?php else: ?>

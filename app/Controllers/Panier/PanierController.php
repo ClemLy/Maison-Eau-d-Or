@@ -76,5 +76,44 @@
 			return redirect()->to('/panier')->with('success', 'Produit ajouté au panier.');
 		}
 
+		public function supprimer($id_prod)
+		{
+			$cartModel = new CartModel();
+
+			$id_user = session()->get('id_user'); 
+			if (!$id_user) 
+			{
+				return redirect()->to('/');
+			}
+
+			$cartModel->where('id_user', $id_user)
+					->where('id_prod', $id_prod)
+					->delete();
+
+			return redirect()->to('/panier');
+		}
+
+		public function vider()
+		{
+			$cartModel = new CartModel();
+			$id_user = session()->get('id_user');
+
+			if (!$id_user) 
+			{
+				return redirect()->to('/');
+			}
+
+			$cartModel->where('id_user', $id_user)->delete();
+
+			return redirect()->to('/panier');
+		}
+
+
+		public function modifier()
+		{
+
+		}
+
+
 	}
 ?>
