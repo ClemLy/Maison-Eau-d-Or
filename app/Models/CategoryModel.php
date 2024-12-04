@@ -8,7 +8,6 @@ class CategoryModel extends Model
     protected $table = 'category';
     protected $primaryKey = 'id_cat';
     protected $allowedFields = ['cat_name'];
-    protected $useAutoIncrement = true; // S'assurer que c'est actif uniquement si SERIAL est présent
 
 }
 

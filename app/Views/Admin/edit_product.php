@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Modifier le produit</h1>
-
+    <?php var_dump($_SESSION);?>
     <form action="/admin/produit/modifier" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
         <!-- ID du produit -->
         <input type="hidden" name="id_prod" value="<?= esc($product['id_prod']) ?>">
@@ -32,12 +32,9 @@
 
         <div class="mb-3">
             <div id="categories-container" class="border p-2 rounded text-muted" style="opacity:80%!important;min-height: 40px;">
-                <!-- Pré-remplir avec les catégories existantes -->
-                <?php foreach ($product['categories'] as $category): ?>
-                    <div class="category-tag"><?= esc($category) ?> <span>&times;</span></div>
-                <?php endforeach; ?>
+                <!-- Les catégories ajoutées par JS apparaîtront ici -->
             </div>
-            <input type="hidden" id="categories" name="categories" value='<?= json_encode($product['categories']) ?>'>
+            <input type="hidden" id="categories" name="categories" value="">
             <small class="text-muted">Ajoutez une catégorie, puis appuyez sur "Ajouter". Utilisez la croix pour en retirer.</small>
         </div>
 
@@ -45,7 +42,6 @@
         <div class="mb-3">
             <label class="form-label">Choisir une image existante :</label>
             <div class="row">
-                <!-- Boucle PHP pour afficher les images -->
                 <?php foreach ($images as $image): ?>
                     <div class="col-md-3">
                         <div class="card image-card <?= $image['id_img'] == $product['id_img'] ? 'border-primary' : '' ?>" data-id="<?= $image['id_img'] ?>">
@@ -82,7 +78,6 @@
         </div>
     </form>
 </div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -142,7 +137,6 @@
         color: #000;
     }
 </style>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const container = document.getElementById('categories-container');
@@ -150,50 +144,56 @@
         const newCategoryInput = document.getElementById('new-category');
         const addCategoryBtn = document.getElementById('add-category-btn');
 
-        let categories = [];
+        // Catégories existantes transmises depuis PHP
+        const initialCategories = <?= json_encode($product['categories'] ?? []) ?>;
 
-        // Ajouter une catégorie
-        function addCategory(category) {
-            category = category.trim();
-            if (category && !categories.includes(category)) {
-                categories.push(category);
+        // Tableau pour suivre les catégories ajoutées
+        let categories = [...initialCategories];
 
-                // Créer un tag visuel
+        // Fonction pour afficher les catégories dans le conteneur
+        function renderCategories() {
+            // Vider le conteneur
+            container.innerHTML = '';
+
+            // Ajouter chaque catégorie
+            categories.forEach(category => {
                 const tag = document.createElement('div');
                 tag.classList.add('category-tag');
                 tag.textContent = category;
 
-                // Ajouter un bouton de suppression
+                // Bouton de suppression
                 const removeButton = document.createElement('span');
-                removeButton.textContent = '×';
+                removeButton.textContent = ' ×';
+                removeButton.style.cursor = 'pointer';
+                removeButton.style.marginLeft = '10px';
                 removeButton.addEventListener('click', function () {
                     removeCategory(category);
                 });
 
                 tag.appendChild(removeButton);
                 container.appendChild(tag);
+            });
 
-                // Mettre à jour le champ caché
-                input.value = JSON.stringify(categories);
+            // Mettre à jour l'input caché
+            input.value = JSON.stringify(categories);
+        }
+
+        // Ajouter une catégorie
+        function addCategory(category) {
+            category = category.trim();
+            if (category && !categories.includes(category)) {
+                categories.push(category);
+                renderCategories();
             }
         }
 
         // Supprimer une catégorie
         function removeCategory(category) {
             categories = categories.filter(c => c !== category);
-
-            // Supprimer le tag visuel
-            Array.from(container.children).forEach(child => {
-                if (child.textContent.includes(category)) {
-                    container.removeChild(child);
-                }
-            });
-
-            // Mettre à jour le champ caché
-            input.value = JSON.stringify(categories);
+            renderCategories();
         }
 
-        // Ajouter une catégorie via le bouton ou la touche "Entrée"
+        // Ajouter une catégorie via le bouton
         addCategoryBtn.addEventListener('click', function () {
             const category = newCategoryInput.value;
             if (category) {
@@ -202,6 +202,7 @@
             }
         });
 
+        // Ajouter une catégorie via la touche "Entrée"
         newCategoryInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -213,8 +214,7 @@
             }
         });
 
-        // Initialisation avec des catégories déjà existantes (si nécessaires)
-        const initialCategories = []; // Remplis ce tableau avec les catégories existantes si nécessaire.
-        initialCategories.forEach(category => addCategory(category));
+        // Initialiser les catégories existantes
+        renderCategories();
     });
 </script>

@@ -60,14 +60,14 @@ CREATE TABLE ORDERS (
 );
 
 CREATE TABLE PRODUCT (
-    id_prod SERIAL PRIMARY KEY,
-    p_name VARCHAR(255) NOT NULL,
-    p_price FLOAT NOT NULL,
-    description TEXT NOT NULL,
-    id_img INT NOT NULL,
-    on_sale BOOLEAN NOT NULL DEFAULT FALSE,
-    is_star BOOLEAN NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (id_img) REFERENCES IMAGE(id_img)
+                         id_prod SERIAL PRIMARY KEY,
+                         p_name VARCHAR(255) NOT NULL,
+                         p_price FLOAT NOT NULL,
+                         description TEXT NOT NULL,
+                         id_img INT NOT NULL,
+                         on_sale BOOLEAN NOT NULL DEFAULT FALSE,
+                         is_star BOOLEAN NOT NULL DEFAULT FALSE,
+                         FOREIGN KEY (id_img) REFERENCES IMAGE(id_img)
 );
 
 CREATE TABLE ORDER_PRODUCT (
@@ -88,17 +88,19 @@ CREATE TABLE CART (
 );
 
 CREATE TABLE CATEGORY (
-    id_cat SERIAL PRIMARY KEY,
-    cat_name VARCHAR(255) NOT NULL
+                          id_cat SERIAL PRIMARY KEY,
+                          cat_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE PRODUCT_CATEGORY (
                                   id_prod INT NOT NULL,
                                   id_cat INT NOT NULL,
-                                  PRIMARY KEY (id_prod, id_cat), -- Clé primaire composite
-                                  FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod) ON DELETE CASCADE, -- Suppression en cascade
-                                  FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat) ON DELETE CASCADE -- Suppression en cascade
+                                  PRIMARY KEY (id_prod, id_cat),
+                                  FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod) ON DELETE CASCADE,
+                                  FOREIGN KEY (id_cat) REFERENCES CATEGORY(id_cat) ON DELETE CASCADE
 );
+
+
 
 CREATE TABLE SHOWCASE (
     id_show SERIAL PRIMARY KEY,

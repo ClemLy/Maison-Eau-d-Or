@@ -11,16 +11,12 @@ use App\Models\ProductModel;
 
 class ProductController extends BaseController
 {
-    protected $productModel;
 
-    public function __construct()
-    {
-        $this->productModel = new ProductModel();
-    }
     // Liste des produits
     public function index()
     {
-        $products = $this->productModel->getProducts();
+        $productModel = new ProductModel();
+        $products = $productModel->getProducts();
         $data = [
             'pageTitle' => 'Produits',
             'products' => $products,
@@ -36,6 +32,7 @@ class ProductController extends BaseController
         $categoryModel = new CategoryModel();
         $productCategoryModel = new ProductCategoryModel();
         $mediaController = new MediaController();
+
 
         // Récupérer les données du formulaire
         $data = $this->request->getPost();
@@ -113,9 +110,6 @@ class ProductController extends BaseController
         return view('Admin/add_product');
     }
 
-
-
-    // Modifier un produit
     public function modifierProduitPost()
     {
         $productModel = new ProductModel();
@@ -123,10 +117,12 @@ class ProductController extends BaseController
         $productCategoryModel = new ProductCategoryModel();
         $mediaController = new MediaController();
 
-        // Récupérer les données du formulaire
         $data = $this->request->getPost();
         $file = $this->request->getFile('new_img');
         $productId = $data['id_prod'] ?? null;
+
+        $db = \Config\Database::connect();
+        $db->transStart(); // Démarre une transaction
 
         try {
             // Vérifier si le produit existe
@@ -136,32 +132,30 @@ class ProductController extends BaseController
             }
 
             // Gestion de l'image
-            if (!empty($data['existing_img'])) {
-                $imageId = $data['existing_img'];
-            } elseif ($file && $file->isValid()) {
+            $imageId = $data['existing_img'] ?? $product['id_img'];
+            if ($file && $file->isValid()) {
                 $imageId = $mediaController->uploadImage($file);
                 if (!$imageId) {
                     throw new \RuntimeException("L'upload de l'image a échoué.");
                 }
-                $data['id_img'] = $imageId;
             }
-
-            // Mise à jour des champs booléens
-            $data['on_sale'] = isset($data['on_sale']) && $data['on_sale'] === 't' ? 't' : 'f';
-            $data['is_star'] = isset($data['is_star']) && $data['is_star'] === 't' ? 't' : 'f';
+            $data['id_img'] = $imageId;
 
             // Mise à jour du produit
-            $data['id_img'] = $imageId ?? $product['id_img'];
+            $data['on_sale'] = isset($data['on_sale']) ? 't' : 'f';
+            $data['is_star'] = isset($data['is_star']) ? 't' : 'f';
+
             if (!$productModel->update($productId, $data)) {
                 throw new \RuntimeException(implode(', ', $productModel->errors()));
             }
 
-            // Gestion des catégories
+            // Récupérer les relations existantes
+            $existingCategories = $productCategoryModel->where('id_prod', $productId)->findAll();
+            $existingCategoryIds = array_column($existingCategories, 'id_cat');
+
+            $newCategoryIds = [];
             $categoryInput = $data['categories'] ?? '[]';
             $categoryNames = json_decode($categoryInput, true);
-
-            // Supprimer les anciennes relations
-            $productCategoryModel->where('id_prod', $productId)->delete();
 
             if (!empty($categoryNames) && is_array($categoryNames)) {
                 foreach ($categoryNames as $categoryName) {
@@ -171,29 +165,70 @@ class ProductController extends BaseController
                     $category = $categoryModel->where('cat_name', $categoryName)->first();
                     $categoryId = $category['id_cat'] ?? null;
 
-                    // Si la catégorie n'existe pas, la créer
+                    // Créer la catégorie si elle n'existe pas
                     if (!$categoryId) {
-                        if (!$categoryModel->save(['cat_name' => $categoryName])) {
-                            throw new \RuntimeException("Erreur lors de l'ajout de la catégorie.");
+                        if (!$categoryModel->insert(['cat_name' => $categoryName])) {
+                            throw new \RuntimeException("Erreur lors de la création de la catégorie : {$categoryName}");
                         }
+
+                        // Récupérer l'ID après insertion réussie
                         $categoryId = $categoryModel->getInsertID();
+
+                        // Double vérification si `insertID` échoue
+                        if (!$categoryId) {
+                            $category = $categoryModel->where('cat_name', $categoryName)->first();
+                            $categoryId = $category['id_cat'] ?? null;
+
+                            if (!$categoryId) {
+                                throw new \RuntimeException("Impossible de récupérer l'ID pour la catégorie : {$categoryName}");
+                            }
+                        }
                     }
 
-                    // Ajouter la relation dans product_category
-                    if (!$productCategoryModel->save(['id_prod' => $productId, 'id_cat' => $categoryId])) {
-                        throw new \RuntimeException("Erreur lors de la liaison produit-catégorie.");
+                    log_message('debug', "Catégorie traitée : ID = {$categoryId}, Nom = {$categoryName}");
+
+                    $newCategoryIds[] = $categoryId;
+
+                    // Vérifier si la relation existe déjà
+                    $relationExists = $productCategoryModel
+                        ->where(['id_prod' => $productId, 'id_cat' => $categoryId])
+                        ->countAllResults();
+
+                    if ($relationExists == 0) {
+                        // Ajouter la relation uniquement si elle n'existe pas
+                        if (!$productCategoryModel->insert(['id_prod' => $productId, 'id_cat' => $categoryId])) {
+                            throw new \RuntimeException("Erreur lors de l'ajout de la relation produit-catégorie : produit {$productId}, catégorie {$categoryId}");
+                        }
+                        log_message('debug', "Relation ajoutée : produit {$productId}, catégorie {$categoryId}");
+                    } else {
+                        log_message('debug', "Relation déjà existante : produit {$productId}, catégorie {$categoryId}");
                     }
                 }
             }
 
+            // Supprimer les relations obsolètes
+            $categoriesToRemove = array_diff($existingCategoryIds, $newCategoryIds);
+            if (!empty($categoriesToRemove)) {
+                $productCategoryModel->where('id_prod', $productId)
+                    ->whereIn('id_cat', $categoriesToRemove)
+                    ->delete();
+                log_message('debug', 'Relations supprimées pour les catégories : ' . implode(', ', $categoriesToRemove));
+            }
+
+            $db->transComplete();
+            if ($db->transStatus() === false) {
+                throw new \RuntimeException("Erreur lors de la transaction.");
+            }
+
             return redirect()->to('/admin/produits')->with('success', 'Produit modifié avec succès.');
         } catch (\RuntimeException $e) {
+            $db->transRollback(); // Annuler les modifications
+            log_message('error', $e->getMessage());
             return redirect()->to('/admin/produit/modifier/' . $productId)
                 ->withInput()
                 ->with('error', $e->getMessage());
         }
     }
-
     public function modifierProduitGet($id_prod)
     {
         $productModel = new ProductModel();
