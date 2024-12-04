@@ -1,4 +1,4 @@
-<div class="apropos-container">
+<!--<div class="apropos-container">
 	<h1>À propos de Nous</h1>
 
 	<section class="section-about">
@@ -23,4 +23,11 @@
 			Pour toute question ou information complémentaire, n'hésitez pas à <a href="#">nous contacter</a>. Nous sommes là pour vous aider.
 		</p>
 	</section>
+</div>-->
+
+<div class="apropos-container">
+    <h1>À propos</h1>
+    <div class="apropos-content">
+        <?= isset($content) ? $content : '<p>Le contenu est vide.</p>' ?>
+    </div>
 </div>

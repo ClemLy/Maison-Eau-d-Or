@@ -457,7 +457,7 @@ header li a:hover  {
 }
 
 /* Sections */
-.apropos-container h2 {
+.apropos-content h2 {
     font-size: 2rem;
     color: #000;
     margin-bottom: 20px;
@@ -468,19 +468,19 @@ header li a:hover  {
     color: transparent;
 }
 
-.apropos-container p {
+.apropos-content p {
     margin-bottom: 20px;
     line-height: 1.8;
     text-align: justify;
 }
 
 /* Listes */
-.apropos-container ul {
+.apropos-content ul {
     list-style: none;
     padding-left: 0;
 }
 
-.apropos-container li {
+.apropos-content li {
     margin-bottom: 15px;
     font-size: 1.1rem;
     color: #333;
@@ -488,7 +488,7 @@ header li a:hover  {
     position: relative;
 }
 
-.apropos-container li::before {
+.apropos-content li::before {
     content: '•';
     color: #d4af37;
     font-size: 1.5rem;
@@ -496,6 +496,21 @@ header li a:hover  {
     left: 0;
     top: 0;
 }
+
+
+/* Liens */
+.apropos-content a {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.apropos-content a:hover {
+    color: #b8860b;
+}
+
+
 
 /* Modif À Propos */
 #editor {
@@ -526,30 +541,7 @@ header li a:hover  {
 
 
 
-/* Liens */
-.apropos-container a {
-    color: #d4af37;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.apropos-container a:hover {
-    color: #b8860b;
-}
-
-/* Section contact */
-.section-contact {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.section-contact p {
-    font-size: 1.2rem;
-    color: #333;
-}
-
-/* Styles pour la page À propos */
+/* Styles pour la page FAQ */
 /* Container principal */
 .faq-container {
     max-width: 900px;

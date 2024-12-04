@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\AProposModel;
 
 class AdminController extends BaseController
 {
@@ -75,34 +76,94 @@ class AdminController extends BaseController
 
     public function modifierAProposGet()
     {
-        // Lecture du fichier où le contenu est sauvegardé (ajustez selon votre logique)
-        $filePath = WRITEPATH . 'apropos_content.html';
-        $currentContent = file_exists($filePath) ? file_get_contents($filePath) : '';
-
-        $data = [
-            'pageTitle'       => 'Modifier À Propos',
-            'currentContent'  => $currentContent,
-            'content'         => view('Admin/edit_apropos')
+        // Charger le modèle
+        $aProposModel = new \App\Models\AProposModel();
+    
+        // Récupérer le contenu avec ID = 1
+        $contentData = $aProposModel->find(1);
+    
+        // Préparer les données pour la vue partielle
+        $aproposViewData = [
+            'currentContent' => $contentData['content'] ?? '', // Contenu existant ou valeur par défaut
         ];
-
+    
+        // Préparer les données pour le layout principal
+        $data = [
+            'pageTitle' => 'Modifier À Propos',
+            'content'   => view('Admin/edit_apropos', $aproposViewData), // Charger la vue partielle avec ses données
+        ];
+    
+        // Charger la vue principale avec le contenu
         return view('Layout/main', $data);
     }
 
     public function modifierAProposPost()
     {
-        $request = $this->request;
-        if ($request->isAJAX())
-        {
-            $content = $request->getJSON()->content;
+        $aProposModel = new AProposModel(); // Instanciation du modèle
 
-            // Simulation de sauvegarde (à adapter selon votre base de données)
-            if ($content)
+        // Vérifier si la requête est AJAX
+        if ($this->request->isAJAX())
+        {
+            // Récupérer les données POST
+            $content = $this->request->getPost('content');
+
+            if (empty($content))
             {
-                // Exemple : Sauvegarde dans un fichier ou une base de données
-                file_put_contents(WRITEPATH . 'apropos_content.html', $content);
-                return $this->response->setJSON(['status' => 'success', 'message' => 'Contenu sauvegardé avec succès !']);
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Le contenu ne peut pas être vide.',
+                ]);
             }
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Erreur lors de la sauvegarde !']);
+
+            // Vérifier si une ligne avec id_apropos = 1 existe
+            $existingData = $aProposModel->find(1);
+
+            if ($existingData)
+            {
+                // Mettre à jour le contenu si la ligne existe
+                $updated = $aProposModel->update(1, ['content' => $content]);
+
+                if ($updated)
+                {
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Le contenu a été mis à jour avec succès.',
+                    ]);
+                }
+                else
+                {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Une erreur est survenue lors de la mise à jour.',
+                    ]);
+                }
+            } 
+            else
+            {
+                // Insérer une nouvelle ligne si elle n'existe pas
+                $inserted = $aProposModel->insert(['id' => 1, 'content' => $content]);
+
+                if ($inserted)
+                {
+                    return $this->response->setJSON([
+                        'status' => 'success',
+                        'message' => 'Le contenu a été créé avec succès.',
+                    ]);
+                }
+                else
+                {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'Une erreur est survenue lors de la création du contenu.',
+                    ]);
+                }
+            }
         }
-    }
+
+        // Retourner une erreur si ce n'est pas une requête AJAX
+        return $this->response->setJSON([
+            'status' => 'error',
+            'message' => 'Requête invalide.',
+        ]);
+        }
 }
