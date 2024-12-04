@@ -61,14 +61,20 @@ CREATE TABLE ORDERS (
 );
 
 CREATE TABLE PRODUCT (
-                         id_prod SERIAL PRIMARY KEY,
-                         p_name VARCHAR(255) NOT NULL,
-                         p_price FLOAT NOT NULL,
-                         description TEXT NOT NULL,
-                         id_img INT NOT NULL,
-                         on_sale BOOLEAN NOT NULL DEFAULT FALSE,
-                         is_star BOOLEAN NOT NULL DEFAULT FALSE,
-                         FOREIGN KEY (id_img) REFERENCES IMAGE(id_img)
+    id_prod SERIAL PRIMARY KEY,
+    p_name VARCHAR(255) NOT NULL,
+    p_price FLOAT NOT NULL,
+    description TEXT NOT NULL,
+    on_sale BOOLEAN NOT NULL DEFAULT FALSE,
+    is_star BOOLEAN NOT NULL DEFAULT FALSE,
+);
+
+CREATE TABLE PRODUCT_IMAGE(
+    id_prod INT NOT NULL,
+    id_img INT NOT NULL,
+    PRIMARY KEY (id_prod, id_img),
+    FOREIGN KEY (id_prod) REFERENCES PRODUCT(id_prod) ON DELETE CASCADE,
+    FOREIGN KEY (id_img) REFERENCES IMAGE(id_img) ON DELETE CASCADE
 );
 
 CREATE TABLE ORDER_PRODUCT (
