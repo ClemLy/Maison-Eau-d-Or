@@ -12,7 +12,7 @@ $routes->get('/', 'Home::index');
 // Boutique
 $routes->get('boutique', 'Boutique\BoutiqueController::index');
 $routes->get('boutique/produit/(:num)', 'Boutique\BoutiqueController::produit/$1');
-$routes->get('boutique/categorie/(:num)', 'Boutique\BoutiqueController::categorie/$1');
+$routes->get('boutique/categorie/(:any)', 'Boutique\BoutiqueController::categorie/$1');
 
 
 // À Propos

@@ -32,12 +32,10 @@
 							Boutique
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<?php if (isset($categories) && !empty($categories)): ?>
+							<?php if (isset($categories)): ?>
 								<?php foreach ($categories as $category): ?>
-									<li><a class="dropdown-item" href="?category_id=<?php echo $category['id_cat']; ?>"><?php echo esc($category['cat_name']); ?></a></li>
+									<li><a class="dropdown-item" href="<?= site_url("boutique/categorie/" .$category['cat_name']); ?>"><?php echo esc($category['cat_name']); ?></a></li>
 								<?php endforeach; ?>
-							<?php else: ?>
-								<li><a class="dropdown-item" href="#">Aucune catégorie dispo</a></li>
 							<?php endif; ?>
 						</ul>
 					</li>
