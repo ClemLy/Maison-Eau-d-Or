@@ -32,7 +32,7 @@
                             <?= esc($category['cat_name']) ?><br>
                         <?php endforeach; ?></td>
                     <td>
-                        <a href="<?= base_url('admin/produit/modifier/' . $product['id_prod']) ?>" class="btn btn-warning">Modifier</a>
+                        <a href="<?= base_url('admin/produit/modifier/' . $product['id_prod']) ?>" class="btn btn-warning" style="background:#d4af37;">Modifier</a>
                         <a href="<?= base_url('admin/produit/supprimer/' . $product['id_prod']) ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
                     </td>
                 </tr>
