@@ -58,5 +58,31 @@
 			echo view('Boutique/categorie', $data);
 			echo view('commun/footer');
 		}
+
+		public function produit($id_prod)
+		{
+			$categoryModel = new CategoryModel();
+			$productModel = new ProductModel();
+
+			$categories = $categoryModel->findAll();
+
+			$product = $productModel
+									->select('product.*, image.img_path')
+									->join('product_category', 'product.id_prod = product_category.id_prod')
+									->join('product_image', 'product.id_prod = product_image.id_prod')
+									->join('image', 'image.id_img = product_image.id_img') 
+									->where('product.id_prod', $id_prod)
+									->first();
+									
+			$data = [
+				'categories' => $categories,
+				'product' => $product
+			];
+
+
+			echo view('commun/header', $data);
+			echo view('Boutique/produit', $data);
+			echo view('commun/footer');
+		}
 	}
 ?>
