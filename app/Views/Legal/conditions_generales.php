@@ -2,7 +2,7 @@
 	<h1>Conditions Générales</h1>
 
 	<p>
-		Veuillez trouver ci-dessous nos conditions générales relatives à l'utilisation du site internet de Maison Eau d'OR et à l'achat de produits sur ce site.
+		Veuillez trouver ci-dessous nos conditions générales relatives à l'utilisation du site internet de Maison Eau d'Or et à l'achat de produits sur ce site.
 	</p>
 
 	<p>
@@ -11,7 +11,7 @@
 
 	<h2>Utilisation du site</h2>
 	<p>
-		L'utilisation par les clients du site internet est régie par les présentes conditions générales ainsi que tout avis ou toutes conditions figurant sur une quelconque autre partie du site internet. Maison Eau D'Or peut modifier ou retirer à tout moment toute partie du site internet, sans que sa responsabilité ne puisse être engagée du fait de ces modifications à l'égard des clients. Maison Eau D'Or se réserve le droit de modifier les présentes conditions générales à l'avenir sans être tenue d'en aviser spécifiquement les clients. Le fait de poursuivre l'utilisation du site internet ou de passer commande ultérieurement à ces modifications vaudra acceptation de ces modifications.
+		L'utilisation par les clients du site internet est régie par les présentes conditions générales ainsi que tout avis ou toutes conditions figurant sur une quelconque autre partie du site internet. Maison Eau d'Or peut modifier ou retirer à tout moment toute partie du site internet, sans que sa responsabilité ne puisse être engagée du fait de ces modifications à l'égard des clients. Maison Eau d'Or se réserve le droit de modifier les présentes conditions générales à l'avenir sans être tenue d'en aviser spécifiquement les clients. Le fait de poursuivre l'utilisation du site internet ou de passer commande ultérieurement à ces modifications vaudra acceptation de ces modifications.
 	</p>
 
 	<h2>Passer une commande</h2>
@@ -31,7 +31,7 @@
 
 	<h2>Livraison</h2>
 	<p>
-		En tant qu'acheteur, vous pouvez choisir parmi les options de livraison mentionnées et le moment qui vous convient le mieux. Maison Eau D'Or ne peut être tenu responsable de tout dommage causé pendant le transport ou dû à tout retard indépendant de sa volonté :
+		En tant qu'acheteur, vous pouvez choisir parmi les options de livraison mentionnées et le moment qui vous convient le mieux. Maison Eau d'Or ne peut être tenu responsable de tout dommage causé pendant le transport ou dû à tout retard indépendant de sa volonté :
 	</p>
 	<ul>
 		<li>Récupérer en magasin</li>
@@ -39,7 +39,7 @@
 
 	<h2>Politique de retour</h2>
 	<p>
-		Maison Eau D'Or accepte les retours sous 14 jours si les articles n'ont pas été utilisés, modifiés, lavés ou autrement manipulés. Les articles doivent être retournés dans leur emballage d'origine. Les articles ne peuvent être retournés à Maison Eau D'Or sans le consentement écrit préalable de Maison Eau D'Or et sont soumis à des frais de retour.
+		Maison Eau D'Or accepte les retours sous 14 jours si les articles n'ont pas été utilisés, modifiés, lavés ou autrement manipulés. Les articles doivent être retournés dans leur emballage d'origine. Les articles ne peuvent être retournés à Maison Eau d'Or sans le consentement écrit préalable de Maison Eau d'Or et sont soumis à des frais de retour.
 	</p>
 
 	<h2>Responsabilité</h2>

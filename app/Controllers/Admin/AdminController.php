@@ -271,4 +271,12 @@ class AdminController extends BaseController
             'message' => 'Requête invalide.',
         ]);
     }
+
+
+
+    /* ------------------ */
+    /* -------Blog------- */
+    /* ------------------ */
+
+    
 }

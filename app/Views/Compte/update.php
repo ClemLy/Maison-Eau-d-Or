@@ -26,6 +26,11 @@
 		<label for="phone_number">Numéro de téléphone</label>
 		<input type="text" id="phone_number" name="phone_number" value="<?= old('phone_number', session()->get('phone_number')); ?>">
 
+		<label for="newsletter">
+            <input type="checkbox" id="newsletter" name="newsletter" <?= session()->get('newsletter') ? 'checked' : ''; ?>>
+            Inscrivez-vous à la newsletter
+        </label>
+
 		<button type="submit">Enregistrer les modifications</button>
 	</form>
 </div>

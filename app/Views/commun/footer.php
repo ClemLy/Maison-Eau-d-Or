@@ -29,7 +29,7 @@
 				</div>
 				<div class="row mt-3">
 					<div class="col-12">
-						<p class="text-muted small mb-0">&copy; 2024 Maison Eau D'Or - Tous droits réservés</p>
+						<p class="text-muted small mb-0">&copy; 2024 Maison Eau d'Or - Tous droits réservés</p>
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,7 @@
 	<h1>Politique de Confidentialité</h1>
 	
 	<p>
-		La protection de votre vie privée est primordiale aux yeux de Maison Eau D'or. Nous veillons à la protection de votre vie privée lors de vos visites sur notre site internet ou pour les commandes passées en ligne.
+		La protection de votre vie privée est primordiale aux yeux de Maison Eau d'Or. Nous veillons à la protection de votre vie privée lors de vos visites sur notre site internet ou pour les commandes passées en ligne.
 	</p>
 
 	<h2>Collecte des Données</h2>

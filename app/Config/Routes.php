@@ -37,6 +37,8 @@ $routes->get('user/mot-de-passe-oublie/(:alphanum)', 'Compte\CompteController::m
 $routes->get('user/valider/(:alphanum)', 'Compte\CompteController::valider/$1'); // valider l'inscription
 $routes->get('user/commandes', 'Compte\CompteController::commandes', ['filter' => 'auth']); // affiche les commandes de l'utilisateur
 
+$routes->post('newsletter/subscribe', 'Compte\CompteController::subscribe', ['filter' => 'auth']);
+
 // Connexion
 $routes->get('/signin', 'Compte\SigninController::index');
 $routes->match(['get', 'post'], 'signin/auth', 'Compte\SigninController::loginAuth');
@@ -95,8 +97,8 @@ $routes->get('admin/commande/(:num)', 'Admin\AdminController::commandes/$1', ['f
 $routes->get('admin/commandes/', 'Admin\AdminController::commande/',['filter' => 'admin']);
 
 
-$routes->get('admin/blog/ajouter', 'Admin\AdminController::ajouterArticle', ['filter' => 'admin']); 
-$routes->post('admin/blog/ajouter', 'Admin\AdminController::ajouterArticle', ['filter' => 'admin']);
+$routes->get('admin/blog/ajouter', 'Blog\BlogController::ajouterArticle');
+$routes->post('admin/blog/ajouter', 'Blog\BlogController::ajouterArticle');
 
 $routes->get('admin/blog/modifier/(:num)', 'Admin\AdminController::modifierArticle/$1', ['filter' => 'admin']); 
 $routes->post('admin/blog/modifier/', 'Admin\AdminController::modifierArticle', ['filter' => 'admin']);
