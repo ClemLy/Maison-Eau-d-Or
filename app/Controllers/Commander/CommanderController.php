@@ -69,14 +69,15 @@ class CommanderController extends BaseController
         $pdf->useTemplate($tplId);
 
         // Configurer les styles de texte
-        $pdf->SetFont('Arial', '', 12);
+        $pdf->AddFont('Montserrat', '', 'Montserrat-Regular.php'); // Style normal
+        $pdf->SetFont('Montserrat', '', 10); // Taille 12
         $pdf->SetTextColor(0, 0, 0);
 
         // Ajouter les informations de commande
         $pdf->SetXY(37, 83); // Position : Nom
         $pdf->Write(10, "KYLLIAN LE BRETON"); // $order['name']
 
-        $pdf->SetXY(45, 92.5); // Position : Téléphone
+        $pdf->SetXY(47, 92.5); // Position : Téléphone
         $pdf->Write(10, "0644125913"); // $order['phone']
 
         $pdf->SetXY(37, 101); // Position : Email
@@ -107,13 +108,43 @@ class CommanderController extends BaseController
 
         // Var pour la position Y
         $y = 130.5;
+        $width = 40; // Largeur de la zone
 
         $pdf->SetXY(23, $y); // Position : Total TTC
         $pdf->Write(10, 'Nuage Magique'); // $order['total']);
 
-        $pdf->SetXY(23, 138); // Position : Total TTC
-        $pdf->Write(10, 'Nuage Magique'); // $order['total']);
+        $pdf->SetXY(117, $y+7.5*0); // Position : Total TTC
+        $pdf->Cell($width, 10, '3', 0, 0, 'C'); // $order['total']);
 
+        $pdf->SetXY(149, $y); // Position : Total TTC
+        $pdf->Cell($width, 10, mb_convert_encoding('90 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+
+        $pdf->SetXY(23, $y+7.5*1); // Position : Total TTC
+        $pdf->Write(10, 'Falestine'); // $order['total']);
+
+        $pdf->SetXY(117, $y+7.5*1); // Position : Total TTC
+        $pdf->Cell($width, 10, '10', 0, 0, 'C'); // $order['total']);
+
+        $pdf->SetXY(149, $y+7.5*1); // Position : Total TTC
+        $pdf->Cell($width, 10, mb_convert_encoding('300 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+
+        $pdf->SetXY(23, $y+7.5*2); // Position : Total TTC
+        $pdf->Write(10, 'Gokuuuu'); // $order['total']);
+
+        $pdf->SetXY(117, $y+7.5*2); // Position : Total TTC
+        $pdf->Cell($width, 10, '2', 0, 0, 'C'); // $order['total']);;
+
+        $pdf->SetXY(149, $y+7.5*2); // Position : Total TTC
+        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+
+        $pdf->SetXY(149, 209); // Position : Total TTC
+        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+
+        $pdf->SetXY(149, 216.5); // Position : Total TTC
+        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+
+        $pdf->SetXY(149, 225.5); // Position : Total TTC
+        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         // Générer le PDF
         $this->response->setHeader('Content-Type', 'application/pdf');
