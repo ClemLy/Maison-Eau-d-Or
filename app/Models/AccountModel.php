@@ -26,5 +26,11 @@
 		{
 			return $this->where('email', $email)->first();
 		}
+
+		public function subscribe($userId)
+		{
+			// Met à jour le champ 'newsletter' à TRUE pour l'utilisateur spécifique
+			return $this->update($userId, ['newsletter' => true]);
+		}
 	}
 ?>

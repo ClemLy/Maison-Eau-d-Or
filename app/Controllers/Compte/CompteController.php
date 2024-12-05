@@ -71,7 +71,8 @@
 					'last_name'    => $this->request->getPost('last_name'),
 					'first_name'   => $this->request->getPost('first_name'),
 					'email'        => $this->request->getPost('email'),
-					'phone_number' => $this->request->getPost('phone_number')
+					'phone_number' => $this->request->getPost('phone_number'),
+					'newsletter'   => $this->request->getPost('newsletter') ? true : false,
 				];
 		
 				$accountModel->update($userId, $updateData);
@@ -134,5 +135,24 @@
 			echo "<script>window.location.href='/signin';</script>";
 		}
 
+
+		public function subscribe()
+		{
+			$userId       = session()->get('id_user'); 
+			$accountModel = new AccountModel();
+
+			// Appeler la méthode subscribe dans le modèle pour mettre à jour newsletter à true
+			if ($accountModel->subscribe($userId))
+			{
+				session()->set(['newsletter' => true]);
+				session()->setFlashdata('success', 'Vous êtes désormais inscrit à notre newsletter.');
+			}
+			else
+			{
+				session()->setFlashdata('error', 'Une erreur est survenue lors de l\'inscription à la newsletter.');
+			}
+
+			return redirect()->to('/');
+		}
 	}
 ?>
