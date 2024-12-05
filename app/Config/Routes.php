@@ -112,3 +112,8 @@ $routes->post('admin/a-propos/modifier', 'Admin\AdminController::modifierAPropos
 
 $routes->post('admin/produit-vedette/ajouter', 'Admin\AdminController::ajouterProduitVedette', ['filter' => 'admin']);
 $routes->post('admin/produit-vedette/supprimer', 'Admin\AdminController::supprimerProduitVedette/$1', ['filter' => 'admin']);
+
+
+// Légal
+$routes->get('conditions-generales', 'Legal\LegalController::conditionsGenerales');
+$routes->get('politique-confidentialite', 'Legal\LegalController::politiqueConfidentialite');

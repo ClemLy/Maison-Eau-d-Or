@@ -62,12 +62,23 @@
 							</ul>
 						</li>
 					<?php endif; ?>
+
 					<?php if (session()->get('isLoggedIn')): ?>
-						<li><a href="<?= site_url('account'); ?>">Mon Compte</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="<?= site_url('account'); ?>" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Mon Compte
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="accountDropdown">
+								<li><a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a></li>
+							</ul>
+						</li>
 					<?php else: ?>
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
-					    <li><a href="<?= site_url('panier'); ?>">Panier</a></li>
+
+					<li><a href="<?= site_url('panier'); ?>">Panier</a></li>
 				</div>
 			</ul>
 		</nav>

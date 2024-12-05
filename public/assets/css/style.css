@@ -146,6 +146,32 @@ header li a:hover  {
 }
 
 
+/* Footer */
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
+.footer a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #d4af37; /* Couleur de survol */
+}
+
+.footer .bi-facebook, .footer .bi-instagram {
+    transition: transform 0.3s ease;
+}
+
+.footer .bi-facebook:hover, .footer .bi-instagram:hover {
+    transform: scale(1.2); /* Agrandir légèrement au survol */
+}
+
+
+
 
 /* Home */
 .container-fluid {
