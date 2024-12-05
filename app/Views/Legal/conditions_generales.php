@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="legal-container">
 	<h1>Conditions Générales</h1>
 	<p>
 		Bienvenue sur notre site. En utilisant nos services, vous acceptez les présentes conditions générales d'utilisation. 
@@ -24,4 +24,6 @@
 	<p>
 		Pour toute question concernant ces conditions, veuillez nous contacter à <a href="mailto:support@maison-eaudor.com">support@maison-eaudor.com</a>.
 	</p>
+
+	<a href="<?= site_url('/'); ?>" class="back-btn">← Retour à l'accueil</a>
 </div>

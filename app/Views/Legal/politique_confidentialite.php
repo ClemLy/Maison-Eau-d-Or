@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="legal-container">
 	<h1>Politique de Confidentialité</h1>
 	<p>
 		Votre confidentialité est importante pour nous. Cette politique explique comment nous collectons, utilisons et protégeons vos données personnelles.
@@ -23,4 +23,6 @@
 	<p>
 		Vous avez le droit de demander l'accès, la modification ou la suppression de vos données personnelles. Contactez-nous à <a href="mailto:support@maison-eaudor.com">support@maison-eaudor.com</a>.
 	</p>
+
+	<a href="<?= site_url('/'); ?>" class="back-btn">← Retour à l'accueil</a>
 </div>

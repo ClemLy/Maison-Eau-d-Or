@@ -8,11 +8,21 @@ class LegalController extends BaseController
 {
     public function conditionsGenerales()
     {
-        return view('Legal/conditions_generales');
+        $data = [
+            'pageTitle' => 'Conditions Générales',
+            'content'   => view('Legal/conditions_generales') // Contenu principal
+        ];
+
+        return View('Layout/main', $data);
     }
 
     public function politiqueConfidentialite()
     {
-        return view('Legal/politique_confidentialite');
+        $data = [
+            'pageTitle' => 'Politique de Confidentialité',
+            'content'   => view('Legal/politique_confidentialite') // Contenu principal
+        ];
+
+        return View('Layout/main', $data);
     }
 }
