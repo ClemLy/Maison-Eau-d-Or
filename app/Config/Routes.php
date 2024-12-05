@@ -60,6 +60,8 @@ $routes->post('/reset-password/update', 'Compte\ResetPasswordController::updateP
 // Commander
 $routes->get('commander', 'Commander\CommanderController::index', ['filter' => 'auth']);
 $routes->get('order/pdf/(:num)', 'Commander\CommanderController::generatePDF/$1');
+$routes->post('commander/valider_commande', 'Commander\CommanderController::valider_commande', ['filter' => 'auth']);
+
 
 // Panier
 $routes->get('panier', 'Panier\PanierController::panierGet', ['filter' => 'auth']); 
