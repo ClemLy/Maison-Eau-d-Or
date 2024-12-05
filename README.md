@@ -54,7 +54,7 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
    email_port=587                        # Port pour l'envoi d'emails (587 est généralement utilisé pour TLS)
    ```
 
-4. **Exécuter l'environnement**
+4. **Exécuter les dépendances**
 
    Afin d'exécuter votre fichier `.env`, installez la bibliothèque vlucas/phpdotenv en exécutant cette commande dans le terminal :
    ```cmd
@@ -62,7 +62,13 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
     composer require vlucas/phpdotenv
    ```
 
-5. **Démarrer le serveur local**
+   Afin de permettre l'exportation du bon de commande, en PDF, installez la bibliothèque setasing/fpdf en exécutant cette commande dans le terminal :
+   ```cmd
+   cd Maison-Eau-d-Or
+   composer require setasign/fpdf
+   ```
+
+6. **Démarrer le serveur local**
   
    ```bash
     cd Maison-Eau-d-Or
