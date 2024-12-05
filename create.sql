@@ -58,6 +58,11 @@ CREATE TABLE ORDERS (
     id_order SERIAL PRIMARY KEY,
     id_user INT NOT NULL,
     order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    phone_number_order VARCHAR(10) NOT NULL,
+    address_street VARCHAR(255) NOT NULL,
+    address_city VARCHAR(255) NOT NULL,
+    address_zip VARCHAR(5) NOT NULL,
+    address_country VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_user) REFERENCES USERS(id_user)
 );
 
