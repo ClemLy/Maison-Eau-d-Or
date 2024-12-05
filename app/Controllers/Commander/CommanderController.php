@@ -50,13 +50,39 @@ class CommanderController extends BaseController
 
     public function generatePDF($orderId)
     {
-        // Charger les données depuis la base de données
-        //$orderModel = new OrderModel();
-        //$order = $orderModel->getOrder($orderId);
+        // 1. URL de la police Montserrat
+        $fontDir = FCPATH . 'assets/fonts/';
+        $fontName = 'Montserrat-Regular';
+        $fontPath = $fontDir . $fontName . '.ttf';
 
-        //if (!$order) {
-        //    return redirect()->back()->with('error', 'Commande non trouvée.');
-        //}
+        // 4. Convertir la police en format FPDF
+        $makefontPath = ROOTPATH . 'vendor/setasign/fpdf/makefont/makefont.php'; // Assurez-vous que makefont.php est installé
+        $phpCommand = sprintf(
+            'php %s %s ISO-8859-15',
+            escapeshellarg($makefontPath),
+            escapeshellarg($fontPath)
+        );
+
+        // 5. Déplacer les fichiers générés dans public/ vers le dossier FPDF font/
+        $fontFiles = [
+            ROOTPATH. 'public/' . $fontName . '.php',
+            ROOTPATH. 'public/' . $fontName . '.z',
+        ];
+
+        $oldPath1 = ROOTPATH. 'public/' . $fontName . '.php';  // Chemin d'origine du fichier
+        $oldPath2 = ROOTPATH. 'public/' . $fontName . '.z';  // Chemin d'origine du fichier
+
+        $newPath1 = ROOTPATH. 'vendor/setasign/fpdf/font/' . $fontName . '.php';  // Nouveau chemin du fichier
+        $newPath2 = ROOTPATH. 'vendor/setasign/fpdf/font/' . $fontName . '.z';  // Nouveau chemin du fichier
+
+        rename($oldPath1, $newPath1);  // Déplacer le fichier
+        rename($oldPath2, $newPath2);  // Déplacer le fichier
+
+        // Exécuter la commande pour générer les fichiers nécessaires
+        exec($phpCommand, $output, $resultCode);
+        if ($resultCode !== 0) {
+            die('Erreur lors de la conversion de la police : ' . implode("\n", $output));
+        }
 
         // Chemin vers le modèle PDF
         $templatePath = FCPATH . 'assets/pdf/template_bon_commande.pdf';
@@ -69,8 +95,8 @@ class CommanderController extends BaseController
         $pdf->useTemplate($tplId);
 
         // Configurer les styles de texte
-        $pdf->AddFont('Montserrat', '', 'Montserrat-Regular.php'); // Style normal
-        $pdf->SetFont('Montserrat', '', 10); // Taille 12
+        $pdf->AddFont($fontName, '', $fontName . '.php');
+        $pdf->SetFont($fontName, '', 10); // Taille 12
         $pdf->SetTextColor(0, 0, 0);
 
         // Ajouter les informations de commande
@@ -143,8 +169,9 @@ class CommanderController extends BaseController
         $pdf->SetXY(149, 216.5); // Position : Total TTC
         $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
+        $pdf->SetFont('Times', '', 12);
         $pdf->SetXY(149, 225.5); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding('300 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         // Générer le PDF
         $this->response->setHeader('Content-Type', 'application/pdf');
