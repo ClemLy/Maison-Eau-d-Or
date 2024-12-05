@@ -486,11 +486,9 @@ header li a:hover  {
 }
 
 
-
-
-/* Styles pour la page À propos */
+/* Styles pour les pages */
 /* Container principal */
-.apropos-container {
+.page-container {
     max-width: 900px;
     margin: 100px auto;
     padding: 30px;
@@ -502,7 +500,7 @@ header li a:hover  {
 }
 
 /* Titre principal */
-.apropos-container h1 {
+.page-container h1 {
     text-align: center;
     font-size: 3rem;
     font-weight: bold;
@@ -511,7 +509,7 @@ header li a:hover  {
     position: relative;
 }
 
-.apropos-container h1::after {
+.page-container h1::after {
     content: '';
     display: block;
     width: 120px;
@@ -521,7 +519,7 @@ header li a:hover  {
 }
 
 /* Sections */
-.apropos-content h2 {
+.page-content h2 {
     font-size: 2rem;
     color: #000;
     margin-bottom: 20px;
@@ -532,19 +530,31 @@ header li a:hover  {
     color: transparent;
 }
 
-.apropos-content p {
+.page-content h3 {
+    font-size: 1.3rem;
+    color: #000;
+    margin-top:50px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.page-content p {
     margin-bottom: 20px;
     line-height: 1.8;
     text-align: justify;
 }
 
 /* Listes */
-.apropos-content ul {
+.page-content ul {
     list-style: none;
     padding-left: 0;
 }
 
-.apropos-content li {
+.page-content li {
     margin-bottom: 15px;
     font-size: 1.1rem;
     color: #333;
@@ -552,7 +562,7 @@ header li a:hover  {
     position: relative;
 }
 
-.apropos-content li::before {
+.page-content li::before {
     content: '•';
     color: #d4af37;
     font-size: 1.5rem;
@@ -563,20 +573,28 @@ header li a:hover  {
 
 
 /* Liens */
-.apropos-content a {
+.page-content a {
     color: #d4af37;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
 }
 
-.apropos-content a:hover {
+.page-content a:hover {
     color: #b8860b;
 }
 
 
+/* Styles pour la page FAQ */
+.faq-content h3:nth-child(odd), .faq-content p:nth-child(even):not(:empty) {
+    text-align: left;
+}
 
-/* Modif À Propos */
+.faq-content h3:nth-child(even), .faq-content p:nth-child(odd):not(:empty) {
+   text-align: right;
+}
+
+/* Quill */
 #editor {
     height: 300px; /* Ajustez la hauteur selon vos besoins */
     overflow-y: auto;
@@ -600,203 +618,4 @@ header li a:hover  {
 
 #editor::-webkit-scrollbar-thumb:hover {
     background: #d4af37; /* Couleur au survol */
-}
-
-
-
-
-/* Styles pour la page FAQ */
-/* Container principal */
-.faq-container {
-    max-width: 900px;
-    margin: 100px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: #333;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Titre principal */
-.faq-container h1 {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 40px;
-    position: relative;
-}
-
-.faq-container h1::after {
-    content: '';
-    display: block;
-    width: 120px;
-    height: 5px;
-    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
-    margin: 10px auto 0;
-}
-
-/* Sections */
-.faq-content h3 {
-    font-size: 1.3rem;
-    color: #000;
-    margin-top:50px;
-    margin-bottom: 20px;
-    padding-bottom: 5px;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.faq-content p {
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    line-height: 1.8;
-}
-
-/* Listes */
-.faq-content ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.faq-content li {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #333;
-    padding-left: 20px;
-    position: relative;
-}
-
-.faq-content li::before {
-    content: '•';
-    color: #d4af37;
-    font-size: 1.5rem;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-/* Liens */
-.faq-content a {
-    color: #d4af37;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.faq-content a:hover {
-    color: #b8860b;
-}
-
-.faq-content h3:nth-child(odd), .faq-content p:nth-child(even):not(:empty) {
-    text-align: left;
-}
-
-.faq-content h3:nth-child(even), .faq-content p:nth-child(odd):not(:empty) {
-   text-align: right;
-}
-
-
-
-
-/* Styles spécifiques pour les pages légales */
-.legal-container {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: #333;
-}
-
-/* Titres principaux */
-.legal-container h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 30px;
-    color: #000;
-    position: relative;
-}
-
-.legal-container h1::after {
-    content: '';
-    display: block;
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
-    margin: 15px auto 0;
-}
-
-/* Sous-titres */
-.legal-container h2 {
-    font-size: 1.8rem;
-    color: #000;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Paragraphes */
-.legal-container p {
-    line-height: 1.8;
-    margin-bottom: 20px;
-    text-align: justify;
-}
-
-/* Liens */
-.legal-container a {
-    color: #d4af37;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.legal-container a:hover {
-    color: #b8860b;
-}
-
-/* Listes */
-.legal-container ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.legal-container li {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    padding-left: 30px;
-    position: relative;
-    line-height: 1.6;
-}
-
-.legal-container li::before {
-    content: "\f0da";
-    font-family: "Bootstrap Icons";
-    color: #d4af37;
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1.2rem;
-}
-
-/* Bouton retour */
-.legal-container .back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #d4af37;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.legal-container .back-btn:hover {
-    background-color: #b8860b;
 }

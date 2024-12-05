@@ -1,4 +1,4 @@
-<div class="faq-container">
+<div class="page-container">
     <h1>Modifier FAQ</h1>
 </div>
 

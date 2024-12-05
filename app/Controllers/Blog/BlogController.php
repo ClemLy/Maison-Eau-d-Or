@@ -12,12 +12,25 @@
 	{
 		public function index()
 		{
+			// Charger le modèle
+			$blogModel = new BlogModel();
+
+			// Récupérer le contenu avec id = 1
+			$contentData = $blogModel->find(1);
+
+			// Charger la vue spécifique Blog/blog.php
+			$blogView = view('Blog/blog', [
+				'content' => $contentData['content'] ?? 'Le contenu est vide.', // Passer le contenu spécifique
+			]);
+
+			// Passer les données à la vue principale
 			$data = [
 				'pageTitle' => 'Blog',
-				'content'   => view('Blog/blog') // Contenu principal
+				'content'   => $blogView, // Inclure la vue comme contenu principal
 			];
-	
-			return View('Layout/main', $data);
+
+			// Charger la vue principale
+			return view('Layout/main', $data);
 		}
 
 		public function ajouterArticle()
@@ -54,7 +67,7 @@
 					}
 
 					// Insertion de l'article
-					$blogModel->insert([
+					$blogModel->save([
 						'id_img'    => $imageId,
 						'art_title' => $data['title'],
 						'art_text'  => $data['content']

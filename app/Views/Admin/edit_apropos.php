@@ -1,4 +1,4 @@
-<div class="apropos-container">
+<div class="page-container">
     <h1>Modifier À Propos</h1>
 </div>
 

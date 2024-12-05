@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="page-container mt-5">
 	<h1>Ajouter un Article</h1>
 	<form action="<?= site_url('admin/blog/ajouter'); ?>" method="post" enctype="multipart/form-data">
 		<!-- Choix de l'image -->
