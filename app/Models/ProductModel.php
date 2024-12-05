@@ -37,14 +37,15 @@ class ProductModel extends Model
             'numeric'  => 'L\'image du produit est invalide.',
         ],
     ];
-
     public function getStarProduct()
     {
         return $this->select('product.*, image.img_path')
-            ->join('image', 'product.id_img = image.id_img')
+            ->join('product_image', 'product.id_prod = product_image.id_prod') 
+            ->join('image', 'product_image.id_img = image.id_img') 
             ->where('product.is_star', true)
             ->first();
     }
+    
     public function getProducts()
     {
         $products = $this->select('

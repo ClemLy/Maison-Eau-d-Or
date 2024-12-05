@@ -23,7 +23,8 @@ class Home extends BaseController
             $products = $productModel
                 ->select('product.*, image.img_path')
                 ->join('product_category', 'product.id_prod = product_category.id_prod')
-                ->join('image', 'image.id_img = product.id_img')
+                ->join('product_image', 'product.id_prod = product_image.id_prod')
+                ->join('image', 'image.id_img = product_image.id_img')
                 ->where('product_category.id_cat', $category['id_cat'])
                 ->findAll();
 
