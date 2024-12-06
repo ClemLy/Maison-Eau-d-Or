@@ -78,7 +78,6 @@ class CommanderController extends BaseController
         return redirect()->to('order/pdf/' . $id_order);
     }
 
-
     public function generatePDF($orderId)
     {
         // 1. URL de la police Montserrat
@@ -115,8 +114,6 @@ class CommanderController extends BaseController
             die('Erreur lors de la conversion de la police : ' . implode("\n", $output));
         }
 
-
-
         $orderModel = new OrderModel();
         $order = $orderModel
                             ->select('orders.id_order, orders.order_date, orders.phone_number_order, orders.address_street, orders.address_city, 
@@ -124,7 +121,7 @@ class CommanderController extends BaseController
                             ->join('users', 'users.id_user = orders.id_user') 
                             ->where('orders.id_order', $orderId) 
                             ->first();
-        
+
         // $productModel = new ProductModel();
         // $products = $productModel
         //                     ->select('product.p_name, product.p_price, order_product.quantity')
@@ -145,7 +142,7 @@ class CommanderController extends BaseController
 
         // Configurer les styles de texte
         $pdf->AddFont($fontName, '', $fontName . '.php');
-        $pdf->SetFont($fontName, '', 10); // Taille 12
+        $pdf->SetFont($fontName, '', 10);
         $pdf->SetTextColor(0, 0, 0);
 
         // Ajouter les informations de commande
@@ -179,9 +176,6 @@ class CommanderController extends BaseController
 
         $pdf->SetXY(127, 101); // Position : Adresse Pays
         $pdf->Write(10, $order['address_country']); // $order['address_country']
-
-
-        // Pour chaque produit dans la commande
 
         // Var pour la position Y
         $y = 130.5;
@@ -220,7 +214,6 @@ class CommanderController extends BaseController
         $pdf->SetXY(149, 216.5); // Position : Total TTC
         $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
-        $pdf->SetFont('Times', '', 12);
         $pdf->SetXY(149, 225.5); // Position : Total TTC
         $pdf->Cell($width, 10, mb_convert_encoding('300 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
