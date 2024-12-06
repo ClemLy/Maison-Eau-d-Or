@@ -5,33 +5,42 @@ use CodeIgniter\Model;
 
 class ProductImageModel extends Model
 {
-    protected $table = 'product_image'; // Nom de la table
-    protected $primaryKey = '';
-    protected $allowedFields = ['id_prod', 'id_img']; // Champs autorisés pour insertion/mise à jour
+    protected $table = 'product_image';
+    protected $allowedFields = ['id_prod', 'id_img'];
 
-    public $timestamps = false; // Désactiver les timestamps si non utilisés
+    // Désactiver la clé primaire automatique
+    protected $primaryKey = false;
+    protected $useAutoIncrement = false;
 
-    // Définir les règles de validation
-    protected $validationRules = [
-        'id_prod' => 'required|numeric',
-        'id_img'  => 'required|numeric',
-    ];
-
-    protected $validationMessages = [
-        'id_prod' => [
-            'required' => 'L\'ID du produit est obligatoire.',
-            'numeric'  => 'L\'ID du produit doit être un nombre.',
-        ],
-        'id_img' => [
-            'required' => 'L\'ID de l\'image est obligatoire.',
-            'numeric'  => 'L\'ID de l\'image doit être un nombre.',
-        ],
-    ];
-
-    // Méthode personnalisée pour insérer ou mettre à jour en fonction des clés primaires composites
-    public function saveComposite(array $data)
+    /**
+     * Méthode pour sauvegarder une relation produit-image.
+     */
+    public function saveComposite($data)
     {
-        $builder = $this->db->table($this->table);
-        return $builder->insert($data);
+
+        if (!isset($data['id_prod'], $data['id_img'])) {
+            throw new \InvalidArgumentException('Les clés id_prod et id_img sont obligatoires.');
+        }
+
+        $exists = $this->where('id_prod', $data['id_prod'])
+            ->where('id_img', $data['id_img'])
+            ->countAllResults();
+
+        if ($exists) {
+            return true; // La relation existe déjà
+        }
+
+        return $this->db->table($this->table)->insert($data);
+    }
+
+    /**
+     * Méthode pour supprimer une relation produit-image.
+     */
+    public function deleteComposite($id_prod, $id_img)
+    {
+        return $this->db->table($this->table)
+            ->where('id_prod', $id_prod)
+            ->where('id_img', $id_img)
+            ->delete();
     }
 }

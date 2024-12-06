@@ -73,26 +73,33 @@ class ProductModel extends Model
     }
     public function getProductById($id_prod)
     {
-        $product = $this->select('
-                product.*, 
-                image.img_path, 
-                image.img_name
-            ')
-            ->join('image', 'product.id_img = image.id_img', 'left')
+        // Récupérer le produit avec ses données principales
+        $product = $this->select('product.*')
             ->where('product.id_prod', $id_prod)
             ->first();
 
         if ($product) {
-            // Récupérer les catégories associées au produit
             $db = \Config\Database::connect();
-            $categories = $db->table('product_category')
+
+            // Récupérer les catégories associées au produit
+            $categories = $db->table('category')
                 ->select('category.cat_name')
-                ->join('category', 'product_category.id_cat = category.id_cat')
+                ->join('product_category', 'category.id_cat = product_category.id_cat')
                 ->where('product_category.id_prod', $id_prod)
                 ->get()
                 ->getResultArray();
 
-            $product['categories'] = array_column($categories, 'cat_name');
+            $product['categories'] = array_column($categories, 'cat_name'); // Associer les catégories au produit
+
+            // Récupérer les images associées au produit
+            $images = $db->table('image')
+                ->select('image.img_path, image.img_name,image.id_img')
+                ->join('product_image', 'product_image.id_img = image.id_img')
+                ->where('product_image.id_prod', $id_prod)
+                ->get()
+                ->getResultArray();
+
+            $product['images'] = $images; // Associer les images au produit
         }
 
         return $product;
