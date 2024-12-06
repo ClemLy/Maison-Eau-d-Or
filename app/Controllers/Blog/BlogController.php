@@ -73,7 +73,7 @@
 
 					
 
-					//return redirect()->to('/admin/blog/ajouter')->with('success', 'Article ajouté avec succès.');
+					return redirect()->to('/admin/blog/ajouter')->with('success', 'Article ajouté avec succès.');
 				}
 				catch (\Exception $e)
 				{

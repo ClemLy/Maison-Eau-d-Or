@@ -13,22 +13,22 @@
 
 	<form action="<?= site_url('contact/send') ?>" method="post">
 		<div class="form-group mb-3">
-			<label for="first_name">Prénom :</label>
+			<label for="first_name">Prénom</label>
 			<input type="text" id="first_name" name="first_name" class="form-control" value="<?= old('first_name') ?>" required>
 		</div>
 
 		<div class="form-group mb-3">
-			<label for="last_name">Nom :</label>
+			<label for="last_name">Nom</label>
 			<input type="text" id="last_name" name="last_name" class="form-control" value="<?= old('last_name') ?>" required>
 		</div>
 
 		<div class="form-group mb-3">
-			<label for="email">Adresse Email :</label>
+			<label for="email">Adresse Email</label>
 			<input type="email" id="email" name="email" class="form-control" value="<?= old('email') ?>" required>
 		</div>
 
 		<div class="form-group mb-3">
-			<label for="message">Message :</label>
+			<label for="message">Message</label>
 			<textarea id="message" name="message" class="form-control" rows="5" required><?= old('message') ?></textarea>
 		</div>
 
