@@ -6,6 +6,7 @@ use App\Models\CartModel;
 use App\Models\OrderModel;
 use App\Models\OrderItemModel;
 use App\Models\AccountModel;
+use App\Models\ProductModel;
 use setasign\Fpdi\Fpdi;
 
 class CommanderController extends BaseController
@@ -48,6 +49,36 @@ class CommanderController extends BaseController
         echo view('commun/footer');
     }
 
+    public function valider_commande()
+    {
+        $orderModel = new OrderModel();
+
+        $first_name = $this->request->getPost('first_name');
+        $last_name = $this->request->getPost('last_name');
+        $email = $this->request->getPost('email');
+        $phone_number = $this->request->getPost('phone_number');
+        $address_street = $this->request->getPost('address_street');
+        $address_city = $this->request->getPost('address_city');
+        $address_zip = $this->request->getPost('address_zip');
+        $address_country = $this->request->getPost('address_country');
+        $id_user = session()->get('id_user');
+
+        $orderModel->insert([
+            'id_user' => $id_user,
+            'order_date' => date('Y-m-d H:i:s'),
+            'phone_number_order' => $phone_number,
+            'address_street' => $address_street,
+            'address_city' => $address_city,
+            'address_zip' => $address_zip,
+            'address_country' => $address_country,
+        ]);
+
+        $id_order = $orderModel->getInsertID();
+
+        return redirect()->to('order/pdf/' . $id_order);
+    }
+
+
     public function generatePDF($orderId)
     {
         // 1. URL de la police Montserrat
@@ -84,6 +115,24 @@ class CommanderController extends BaseController
             die('Erreur lors de la conversion de la police : ' . implode("\n", $output));
         }
 
+
+
+        $orderModel = new OrderModel();
+        $order = $orderModel
+                            ->select('orders.id_order, orders.order_date, orders.phone_number_order, orders.address_street, orders.address_city, 
+                            orders.address_zip, orders.address_country, users.first_name, users.last_name, users.email, users.phone_number AS user_phone_number') 
+                            ->join('users', 'users.id_user = orders.id_user') 
+                            ->where('orders.id_order', $orderId) 
+                            ->first();
+        
+        // $productModel = new ProductModel();
+        // $products = $productModel
+        //                     ->select('product.p_name, product.p_price, order_product.quantity')
+        //                     ->join('order_product', 'order_product.id_prod = product.id_prod')
+        //                     ->where('order_product.id_order', $orderId)
+        //                     ->findAll();
+
+
         // Chemin vers le modèle PDF
         $templatePath = FCPATH . 'assets/pdf/template_bon_commande.pdf';
 
@@ -101,34 +150,36 @@ class CommanderController extends BaseController
 
         // Ajouter les informations de commande
         $pdf->SetXY(37, 83); // Position : Nom
-        $pdf->Write(10, "KYLLIAN LE BRETON"); // $order['name']
+        $pdf->Write(10, $order['last_name'] . " " . $order['first_name']); 
 
         $pdf->SetXY(47, 92.5); // Position : Téléphone
-        $pdf->Write(10, "0644125913"); // $order['phone']
+        $pdf->Write(10, $order['phone_number_order']); 
 
         $pdf->SetXY(37, 101); // Position : Email
-        $pdf->Write(10, "kyllian.lebreton27@gmail.com"); // $order['email']
+        $pdf->Write(10, $order['email']); 
 
         $pdf->SetXY(130, 55); // Position : Numéro de commande
-        $pdf->Write(10, "E112412045460007751"); // $order['order_id']
+        $pdf->Write(10, $order['id_order']);
 
+        $orderDate = strtotime($order['order_date']); 
         $pdf->SetXY(130, 33); // Position : Jour
-        $pdf->Write(10, "15");
-
-        $pdf->SetXY(153, 33); // Position : Jour
-        $pdf->Write(10, "12");
-
-        $pdf->SetXY(173, 33); // Position : Jour
-        $pdf->Write(10, "2024");
+        $pdf->Write(10, date('d', $orderDate)); // Jour
+        
+        $pdf->SetXY(153, 33); // Position : Mois
+        $pdf->Write(10, date('m', $orderDate)); // Mois
+        
+        $pdf->SetXY(173, 33); // Position : Année
+        $pdf->Write(10, date('Y', $orderDate)); // Année
 
         $pdf->SetXY(127, 83); // Position : Adresse Rue
-        $pdf->Write(10, "12 rue de la Paix");
-        
-        $pdf->SetXY(127, 92.5); // Position : Adresse ZIP + VILLE
-        $pdf->Write(10, "76600, Le Havre");
+        $pdf->Write(10, $order['address_street']); // $order['address_street']
 
-        $pdf->SetXY(127, 101); // Position : Adresse ZIP + VILLE
-        $pdf->Write(10, "France");
+        $pdf->SetXY(127, 92.5); // Position : Adresse ZIP + VILLE
+        $pdf->Write(10, $order['address_zip'] . ", " . $order['address_city']); // $order['address_zip'] et $order['address_city']
+
+        $pdf->SetXY(127, 101); // Position : Adresse Pays
+        $pdf->Write(10, $order['address_country']); // $order['address_country']
+
 
         // Pour chaque produit dans la commande
 
