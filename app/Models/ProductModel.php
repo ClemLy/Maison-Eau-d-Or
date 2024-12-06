@@ -15,7 +15,6 @@ class ProductModel extends Model
         'p_name'      => 'required',
         'p_price'     => 'required|numeric',
         'description' => 'required',
-        'id_img'      => 'required|numeric',
     ];
 
     // Messages d'erreur explicites
@@ -32,10 +31,6 @@ class ProductModel extends Model
             'required'   => 'La description est obligatoire.',
             'min_length' => 'La description doit contenir au moins 10 caractères.',
         ],
-        'id_img' => [
-            'required' => 'L\'image du produit est obligatoire.',
-            'numeric'  => 'L\'image du produit est invalide.',
-        ],
     ];
     public function getStarProduct()
     {
@@ -45,18 +40,15 @@ class ProductModel extends Model
             ->where('product.is_star', true)
             ->first();
     }
-    
+
     public function getProducts()
     {
-        $products = $this->select('
-                product.*, 
-                image.img_path, 
-                image.img_name
-            ')
-            ->join('image', 'product.id_img = image.id_img', 'left')
+        // Récupérer les produits avec leurs données principales
+        $products = $this->select('product.*')
             ->findAll();
 
         foreach ($products as &$product) {
+            // Récupérer les catégories associées au produit
             $categories = $this->db->table('category')
                 ->select('cat_name')
                 ->join('product_category', 'category.id_cat = product_category.id_cat')
@@ -65,6 +57,16 @@ class ProductModel extends Model
                 ->getResultArray();
 
             $product['categories'] = $categories; // Associer les catégories au produit
+
+            // Récupérer les images associées au produit
+            $images = $this->db->table('image')
+                ->select('image.img_path, image.img_name')
+                ->join('product_image', 'product_image.id_img = image.id_img')
+                ->where('product_image.id_prod', $product['id_prod'])
+                ->get()
+                ->getResultArray();
+
+            $product['images'] = $images; // Associer les images au produit
         }
 
         return $products;

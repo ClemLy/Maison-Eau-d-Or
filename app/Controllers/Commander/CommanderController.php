@@ -4,7 +4,7 @@ namespace App\Controllers\Commander;
 use App\Controllers\BaseController;
 use App\Models\CartModel;
 use App\Models\OrderModel;
-use App\Models\OrderItemModel;
+use App\Models\OrderProductModel;
 use App\Models\AccountModel;
 use App\Models\ProductModel;
 use setasign\Fpdi\Fpdi;
@@ -52,6 +52,8 @@ class CommanderController extends BaseController
     public function valider_commande()
     {
         $orderModel = new OrderModel();
+        $orderProductModel = new OrderProductModel();
+        $cartModel = new CartModel();
 
         $first_name = $this->request->getPost('first_name');
         $last_name = $this->request->getPost('last_name');
@@ -72,8 +74,54 @@ class CommanderController extends BaseController
             'address_zip' => $address_zip,
             'address_country' => $address_country,
         ]);
+        
+        $userModel = new AccountModel();
+        $user = $userModel->find($id_user);
+        if ($user) 
+        {
+            $updateData = [];
+            if ($first_name && $first_name !== $user['first_name']) 
+            {
+                $updateData['first_name'] = $first_name;
+            }
+
+            if ($last_name && $last_name !== $user['last_name']) 
+            {
+                $updateData['last_name'] = $last_name;
+            }
+
+            if ($email && $email !== $user['email']) 
+            {
+                $updateData['email'] = $email;
+            }
+
+            if ($phone_number && $phone_number !== $user['phone_number']) 
+            {
+                $updateData['phone_number'] = $phone_number;
+            }
+    
+            if (!empty($updateData)) 
+            {
+                $userModel->update($id_user, $updateData);
+            }
+        }
+
 
         $id_order = $orderModel->getInsertID();
+
+        $cartItems = $cartModel->where('id_user', $id_user)->findAll();
+
+        if (!empty($cartItems)) {
+            foreach ($cartItems as $item) {
+                $orderProductModel->insert([
+                    'id_order' => $id_order,
+                    'id_prod' => $item['id_prod'],
+                    'quantity' => $item['quantity'],
+                ]);
+            }
+    
+            $cartModel->where('id_user', $id_user)->delete();
+        }
 
         return redirect()->to('order/pdf/' . $id_order);
     }
@@ -125,12 +173,12 @@ class CommanderController extends BaseController
                             ->where('orders.id_order', $orderId) 
                             ->first();
         
-        // $productModel = new ProductModel();
-        // $products = $productModel
-        //                     ->select('product.p_name, product.p_price, order_product.quantity')
-        //                     ->join('order_product', 'order_product.id_prod = product.id_prod')
-        //                     ->where('order_product.id_order', $orderId)
-        //                     ->findAll();
+        $productModel = new ProductModel();
+        $products = $productModel
+                            ->select('product.p_name, product.p_price, order_product.quantity')
+                            ->join('order_product', 'order_product.id_prod = product.id_prod')
+                            ->where('order_product.id_order', $orderId)
+                            ->findAll();
 
 
         // Chemin vers le modèle PDF
@@ -187,42 +235,39 @@ class CommanderController extends BaseController
         $y = 130.5;
         $width = 40; // Largeur de la zone
 
-        $pdf->SetXY(23, $y); // Position : Total TTC
-        $pdf->Write(10, 'Nuage Magique'); // $order['total']);
+        $totalOrder = 0;
+        foreach ($products as $product) {
+            // Afficher le nom du produit
+            $pdf->SetXY(23, $y); // Position : Nom du produit
+            $pdf->Write(10, $product['p_name']); // Afficher le nom du produit
+        
+            // Afficher la quantité
+            $pdf->SetXY(117, $y); // Position : Quantité
+            $pdf->Cell($width, 10, $product['quantity'], 0, 0, 'C'); // Afficher la quantité
+        
+            // Afficher le prix total (prix unitaire * quantité)
+            $pdf->SetXY(149, $y); // Position : Prix total
+            $totalPrice = $product['p_price'] * $product['quantity']; // Calcul du prix total pour ce produit
+            $pdf->Cell($width, 10, mb_convert_encoding(number_format($totalPrice, 2, ',', ' ') . ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        
+            // Passer à la ligne suivante
+            $y += 7.5; // Modifier la valeur en fonction de l'espacement désiré
 
-        $pdf->SetXY(117, $y+7.5*0); // Position : Total TTC
-        $pdf->Cell($width, 10, '3', 0, 0, 'C'); // $order['total']);
 
-        $pdf->SetXY(149, $y); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('90 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+            $totalPrice = $product['p_price'] * $product['quantity']; // Calcul du prix total pour ce produit
+            $totalOrder += $totalPrice; 
+        }
 
-        $pdf->SetXY(23, $y+7.5*1); // Position : Total TTC
-        $pdf->Write(10, 'Falestine'); // $order['total']);
-
-        $pdf->SetXY(117, $y+7.5*1); // Position : Total TTC
-        $pdf->Cell($width, 10, '10', 0, 0, 'C'); // $order['total']);
-
-        $pdf->SetXY(149, $y+7.5*1); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('300 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
-
-        $pdf->SetXY(23, $y+7.5*2); // Position : Total TTC
-        $pdf->Write(10, 'Gokuuuu'); // $order['total']);
-
-        $pdf->SetXY(117, $y+7.5*2); // Position : Total TTC
-        $pdf->Cell($width, 10, '2', 0, 0, 'C'); // $order['total']);;
-
-        $pdf->SetXY(149, $y+7.5*2); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
-
+        
         $pdf->SetXY(149, 209); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder . ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         $pdf->SetXY(149, 216.5); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('60 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *0.2. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         $pdf->SetFont('Times', '', 12);
         $pdf->SetXY(149, 225.5); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding('300 €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *1.2. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         // Générer le PDF
         $this->response->setHeader('Content-Type', 'application/pdf');

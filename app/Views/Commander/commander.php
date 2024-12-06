@@ -40,7 +40,7 @@
         <div class="row mt-3">
             <div class="col-md-6">
                 <label for="address_zip" class="form-label">Code postal (*)</label>
-                <input type="text" name="address_zip" id="address_zip" class="form-control" required>
+                <input type="text" name="address_zip" id="address_zip" class="form-control" required maxlength="5">
             </div>
             <div class="col-md-6">
                 <label for="address_country" class="form-label">Pays (*)</label>
