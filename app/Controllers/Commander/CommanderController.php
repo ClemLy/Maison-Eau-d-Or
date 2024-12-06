@@ -126,7 +126,6 @@ class CommanderController extends BaseController
         return redirect()->to('order/pdf/' . $id_order);
     }
 
-
     public function generatePDF($orderId)
     {
         // 1. URL de la police Montserrat
@@ -163,8 +162,6 @@ class CommanderController extends BaseController
             die('Erreur lors de la conversion de la police : ' . implode("\n", $output));
         }
 
-
-
         $orderModel = new OrderModel();
         $order = $orderModel
                             ->select('orders.id_order, orders.order_date, orders.phone_number_order, orders.address_street, orders.address_city, 
@@ -193,7 +190,7 @@ class CommanderController extends BaseController
 
         // Configurer les styles de texte
         $pdf->AddFont($fontName, '', $fontName . '.php');
-        $pdf->SetFont($fontName, '', 10); // Taille 12
+        $pdf->SetFont($fontName, '', 10);
         $pdf->SetTextColor(0, 0, 0);
 
         // Ajouter les informations de commande
@@ -214,22 +211,8 @@ class CommanderController extends BaseController
         $pdf->Write(10, date('d', $orderDate)); // Jour
         
         $pdf->SetXY(153, 33); // Position : Mois
-        $pdf->Write(10, date('m', $orderDate)); // Mois
-        
-        $pdf->SetXY(173, 33); // Position : Année
-        $pdf->Write(10, date('Y', $orderDate)); // Année
-
-        $pdf->SetXY(127, 83); // Position : Adresse Rue
-        $pdf->Write(10, $order['address_street']); // $order['address_street']
-
-        $pdf->SetXY(127, 92.5); // Position : Adresse ZIP + VILLE
-        $pdf->Write(10, $order['address_zip'] . ", " . $order['address_city']); // $order['address_zip'] et $order['address_city']
-
-        $pdf->SetXY(127, 101); // Position : Adresse Pays
+        $pdf->Write(10, date('m', $orderDate)); // Moisid_imgPays
         $pdf->Write(10, $order['address_country']); // $order['address_country']
-
-
-        // Pour chaque produit dans la commande
 
         // Var pour la position Y
         $y = 130.5;
@@ -260,14 +243,13 @@ class CommanderController extends BaseController
 
         
         $pdf->SetXY(149, 209); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder . ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *0.8. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         $pdf->SetXY(149, 216.5); // Position : Total TTC
         $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *0.2. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
-        $pdf->SetFont('Times', '', 12);
         $pdf->SetXY(149, 225.5); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *1.2. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         // Générer le PDF
         $this->response->setHeader('Content-Type', 'application/pdf');

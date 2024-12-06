@@ -22,7 +22,7 @@ $routes->get('a-propos', 'APropos\AProposController::index');
 
 // Blog
 $routes->get('blog', 'Blog\BlogController::index');
-$routes->get('blog/article/(:num)', 'Blog\BlogController::article/$1');
+$routes->get('blog/(:num)', 'Blog\BlogController::lireArticle/$1');
 
 // FAQ
 $routes->get('faq', 'Faq\FaqController::index');
@@ -103,6 +103,7 @@ $routes->get('admin/commandes/', 'Admin\AdminController::commande/',['filter' =>
 
 $routes->get('admin/blog/ajouter', 'Blog\BlogController::ajouterArticleGet', ['filter' => 'admin']);
 $routes->post('admin/blog/ajouter', 'Blog\BlogController::ajouterArticlePost', ['filter' => 'admin']);
+
 
 $routes->get('admin/blog/modifier/(:num)', 'Admin\AdminController::modifierArticle/$1', ['filter' => 'admin']); 
 $routes->post('admin/blog/modifier/', 'Admin\AdminController::modifierArticle', ['filter' => 'admin']);
