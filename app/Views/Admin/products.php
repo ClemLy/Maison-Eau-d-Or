@@ -21,10 +21,20 @@
             </tr>
         </thead>
         <tbody>
+<?php
+        ?>
+        <?php if (isset($products)): ?>
             <?php foreach ($products as $product): ?>
+            <?php
+
+            ?>
                 <tr>
                     <td>
-                        <img src="<?= base_url($product['img_path']) ?>" alt="<?= $product['img_name'] ?>" class="img-thumbnail" style="width: 100px;">
+                        <img
+                                src="<?= isset($product['images'][0]['img_path']) ? base_url($product['images'][0]['img_path']) : base_url('path/to/default-image.jpg') ?>"
+                                class="img-thumbnail"
+                                style="width: 100px;"
+                        >
                     </td>
                     <td><?= esc($product['p_name']) ?></td>
                     <td><?= esc($product['p_price']) ?> €</td>
@@ -37,5 +47,12 @@
                     </td>
                 </tr>
             <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="5" class="text-center">Aucun produit trouvé.</td>
+            </tr>
+        <?php endif; ?>
+
         </tbody>
+ ,
     </table>

@@ -26,28 +26,49 @@ class MediaController extends BaseController
     }
 
     // Uploader une nouvelle image
-    public function uploadImage($file)
+    public function uploadImage()
     {
+        $file = $this->request->getFile('new_img');
         if ($file && $file->isValid()) {
-            // Générer un nom unique pour le fichier
-            $newName = $file->getRandomName();
+            try {
+                $newName = $file->getRandomName();
+                $filePath = FCPATH . 'uploads/';
 
-            // Déplacer le fichier vers public/uploads
-            $filePath = FCPATH . 'uploads/';
-            if (!is_dir($filePath)) {
-                mkdir($filePath, 0777, true);
+                if (!is_dir($filePath)) {
+                    mkdir($filePath, 0777, true);
+                }
+
+                $file->move($filePath, $newName);
+
+                $imageModel = new \App\Models\MediaModel();
+                $imageId = $imageModel->insert([
+                    'img_name' => $file->getClientName(),
+                    'img_path' => '/uploads/' . $newName
+                ]);
+
+                if ($imageId) {
+                    return $this->response->setJSON([
+                        'success' => true,
+                        'image' => [
+                            'id_img' => $imageId,
+                            'img_name' => $file->getClientName(),
+                            'img_path' => '/uploads/' . $newName,
+                        ]
+                    ]);
+                }
+
+                throw new \RuntimeException('Erreur lors de la sauvegarde en base de données.');
+            } catch (\Exception $e) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => $e->getMessage()
+                ]);
             }
-
-            $file->move($filePath, $newName);
-
-            // Sauvegarder dans la table IMAGE
-            $imageModel = new \App\Models\MediaModel();
-            return $imageModel->insert([
-                'img_name' => $file->getClientName(), // Nom original
-                'img_path' => '/uploads/' . $newName  // Chemin public
-            ]);
         }
 
-        return null;
+        return $this->response->setJSON([
+            'success' => false,
+            'message' => 'Fichier invalide ou non envoyé.'
+        ]);
     }
 }

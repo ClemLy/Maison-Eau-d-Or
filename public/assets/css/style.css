@@ -489,7 +489,7 @@ header li a:hover  {
 /* Styles pour les pages */
 /* Container principal */
 .page-container {
-    max-width: 900px;
+    max-width: 50%;
     margin: 100px auto;
     padding: 30px;
     background-color: #ffffff;

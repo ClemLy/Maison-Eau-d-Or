@@ -9,6 +9,8 @@ use CodeIgniter\Router\RouteCollection;
 
 $routes->get('/', 'Home::index');
 
+$routes->post('/image/upload', 'Media\MediaController::uploadImage');
+
 // Boutique
 $routes->get('boutique', 'Boutique\BoutiqueController::index');
 $routes->get('boutique/produit/(:num)', 'Boutique\BoutiqueController::produit/$1');
@@ -121,3 +123,5 @@ $routes->post('admin/produit-vedette/supprimer', 'Admin\AdminController::supprim
 // Légal
 $routes->get('conditions-generales', 'Legal\LegalController::conditionsGenerales');
 $routes->get('politique-confidentialite', 'Legal\LegalController::politiqueConfidentialite');
+$routes->get('contact', 'Legal\LegalController::contact');
+$routes->post('contact/send', 'Legal\LegalController::sendContact');
