@@ -11,8 +11,13 @@ class MediaModel extends Model
     protected $allowedFields = ['img_name', 'img_path']; // Colonnes modifiables
 
     // Méthode pour trouver une image par son nom
-    public function findByName($name)
+    public function getImagesByProductId($id_prod)
     {
-        return $this->where('img_name', $name)->first();
+
+        // Requête pour récupérer les images associées au produit
+        return $this->select('image.id_img, image.img_path, image.img_name')
+            ->join('product_image', 'product_image.id_img = image.id_img')
+            ->where('product_image.id_prod', $id_prod)
+            ->findAll();
     }
 }
