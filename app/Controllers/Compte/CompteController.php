@@ -15,7 +15,7 @@
 			}
 
 			$data = [
-				'pageTitle' => 'Mon Compte'
+				'pageTitle' => 'Compte'
 			];
 
 			echo view('commun/header', $data);
