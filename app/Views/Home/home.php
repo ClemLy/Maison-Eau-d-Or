@@ -52,7 +52,7 @@
         ?>
     </div>
 
-    <hr class="trait-doree">
+    <hr>
 
     <!-- Carrousel Produits -->
     <?php if (isset($selectedProducts) && !empty($selectedProducts)): ?>
@@ -74,8 +74,8 @@
                     echo '<div class="carousel-item ' . $activeClass . '">';
                     echo '<img src="' . esc($product['img_path']) . '" class="d-block w-100" alt="' . esc($product['p_name']) . '">';
                     echo '<div class="carousel-caption d-none d-md-block">';
-                    echo '<h5>' . esc($product['p_name']) . '</h5>';
-                    echo '<p>' . esc($product['description']) . '</p>';
+                    // echo '<h5>' . esc($product['p_name']) . '</h5>';
+                    // echo '<p>' . esc($product['description']) . '</p>';
                     echo '</div>';
                     echo '</div>';
                     $activeClass = ''; // Seul le premier produit doit être actif
@@ -110,7 +110,7 @@
     <?php if (isset($starProduct) && !empty($starProduct)) { ?>
         <div class="text-center mt-5">
             <h2 class="texte-doree">Notre produit vedette</h2>
-            <hr class="trait-doree">
+            <hr>
 
             <div class="row align-items-center produit-vedette mt-4">
                 <!-- Colonne de l'image -->
