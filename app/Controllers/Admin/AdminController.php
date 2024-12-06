@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\AProposModel;
 use App\Models\FaqModel;
+use App\Models\BlogModel;
 
 class AdminController extends BaseController
 {
@@ -278,5 +279,62 @@ class AdminController extends BaseController
     /* -------Blog------- */
     /* ------------------ */
 
-    
+    // Liste des produits
+    public function blog()
+    {
+        $blogModel = new BlogModel();
+
+        $blog = $blogModel->getArticle();
+        $data = [
+            'pageTitle' => 'Gestion Blog',
+            'content'   => view('Admin/articles',
+                [
+                    'articles' => $blog
+                ]
+            ) // Contenu principal
+        ];
+
+        return View('Layout/main', $data);
+
+    }
+
+    public function modifierArticle($id_art)
+    {
+        helper(['form']);
+        $blogModel = new BlogModel();
+
+        // Vérifier si l'article existe
+        $article = $blogModel->find($id_art);
+        if (!$article)
+        {
+            return redirect()->to('/admin/blog')->with('error', 'Article introuvable.');
+        }
+
+        if ($this->request->getMethod() === 'POST')
+        {
+            // Mise à jour de l'article
+            $updatedData = [
+                'art_title' => $this->request->getPost('art_title'),
+                'art_text'  => $this->request->getPost('content'),
+            ];
+
+            $blogModel->update($id_art, $updatedData);
+
+            return redirect()->to('/admin/blog')->with('success', 'Article modifié avec succès.');
+        }
+
+        // Préparer les données pour la vue
+        $data = [
+            'pageTitle'      => 'Modifier Article',
+            'currentContent' => $article['art_text'], // Le contenu existant de l'article
+            'article'        => $article,
+            'content'        => view('Admin/edit_article', [
+                'currentContent' => $article['art_text'], // Injecter dans Quill
+                'article'        => $article,
+            ]),
+        ];
+
+        return view('Layout/main', $data);
+    }
+
 }

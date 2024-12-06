@@ -101,6 +101,8 @@ $routes->get('admin/commande/(:num)', 'Admin\AdminController::commandes/$1', ['f
 $routes->get('admin/commandes/', 'Admin\AdminController::commande/',['filter' => 'admin']);
 
 
+$routes->get('admin/blog', 'Admin\AdminController::blog', ['filter' => 'admin']);
+
 $routes->get('admin/blog/ajouter', 'Blog\BlogController::ajouterArticleGet', ['filter' => 'admin']);
 $routes->post('admin/blog/ajouter', 'Blog\BlogController::ajouterArticlePost', ['filter' => 'admin']);
 

@@ -50,6 +50,7 @@
 		placeholder: 'Rédigez votre article ici...',
 		modules: {
 			toolbar: [
+				[{ 'header': [2, false] }],
 				['bold', 'italic', 'underline'], 
 				[{ 'list': 'ordered' }, { 'list': 'bullet' }],
 				['link']
