@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Modifier le produit</h1>
-    <?php var_dump($_SESSION);?>
+
     <form action="/admin/produit/modifier" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
         <!-- ID du produit -->
         <input type="hidden" name="id_prod" value="<?= esc($product['id_prod']) ?>">
@@ -39,6 +39,7 @@
         </div>
 
         <!-- Médiathèque : Sélection d'une image existante -->
+        <?php if (isset($images)): ?>
         <div class="mb-3">
             <label class="form-label">Choisir une image existante :</label>
             <div class="row">
@@ -53,6 +54,7 @@
 
             <input type="hidden" id="existing_img" name="existing_img" value="<?= esc($product['id_img']) ?>">
         </div>
+        <?php endif; ?>
 
         <!-- Nouvelle image -->
         <div class="mb-3">

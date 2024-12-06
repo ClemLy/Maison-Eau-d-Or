@@ -7,75 +7,103 @@ use App\Controllers\Media\MediaController;
 use App\Models\CategoryModel;
 use App\Models\MediaModel;
 use App\Models\ProductCategoryModel;
+use App\Models\ProductImageModel;
 use App\Models\ProductModel;
 
 class ProductController extends BaseController
 {
     private ProductModel $productModel;
+    private MediaModel $mediaModel;
 
+
+    public function __construct()
+    {
+        $this->productModel = new ProductModel();
+        $this->mediaModel = new MediaModel();
+    }
     // Liste des produits
     public function index()
     {
         $products = $this->productModel->getProducts();
         $data = [
             'pageTitle' => 'Produits',
-            'products' => $products,
-            'content'   => view('Admin/products', ['products' => $products]) // Contenu principal
+            'content'   => view('Admin/products',
+                [
+                    'products' => $products
+                ]
+            ) // Contenu principal
         ];
 
         return View('Layout/main', $data);
 
-    }
-
-    public function __construct()
-    {
-        $this->productModel = new ProductModel();
     }
     public function ajouterProduitPost()
     {
         $productModel = new ProductModel();
         $categoryModel = new CategoryModel();
         $productCategoryModel = new ProductCategoryModel();
-        $mediaController = new MediaController();
+        $productImageModel = new ProductImageModel();
 
+        // Ajouter un log pour démarrer la méthode
+        log_message('info', 'Début de la méthode ajouterProduitPost.');
 
         // Récupérer les données du formulaire
         $data = $this->request->getPost();
-        $file = $this->request->getFile('new_img');
-        $imageId = null;
+        $imageIds = []; // Tableau pour stocker les IDs des images
 
         try {
-            // Gestion de l'image
-            if (!empty($data['existing_img'])) {
-                $imageId = $data['existing_img'];
-            } elseif ($file && $file->isValid()) {
-                $imageId = $mediaController->uploadImage($file);
-                if (!$imageId) {
-                    throw new \RuntimeException("L'upload de l'image a échoué.");
-                }
+            // Log des données reçues
+            log_message('info', 'Données du formulaire : ' . print_r($data, true));
+
+            // Récupérer les images existantes sélectionnées
+            if (!empty($data['existing_imgs'])) {
+                // Si c'est une chaîne, la convertir en tableau
+                $imageIds = is_array($data['existing_imgs'])
+                    ? $data['existing_imgs']
+                    : explode(',', $data['existing_imgs']);
             }
 
-            if (!$imageId) {
-                throw new \RuntimeException("Aucune image sélectionnée ou uploadée.");
+            // Vérification après conversion
+            log_message('info', 'Images sélectionnées après traitement : ' . implode(', ', $imageIds));
+
+            // Vérifier si des images ont été sélectionnées
+            if (empty($imageIds)) {
+                log_message('error', 'Aucune image sélectionnée.');
+                throw new \RuntimeException("Aucune image sélectionnée.");
             }
 
             // Ajouter les informations du produit
-            $data['id_img'] = $imageId;
-
+            log_message('info', 'Tentative d\'enregistrement du produit.');
             if (!$productModel->save($data)) {
-                $errors = $productModel->errors(); // Récupérer les erreurs de validation
+                $errors = $productModel->errors();
+                log_message('error', 'Erreur lors de l\'enregistrement du produit : ' . implode(', ', $errors));
                 throw new \RuntimeException(implode(', ', $errors));
             }
+            log_message('info', 'Produit enregistré avec succès.');
 
             // Récupérer l'ID du produit ajouté
             $productId = $productModel->getInsertID();
+            log_message('info', 'Produit ajouté avec l\'ID : ' . $productId);
 
-            // Gestion des catégories
-            $categoryInput = $data['categories'] ?? '[]'; // Catégories envoyées en JSON
-            $categoryNames = json_decode($categoryInput, true); // Convertir le JSON en tableau PHP
+            // Associer les images sélectionnées au produit
+            foreach ($imageIds as $imageId) {
+                $s= ['id_prod' => $productId, 'id_img' => (int) trim($imageId)];
 
-            if (!empty($categoryNames) && is_array($categoryNames)) {
-                foreach ($categoryNames as $categoryName) {
+                if (!$productImageModel->saveComposite($s)) {
+                    log_message('error', 'Erreur lors de l\'association de l\'image ID ' . $imageId . ' au produit ID ' . $productId);
+                    throw new \RuntimeException("Erreur lors de l'association de l'image ID $imageId au produit.");
+                }
+
+                log_message('info', 'Image ID ' . $imageId . ' associée au produit ID ' . $productId);
+            }
+            log_message('info', 'Images associées au produit.');
+
+
+            $categories = !empty($data['categories']) ? json_decode($data['categories'], true) : [];
+            log_message('info', 'Catégories reçues : ' . print_r($categories, true));
+
+            if (!empty($categories) && is_array($categories)) {
+                foreach ($categories as $categoryName) {
                     $categoryName = trim($categoryName);
 
                     // Vérifier si la catégorie existe déjà
@@ -84,35 +112,50 @@ class ProductController extends BaseController
 
                     // Si la catégorie n'existe pas, la créer
                     if (!$categoryId) {
-                        $categoryModel->save(['cat_name' => $categoryName]);
+                        if (!$categoryModel->save(['cat_name' => $categoryName])) {
+                            log_message('error', 'Erreur lors de la création de la catégorie : ' . $categoryName);
+                            throw new \RuntimeException("Erreur lors de la création de la catégorie '{$categoryName}'.");
+                        }
                         $categoryId = $categoryModel->getInsertID();
+                        log_message('info', 'Nouvelle catégorie créée avec ID : ' . $categoryId);
                     }
 
-                    // Ajouter la liaison dans la table product_category
-                    $productCategoryModel->save(['id_prod' => $productId, 'id_cat' => $categoryId]);
+                    // Associer la catégorie au produit
+                    if (!$productCategoryModel->saveComposite(['id_prod' => $productId, 'id_cat' => $categoryId])) {
+                        log_message('error', 'Erreur lors de l\'association de la catégorie ID ' . $categoryId . ' au produit.');
+                        throw new \RuntimeException("Erreur lors de l'association des catégories au produit.");
+                    }
                 }
             }
 
+            // Log de fin de méthode
+            log_message('info', 'Produit ajouté avec succès.');
+
             return redirect()->to('/admin/produits')->with('success', 'Produit ajouté avec succès.');
+
         } catch (\RuntimeException $e) {
-            // Renvoyer l'erreur avec un message flash
-            return redirect()->to('/admin/produit/ajouter')->withInput()->with('error', $e->getMessage());
+            log_message('error', 'Exception capturée : ' . $e->getMessage());
+            return redirect()->to('/admin/produit/ajouter')
+                ->withInput()
+                ->with('error', $e->getMessage());
         }
     }
     public function ajouterProduitGet()
     {
-        $imageModel = new \App\Models\MediaModel(); // Charger le modèle Image
+
+        $images = $this->mediaModel->findAll(); // Récupérer toutes les images
 
         $data = [
-            'pageTitle' => 'Ajouter Produit',
-            'images' => $imageModel->findAll(), // Récupérer toutes les images
+            'pageTitle' => 'Modifier Produit',
+            'content'   => view('Admin/add_product',
+                [
+                    'images'=>$images
+                ]
+            ) // Contenu principal
         ];
+        return View('Layout/main', $data);
 
-        echo view('commun/header', $data);
 
-        echo view('commun/footer');
-
-        return view('Admin/add_product');
     }
 
     public function modifierProduitPost()
