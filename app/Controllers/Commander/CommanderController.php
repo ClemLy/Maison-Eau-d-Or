@@ -75,6 +75,37 @@ class CommanderController extends BaseController
             'address_country' => $address_country,
         ]);
         
+        $userModel = new AccountModel();
+        $user = $userModel->find($id_user);
+        if ($user) 
+        {
+            $updateData = [];
+            if ($first_name && $first_name !== $user['first_name']) 
+            {
+                $updateData['first_name'] = $first_name;
+            }
+
+            if ($last_name && $last_name !== $user['last_name']) 
+            {
+                $updateData['last_name'] = $last_name;
+            }
+
+            if ($email && $email !== $user['email']) 
+            {
+                $updateData['email'] = $email;
+            }
+
+            if ($phone_number && $phone_number !== $user['phone_number']) 
+            {
+                $updateData['phone_number'] = $phone_number;
+            }
+    
+            if (!empty($updateData)) 
+            {
+                $userModel->update($id_user, $updateData);
+            }
+        }
+
 
         $id_order = $orderModel->getInsertID();
 
