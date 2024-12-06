@@ -33,10 +33,8 @@
 			return view('Layout/main', $data);
 		}
 
-		public function ajouterArticle()
+		public function ajouterArticlePost()
 		{
-			$mediaModel = new MediaModel();
-
 			if ($this->request->getMethod() === 'post')
 			{
 				$mediaController = new MediaController();
@@ -73,13 +71,20 @@
 						'art_text'  => $data['content']
 					]);
 
-					return redirect()->to('/admin/blog/ajouter')->with('success', 'Article ajouté avec succès.');
+					
+
+					//return redirect()->to('/admin/blog/ajouter')->with('success', 'Article ajouté avec succès.');
 				}
 				catch (\Exception $e)
 				{
 					return redirect()->back()->with('error', $e->getMessage());
 				}
 			}
+		}
+
+		public function ajouterArticleGet()
+		{
+			$mediaModel = new MediaModel();
 
 			$data = [
 				'pageTitle' => 'Blog',
@@ -89,6 +94,5 @@
 	
 			return View('Layout/main', $data);
 		}
-
 	}
 ?>

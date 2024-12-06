@@ -596,7 +596,7 @@ header li a:hover  {
 
 /* Quill */
 #editor {
-    height: 300px; /* Ajustez la hauteur selon vos besoins */
+    height: 500px; /* Ajustez la hauteur selon vos besoins */
     overflow-y: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -618,4 +618,12 @@ header li a:hover  {
 
 #editor::-webkit-scrollbar-thumb:hover {
     background: #d4af37; /* Couleur au survol */
+}
+
+
+
+/* Preview */
+#previewContent {
+    height: 50%;
+    overflow-y: scroll;
 }

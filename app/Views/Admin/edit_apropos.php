@@ -2,11 +2,21 @@
     <h1>Modifier À Propos</h1>
 </div>
 
-<!-- Conteneur de l'éditeur -->
-<div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>
-<input type="hidden" id="hiddenContent" name="content">
-<button id="saveBtn" class="btn btn-primary">Sauvegarder</button>
-<div id="message" style="margin-top: 20px;"></div>
+<div class="d-flex p-2">
+    <!-- Conteneur de l'éditeur -->
+    <div class="w-30">
+        <div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>
+        <input type="hidden" id="hiddenContent" name="content">
+        <button id="saveBtn" class="btn btn-primary">Sauvegarder</button>
+        <div id="message" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- Section de prévisualisation -->
+    <div class="page-container w-100 mt-0">
+        <h1>Aperçu de la page À Propos</h1>
+        <div id="previewContent" class="page-content"></div>
+    </div>
+</div>
 
 <!-- Charger Quill.js -->
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
@@ -30,6 +40,17 @@
     // Charger le contenu existant dans Quill (HTML injecté dans #editor)
     const existingContent = <?= json_encode($currentContent) ?>;
     quill.clipboard.dangerouslyPasteHTML(existingContent);
+
+    // Mise à jour de la prévisualisation
+    quill.on('text-change', function () {
+        const htmlContent = quill.root.innerHTML;
+        document.getElementById('previewContent').innerHTML = htmlContent;
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const htmlContent = quill.root.innerHTML;
+        document.getElementById('previewContent').innerHTML = htmlContent;
+    });
 
     // Sauvegarder le contenu dans un champ caché avant soumission
     document.getElementById('saveBtn').addEventListener('click', function () {
