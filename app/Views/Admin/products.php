@@ -31,7 +31,7 @@
                 <tr>
                     <td>
                         <img
-                                src="<?= isset($product['images'][0]['img_path']) ? base_url($product['images'][0]['img_path']) : base_url('path/to/default-image.jpg') ?>"
+                                src="<?= isset($product['images'][0]['img_path']) ? $product['images'][0]['img_path'] : base_url('path/to/default-image.jpg') ?>"
                                 class="img-thumbnail"
                                 style="width: 100px;"
                         >
