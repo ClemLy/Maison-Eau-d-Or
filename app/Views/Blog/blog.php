@@ -1,6 +1,5 @@
 <div class="page-container">
 	<h1>Blog</h1>
-
 	<div class="row">
 		<?php if (isset($articles)): ?>
 			<?php foreach ($articles as $article): ?>

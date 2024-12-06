@@ -243,13 +243,13 @@ class CommanderController extends BaseController
 
         
         $pdf->SetXY(149, 209); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder . ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *0.8. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         $pdf->SetXY(149, 216.5); // Position : Total TTC
         $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *0.2. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         $pdf->SetXY(149, 225.5); // Position : Total TTC
-        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder *1.2. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
+        $pdf->Cell($width, 10, mb_convert_encoding($totalOrder. ' €', 'ISO-8859-15', 'UTF-8'), 0, 0, 'C');
 
         // Générer le PDF
         $this->response->setHeader('Content-Type', 'application/pdf');
