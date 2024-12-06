@@ -21,7 +21,7 @@
 				<div class="header-gauche">
 					<li>
 						<a href="<?= site_url('/'); ?>">
-							<img src="https://media.tenor.com/x8v1oNUOmg4AAAAM/rickroll-roll.gif">
+							<img src="/assets/img/logo-accueil.png" style="width: 100px; height: 50px;">
 						</a>
 					</li>
 				</div>

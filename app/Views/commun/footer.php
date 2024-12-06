@@ -13,6 +13,9 @@
 							<li class="list-inline-item">
 								<a href="<?= site_url('faq'); ?>">FAQ</a>
 							</li>
+							<li class="list-inline-item">
+								<a href="<?= site_url('contact'); ?>">Contact</a>
+							</li>
 						</ul>
 					</div>
 

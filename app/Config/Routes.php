@@ -121,3 +121,5 @@ $routes->post('admin/produit-vedette/supprimer', 'Admin\AdminController::supprim
 // Légal
 $routes->get('conditions-generales', 'Legal\LegalController::conditionsGenerales');
 $routes->get('politique-confidentialite', 'Legal\LegalController::politiqueConfidentialite');
+$routes->get('contact', 'Legal\LegalController::contact');
+$routes->post('contact/send', 'Legal\LegalController::sendContact');
