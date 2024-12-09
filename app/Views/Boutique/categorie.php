@@ -1,9 +1,5 @@
 <div class="container my-5">
 <h1 class="text-center mb-2 texte-doree" style="margin-top:100px;margin-bottom: 0; padding: 0;"><?= esc($category['cat_name']) ?></h1>
-    <div class="d-flex justify-content-center" style="margin-bottom:25px;margin-top: -5px;">
-        <hr class="trait-doree">
-    </div>
-
 
 
     <?php if (!empty($products)): ?>
