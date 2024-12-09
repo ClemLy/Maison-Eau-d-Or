@@ -34,16 +34,16 @@
                             <tbody>
                             <?php if (isset($images)): ?>
                             <?php foreach ($images as $image): ?>
-                                    <tr onclick="showImageModal('<?= esc($image['img_path']) ?>')">
-                                        <td>
+                                    <tr>
+                                        <td  onclick="showImageModal('<?= esc($image['img_path']) ?>')">
                                         <a href="javascript: void(0);" class="text-dark fw-medium">
                                             <i class="mdi mdi-image font-size-16 align-middle text-muted me-2"></i>
                                             <?= esc($image['img_name']) ?>
                                         </a>
                                     </td>
-                                    <td><?= !empty($image['last_modified']) ? esc($image['last_modified']) : 'Aucune date'; ?></td>
-                                    <td><?= !empty($image['file_size']) ? round($image['file_size'] / 1024, 2) . ' KB' : 'Non disponible'; ?></td>
-                                    <td>
+                                    <td  onclick="showImageModal('<?= esc($image['img_path']) ?>')"><?= !empty($image['last_modified']) ? esc($image['last_modified']) : 'Aucune date'; ?></td>
+                                    <td  onclick="showImageModal('<?= esc($image['img_path']) ?>')"><?= !empty($image['file_size']) ? round($image['file_size'] / 1024, 2) . ' KB' : 'Non disponible'; ?></td>
+                                    <td  onclick="showImageModal('<?= esc($image['img_path']) ?>')">
                                         <?php
                                         $relatedEntities = [];
                                         if (!empty($image['related_products'])) {
