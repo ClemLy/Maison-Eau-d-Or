@@ -32,13 +32,6 @@
 				return redirect()->to('/boutique')->with('error', 'Catégorie non trouvée');
 			}
 
-			// $products = $productModel
-			// 	->select('product.*, image.img_path')
-			// 	->join('product_category', 'product.id_prod = product_category.id_prod')
-			// 	->join('image', 'image.id_img = product.id_img')
-			// 	->where('product_category.id_cat', $category['id_cat'])
-			// 	->findAll();
-
 			$products = $productModel
 									->select('product.*, image.img_path')
 									->join('product_category', 'product.id_prod = product_category.id_prod')
@@ -67,18 +60,29 @@
 			$categories = $categoryModel->findAll();
 
 			$product = $productModel
-			->select('product.*, image.img_path, category.cat_name, category.id_cat')
-			->join('product_category', 'product.id_prod = product_category.id_prod')
-			->join('category', 'category.id_cat = product_category.id_cat')
-			->join('product_image', 'product.id_prod = product_image.id_prod')
-			->join('image', 'image.id_img = product_image.id_img')
-			->where('product.id_prod', $id_prod)
-			->first();
+									->select('product.*, image.img_path, category.cat_name, category.id_cat')
+									->join('product_category', 'product.id_prod = product_category.id_prod')
+									->join('category', 'category.id_cat = product_category.id_cat')
+									->join('product_image', 'product.id_prod = product_image.id_prod')
+									->join('image', 'image.id_img = product_image.id_img')
+									->where('product.id_prod', $id_prod)
+									->first();
 
+			$relatedProducts = $productModel
+								->select('product.*, image.img_path')
+								->join('product_category', 'product.id_prod = product_category.id_prod')
+								->join('product_image', 'product.id_prod = product_image.id_prod')
+								->join('image', 'image.id_img = product_image.id_img')
+								->where('product_category.id_cat', $product['id_cat'])
+								->where('product.id_prod !=', $id_prod)
+								->orderBy('random()')
+								->limit(4) 
+								->findAll();
 									
 			$data = [
 				'categories' => $categories,
-				'product' => $product
+				'product' => $product,
+				'relatedProducts' => $relatedProducts
 			];
 
 

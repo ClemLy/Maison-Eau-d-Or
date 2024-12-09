@@ -115,7 +115,7 @@
             <div class="row align-items-center produit-vedette mt-4">
                 <!-- Colonne de l'image -->
                 <div class="col-md-6 d-flex justify-content-center div-img-vedette">
-                    <img src="<?= esc($starProduct['img_path']); ?>" class="img-vedette" alt="Produit Vedette">
+                <img src="<?= esc($starProduct['img_path']); ?>" class="product-image" alt="Produit Vedette">
                 </div>
 
                 <!-- Colonne texte -->
@@ -127,13 +127,13 @@
                     <form action="<?= site_url('/panier/ajouter/' . $starProduct['id_prod']) ?>" method="post">
                         <div class="d-flex align-items-center mt-3">
                             <div class="input-group" style="width: 150px;">
-                                <button class="btn btn-outline-primary" type="button" id="decrement" onclick="updateValue(-1)">-</button>
+                                <button class="btn btn-outline-dark btn-sm" type="button" id="decrement" onclick="updateValue(-1)">-</button>
                                 <input type="number" class="form-control text-center" id="numberInput" name="quantity" value="1" min="1" max="10" readonly>
-                                <button class="btn btn-outline-primary" type="button" id="increment" onclick="updateValue(1)">+</button>
+                                <button class="btn btn-outline-dark btn-sm" type="button" id="increment" onclick="updateValue(1)">+</button>
                             </div>
                         </div>
 
-                        <button class="btn btn-black mt-3">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
+                        <button class="btn btn-black mt-3 btn-gold-hover">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
                     </form>
 
                 </div>
