@@ -224,7 +224,22 @@ class CommanderController extends BaseController
         
         $pdf->SetXY(153, 33); // Position : Mois
         $pdf->Write(10, date('m', $orderDate)); // Moisid_imgPays
+
+        $pdf->SetXY(175, 33); // Position : Années
+        $pdf->Write(10, date('y', $orderDate)); // Moisid_imgPays
+
+        $pdf->SetXY(130, 83); // Position : Adresse
+        $pdf->Write(10, $order['address_street']); // $order['address_street']
+
+        $pdf->SetXY(110, 92); // Position : Adresse
+        $pdf->Write(10, $order['address_city']); // $order['address_zip']
+        $pdf->SetXY(150, 92); // Position : Adresse
+        $pdf->Write(10, $order['address_zip']); // $order['address_zip']
+
+
+        $pdf->SetXY(110, 101); // Position : Adresse
         $pdf->Write(10, $order['address_country']); // $order['address_country']
+
 
         // Var pour la position Y
         $y = 130.5;
