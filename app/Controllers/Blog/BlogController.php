@@ -51,7 +51,7 @@
 				$mediaController = new MediaController();
 				$blogModel       = new BlogModel();
 				$accountModel    = new AccountModel();
-				$data    = $this->request->getPost();
+				$data            = $this->request->getPost();
 		
 				try
 				{

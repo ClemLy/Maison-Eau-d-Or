@@ -772,6 +772,85 @@ form {
     color: #b8860b;
 }
 
+/* Grille pour les articles */
+.page-content .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Chaque carte d'article */
+.page-content .card {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet au survol d'une carte */
+.page-content .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Image de la carte */
+.page-content .card-img-top {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Corps de la carte */
+.page-content .card-body {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    color: #333;
+}
+
+/* Titre de l'article */
+.page-content .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Texte de publication */
+.page-content .text-muted {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Extrait du texte de l'article */
+.page-content .card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Bouton de lecture */
+.page-content .btn-primary {
+    font-size: 1rem;
+    padding: 10px 20px;
+    color: white;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a);
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du bouton de lecture */
+.page-content .btn-primary:hover {
+    background: linear-gradient(45deg, #b8860b, #d4af37, #c1a15a);
+}
+
+
+
+
 
 /* Styles pour la page FAQ */
 .faq-content h3:nth-child(odd), .faq-content p:nth-child(even):not(:empty) {
@@ -831,6 +910,12 @@ form {
 .upload-section #uploadBtn {
     padding: 5px 15px;
     font-size: 0.9rem;
+}
+
+
+/* Articles Admin */
+.admin .page-container {
+    max-width: 70% !important;
 }
 
 

@@ -1,10 +1,7 @@
 <div class="page-container mt-5">
 	<h1>Ajouter un Article</h1>
 	<form action="/admin/blog/ajouter" method="post" enctype="multipart/form-data">
-
-
-
-	        <!-- Formulaire d'upload -->
+	    <!-- Formulaire d'upload -->
 		<div class="mb-3">
             <label for="new_img" class="form-label">Uploader une nouvelle image :</label>
             <input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
@@ -25,6 +22,8 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
+
+            <input type="hidden" id="existing_imgs" name="existing_imgs">
         </div>
 
 		<!-- Titre de l'article -->
