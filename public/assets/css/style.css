@@ -691,9 +691,38 @@ header li a:hover  {
    text-align: right;
 }
 
+
+/* Styles pour la page Blog */
+.blog-image {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.blog-image img {
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour la date de publication */
+.blog-date {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-style: italic;
+}
+
+
+
+
+
 /* Quill */
 #editor {
-    height: 500px; /* Ajustez la hauteur selon vos besoins */
+    height: 500px;
     overflow-y: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -709,12 +738,12 @@ header li a:hover  {
 }
 
 #editor::-webkit-scrollbar-thumb {
-    background: #b8860b; /* Couleur du dégradé ou personnalisation */
+    background: #b8860b;
     border-radius: 5px;
 }
 
 #editor::-webkit-scrollbar-thumb:hover {
-    background: #d4af37; /* Couleur au survol */
+    background: #d4af37;
 }
 
 

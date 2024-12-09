@@ -15,6 +15,8 @@
             <tr>
                 <th>Image</th>
                 <th>Nom</th>
+                <th>Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +36,12 @@
                         >
                     </td>
                     <td><?= esc($article['art_title']) ?></td>
+                    <td>
+                        <?php
+                        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
+                        echo strftime('%d %B %Y', strtotime($article['art_date']));
+                        ?>
+                    </td>
                     <td>
                         <a href="<?= base_url('admin/blog/modifier/' . $article['id_art']) ?>" class="btn btn-warning" style="background:#d4af37;">Modifier</a>
                         <a href="<?= base_url('admin/blog/supprimer/' . $article['id_art']) ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
