@@ -5,10 +5,6 @@
             
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href="<?= base_url('admin/blog/ajouter') ?>" class="btn btn-primary">Ajouter un article</a>
-                <form action="<?= base_url('admin/articles') ?>" method="get" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Rechercher un article">
-                    <button type="submit" class="btn btn-outline-primary">Rechercher</button>
-                </form>
             </div>
 
             <table class="table table-striped">

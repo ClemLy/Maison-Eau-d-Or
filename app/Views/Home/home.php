@@ -160,20 +160,20 @@
 
     <script src="https://static.elfsight.com/platform/platform.js" async></script>
     <div class="elfsight-app-5626288e-3079-4c8b-bf5b-af021b2da7f7" data-elfsight-app-lazy></div>
-
-    <?php if (!session()->get('newsletter')): ?>
-        <div class="newsletter-section d-flex align-items-center justify-content-between p-4 my-5">
-            <div class="newsletter-title">
-                <h3>Newsletter Maison Eau d'Or</h3>
-            </div>
-            <div class="newsletter-text">
-                <p>Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités</p>
-            </div>
-            <div class="newsletter-button">
-                <form action="<?= site_url('newsletter/subscribe'); ?>" method="post">
-                    <button type="submit" class="btn btn-primary">Inscrivez-vous !</button>
-                </form>
-            </div>
-        </div>
-    <?php endif; ?>
 </div>
+
+<?php if (!session()->get('newsletter')): ?>
+    <div class="newsletter-section d-flex align-items-center justify-content-between p-4 my-5">
+        <div class="newsletter-title">
+            <h3>Newsletter <br> Maison Eau d'Or</h3>
+        </div>
+        <div class="newsletter-text">
+            <p>Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités</p>
+        </div>
+        <div class="newsletter-button">
+            <form action="<?= site_url('newsletter/subscribe'); ?>" method="post">
+                <button type="submit" class="btn btn-primary">Inscrivez-vous !</button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>

@@ -3,7 +3,7 @@
 				<div class="row">
 					<!-- Liens utiles -->
 					<div class="col-md-6 mb-3">
-						<ul class="list-inline">
+						<ul class="d-flex flex-row list-inline">
 							<li class="list-inline-item">
 								<a href="<?= site_url('conditions-generales'); ?>">Conditions Générales</a>
 							</li>
