@@ -128,6 +128,7 @@ class CommanderController extends BaseController
 
     public function generatePDF($orderId)
     {
+
         // 1. URL de la police Montserrat
         $fontDir = FCPATH . 'assets/fonts/';
         $fontName = 'Montserrat-Regular';
@@ -165,10 +166,21 @@ class CommanderController extends BaseController
         $orderModel = new OrderModel();
         $order = $orderModel
                             ->select('orders.id_order, orders.order_date, orders.phone_number_order, orders.address_street, orders.address_city, 
-                            orders.address_zip, orders.address_country, users.first_name, users.last_name, users.email, users.phone_number AS user_phone_number') 
+                            orders.address_zip, orders.address_country, users.first_name, users.last_name, users.id_user ,users.email, users.phone_number AS user_phone_number')
                             ->join('users', 'users.id_user = orders.id_user') 
                             ->where('orders.id_order', $orderId) 
                             ->first();
+
+
+
+        // if order empty
+        if (!$order) {
+            return redirect()->to('/');
+        }
+
+        if ($order['id_user'] !== session()->get('id_user') && session()->get('role') !== 'admin'){
+            return redirect()->to('/');
+        }
         
         $productModel = new ProductModel();
         $products = $productModel
