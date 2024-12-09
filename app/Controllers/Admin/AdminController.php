@@ -312,9 +312,8 @@ class AdminController extends BaseController
 
         if ($this->request->getMethod() === 'POST')
         {
-
             $rules = [
-                'title' => 'required|max_length[255]',
+                'title'   => 'required|max_length[255]',
                 'content' => 'required',
             ];
 
@@ -347,5 +346,29 @@ class AdminController extends BaseController
 
         return view('Layout/main', $data);
     }
+
+
+    public function supprimerArticle($id_art)
+    {
+        $blogModel = new \App\Models\BlogModel();
+
+        // Vérifie si l'article existe
+        $article = $blogModel->find($id_art);
+        if (!$article)
+        {
+            return redirect()->to('/admin/blog')->with('error', 'L\'article n\'existe pas.');
+        }
+
+        // Supprime l'article
+        if ($blogModel->delete($id_art))
+        {
+            return redirect()->to('/admin/blog')->with('success', 'L\'article a été supprimé avec succès.');
+        }
+        else
+        {
+            return redirect()->to('/admin/blog')->with('error', 'Une erreur est survenue lors de la suppression.');
+        }
+    }
+
 
 }

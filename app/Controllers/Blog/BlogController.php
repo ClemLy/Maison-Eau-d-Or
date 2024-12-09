@@ -7,6 +7,7 @@
 
 	use App\Models\BlogModel;
 	use App\Models\MediaModel;
+	use App\Models\AccountModel;
 
 	class BlogController extends BaseController
 	{
@@ -47,6 +48,7 @@
 			{
 				$mediaController = new MediaController();
 				$blogModel       = new BlogModel();
+				$accountModel       = new AccountModel();
 				$data    = $this->request->getPost();
 				$file    = $this->request->getFile("new_img");
 				$imageId = null;
@@ -80,6 +82,22 @@
 						'art_title' => $data['title'],
 						'art_text'  => $data['content']
 					]);
+
+					$users = $accountModel->where('newsletter', true)->findAll();
+
+					$email = \Config\Services::email();
+					foreach ($users as $user)
+					{
+						$email->setFrom(env('email_user', ''), 'Maison Eau D\'Or');
+						$email->setTo($user['email']);
+						$email->setSubject('Nouveau blog sur notre site');
+						$email->setMessage("Bonjour, un nouvel article a été publié sur notre blog : <br><br>
+							<strong>" . esc($data['title']) . "</strong><br>
+							<a href='" . site_url('blog/' . $blogModel->insertID()) . "'>Cliquez ici pour lire l'article complet.</a>");
+
+						// Envoi de l'e-mail
+						$email->send();
+					}
 
 
 					return redirect()->to('/admin/blog/ajouter')->with('success', 'Article ajouté avec succès.');
