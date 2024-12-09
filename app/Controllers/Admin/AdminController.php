@@ -312,6 +312,17 @@ class AdminController extends BaseController
 
         if ($this->request->getMethod() === 'POST')
         {
+
+            $rules = [
+                'title' => 'required|max_length[255]',
+                'content' => 'required',
+            ];
+
+            if (!$this->validate($rules))
+            {
+                return redirect()->back()->withInput()->with('validation', $this->validator);
+            }
+
             // Mise à jour de l'article
             $updatedData = [
                 'art_title' => $this->request->getPost('art_title'),

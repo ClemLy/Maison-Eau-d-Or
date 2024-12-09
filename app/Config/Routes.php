@@ -108,7 +108,7 @@ $routes->post('admin/blog/ajouter', 'Blog\BlogController::ajouterArticlePost', [
 
 
 $routes->get('admin/blog/modifier/(:num)', 'Admin\AdminController::modifierArticle/$1', ['filter' => 'admin']); 
-$routes->post('admin/blog/modifier/', 'Admin\AdminController::modifierArticle', ['filter' => 'admin']);
+$routes->post('admin/blog/modifier/(:num)', 'Admin\AdminController::modifierArticle/$1', ['filter' => 'admin']);
 $routes->get('admin/blog/supprimer/(:num)', 'Admin\AdminController::supprimerArticle/$1', ['filter' => 'admin']);
 
 

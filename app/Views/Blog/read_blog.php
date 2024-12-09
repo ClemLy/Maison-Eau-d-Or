@@ -3,10 +3,6 @@
 
 	<div class="page-content">
         <!-- Affiche l'article -->
-        <div class="card">                                                                
-            <div class="card-body">
-                <?= $article[0]['art_text'] ?>
-            </div>
-        </div>                                                  
+        <?= $article[0]['art_text'] ?>                                         
 	</div>
 </div>

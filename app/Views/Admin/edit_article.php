@@ -8,7 +8,8 @@
 		<div class="w-30">
 			<div class="mb-3">
 				<label for="title" class="form-label">Titre de l'article</label>
-				<input type="text" id="title" name="title" class="form-control" required>
+				<input type="text" id="title" name="title" class="form-control" 
+					   value="<?= isset($article['art_title']) ? esc($article['art_title']) : '' ?>" required>
 			</div>
 
 			<div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>

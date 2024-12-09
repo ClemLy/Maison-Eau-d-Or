@@ -28,9 +28,9 @@
                 <tr>
                     <td>
                         <img
-                                src="<?= isset($article['images'][0]['img_path']) ? $article['images'][0]['img_path'] : base_url('path/to/default-image.jpg') ?>"
-                                class="img-thumbnail"
-                                style="width: 100px;"
+                            src="<?= isset($article['images'][0]['img_path']) ? $article['images'][0]['img_path'] : base_url('path/to/default-image.jpg') ?>"
+                            class="img-thumbnail"
+                            style="width: 100px;"
                         >
                     </td>
                     <td><?= esc($article['art_title']) ?></td>
