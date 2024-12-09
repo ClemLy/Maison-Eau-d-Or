@@ -39,8 +39,8 @@
                         ?>
                     </td>
                     <td>
-                        <a href="<?= base_url('admin/blog/modifier/' . $article['id_art']) ?>" class="btn btn-warning" style="background:#d4af37;">Modifier</a>
-                        <a href="<?= base_url('admin/blog/supprimer/' . $article['id_art']) ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
+                        <a href="<?= base_url('admin/blog/modifier/' . $article['id_art']) ?>" class="btn btn-warning" style="background:#d4af37; border: none;">Modifier</a>
+                        <a href="<?= base_url('admin/blog/supprimer/' . $article['id_art']) ?>" class="btn btn-danger" style="border: none;" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

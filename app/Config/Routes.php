@@ -107,10 +107,10 @@ $routes->get('admin/blog', 'Admin\AdminController::blog', ['filter' => 'admin'])
 $routes->get('admin/blog/ajouter', 'Blog\BlogController::ajouterArticleGet', ['filter' => 'admin']);
 $routes->post('admin/blog/ajouter', 'Blog\BlogController::ajouterArticlePost', ['filter' => 'admin']);
 
-$routes->get('admin/blog/modifier/(:num)', 'Admin\AdminController::modifierArticleGet/$1', ['filter' => 'admin']); 
-$routes->post('admin/blog/modifier/', 'Admin\AdminController::modifierArticlePost', ['filter' => 'admin']);
+$routes->get('admin/blog/modifier/(:num)', 'Blog\BlogController::modifierArticleGet/$1', ['filter' => 'admin']); 
+$routes->post('admin/blog/modifier/', 'Blog\BlogController::modifierArticlePost', ['filter' => 'admin']);
 
-$routes->get('admin/blog/supprimer/(:num)', 'Admin\AdminController::supprimerArticle/$1', ['filter' => 'admin']);
+$routes->get('admin/blog/supprimer/(:num)', 'Blog\BlogController::supprimerArticle/$1', ['filter' => 'admin']);
 
 
 $routes->get('admin/faq/modifier', 'Admin\AdminController::modifierFaqGet', ['filter' => 'admin']);
