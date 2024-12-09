@@ -58,8 +58,6 @@ $routes->get('/reset-password/(:any)', 'Compte\ResetPasswordController::index/$1
 $routes->post('/reset-password/update', 'Compte\ResetPasswordController::updatePassword');
 
 
-
-
 // Commander
 $routes->get('commander', 'Commander\CommanderController::index', ['filter' => 'auth']);
 $routes->get('order/pdf/(:num)', 'Commander\CommanderController::generatePDF/$1');
@@ -119,11 +117,8 @@ $routes->post('admin/faq/modifier', 'Admin\AdminController::modifierFaqPost', ['
 $routes->get('admin/a-propos/modifier', 'Admin\AdminController::modifierAProposGet', ['filter' => 'admin']);
 $routes->post('admin/a-propos/modifier', 'Admin\AdminController::modifierAProposPost', ['filter' => 'admin']);
 
-
-$routes->post('admin/produit-vedette/ajouter', 'Admin\AdminController::ajouterProduitVedette', ['filter' => 'admin']);
-$routes->post('admin/produit-vedette/supprimer', 'Admin\AdminController::supprimerProduitVedette/$1', ['filter' => 'admin']);
-
-
+$routes->get('admin/gestionImage', 'Media\MediaController::manageImage', ['filter' => 'admin']);
+$routes->get('admin/gestionImage/supprimer/(:num)', 'Media\MediaController::deleteImage/$1', ['filter' => 'admin']);
 // Légal
 $routes->get('conditions-generales', 'Legal\LegalController::conditionsGenerales');
 $routes->get('politique-confidentialite', 'Legal\LegalController::politiqueConfidentialite');

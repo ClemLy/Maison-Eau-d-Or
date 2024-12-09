@@ -60,6 +60,7 @@
 								<li><a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a></li>
+                                <li><a class="dropdown-item" href="<?= site_url('admin/gestionImage'); ?>">Gestion Images</a></li>
 							</ul>
 						</li>
 					<?php endif; ?>
@@ -84,8 +85,8 @@
 				</div>
 			</ul>
 		</nav>
+        <?php if (session()->has('error')): ?>
+            <div class="alert alert-danger"><?= session('error') ?></div>
+        <?php endif; ?>
 	</header>
 
-    <?php if (session()->has('error')): ?>
-    <div class="alert alert-danger"><?= session('error') ?></div>
-    <?php endif; ?>

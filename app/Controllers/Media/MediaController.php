@@ -7,11 +7,12 @@ use App\Models\MediaModel;
 
 class MediaController extends BaseController
 {
-    protected $imageModel;
+    protected MediaModel $imageModel;
 
     public function __construct()
     {
         $this->imageModel = new MediaModel();
+
     }
 
     // Afficher la médiathèque
@@ -70,5 +71,46 @@ class MediaController extends BaseController
             'success' => false,
             'message' => 'Fichier invalide ou non envoyé.'
         ]);
+    }
+    public function deleteImage($id_img)
+    {
+        try {
+            // Vérifier si l'image existe
+            if ($id_img === null || !$this->imageModel->find($id_img)) {
+                return redirect()->to('/admin/gestionImage')->with('error', 'Image introuvable.');
+            }
+
+            // Vérifier si des liaisons existent
+            if ($this->imageModel->hasRelations($id_img)) {
+                return redirect()->to('/admin/gestionImage')->with(
+                    'error',
+                    'Impossible de supprimer cette image car elle est liée à des produits ou des articles.'
+                );
+            }
+
+            // Supprimer l'image
+            if (!$this->imageModel->delete($id_img)) {
+                return redirect()->to('/admin/gestionImage')->with('error', 'Erreur lors de la suppression de l\'image.');
+            }
+
+            return redirect()->to('/admin/gestionImage')->with('success', 'Image supprimée avec succès.');
+        } catch (\RuntimeException $e) {
+            return redirect()->to('/admin/gestionImage')->with('error', $e->getMessage());
+        }
+    }
+    public function manageImage()
+    {
+        $images = $this->imageModel->getImageInformation();
+        $data = [
+            'pageTitle' => 'Gestion images',
+            'content'   => view('Admin/manage_images',
+                [
+                    'images' => $images
+                ]
+            )
+        ];
+
+        return View('Layout/main', $data);
+
     }
 }
