@@ -4,6 +4,8 @@
 
     use App\Controllers\BaseController;
 
+    use App\Models\AccountModel;
+
     class LegalController extends BaseController
     {
         public function conditionsGenerales()
@@ -87,19 +89,25 @@
                 {$userMessage}
             ";
 
-            $email = \Config\Services::email();
-            $email->setFrom($fromEmail, 'Maison Eau D\'Or');
-            $email->setTo($fromEmail);
-            $email->setSubject('Nouveau message de contact');
-            $email->setMessage($formattedMessage);
+            $accountModel = new AccountModel();
+            $users = $accountModel->where('is_admin', true)->findAll();
 
-            if ($email->send())
-            {
-                return redirect()->to('/contact')->with('success', 'Votre message a été envoyé avec succès.');
-            }
-            else
-            {
-                return redirect()->to('/contact')->with('error', 'Une erreur est survenue lors de l\'envoi de votre message.');
+            foreach ($users as $user)
+			{
+                $email = \Config\Services::email();
+                $email->setFrom($fromEmail, 'Maison Eau d\'Or');
+                $email->setTo($user['email']);
+                $email->setSubject('Nouveau message de contact');
+                $email->setMessage($formattedMessage);
+
+                if ($email->send())
+                {
+                    return redirect()->to('/contact')->with('success', 'Votre message a été envoyé avec succès.');
+                }
+                else
+                {
+                    return redirect()->to('/contact')->with('error', 'Une erreur est survenue lors de l\'envoi de votre message.');
+                }
             }
         }
     }
