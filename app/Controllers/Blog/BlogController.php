@@ -25,9 +25,11 @@
 		{
 			// Récupérer le contenu avec id = 1
 			$contentData = $this->blogModel->getArticle();
+			$images = $this->mediaModel->findAll();
 
 			// Charger la vue spécifique Blog/blog.php
 			$blogView = view('Blog/blog', [
+				
 				'articles' => $contentData ?? 'Le contenu est vide.', // Passer le contenu spécifique
 			]);
 
@@ -48,40 +50,20 @@
 			{
 				$mediaController = new MediaController();
 				$blogModel       = new BlogModel();
-				$accountModel       = new AccountModel();
+				$accountModel    = new AccountModel();
 				$data    = $this->request->getPost();
-				$file    = $this->request->getFile("new_img");
-				$imageId = null;
-				
+		
 				try
 				{
-					/*/ Gestion de l'image
-					if (!empty($data['existing_img']))
-					{
-						$imageId = $data['existing_img'];
-					}
-					elseif ($file && $file->isValid())
-					{
-						$imageId = $mediaController->uploadImage($file);
-						if (!$imageId)
-						{
-							throw new \RuntimeException("L'upload de l'image a échoué.");
-						}
-					}*/
-
-					$imageId = 1;
-
-					if (!$imageId)
-					{
-						throw new \RuntimeException("Aucune image sélectionnée ou uploadée.");
-					}
 
 					// Insertion de l'article
 					$blogModel->save([
-						'id_img'    => $imageId,
+						'id_img'    => $data['existing_imgs'],
 						'art_title' => $data['title'],
 						'art_text'  => $data['content']
 					]);
+
+			
 
 					$users = $accountModel->where('newsletter', true)->findAll();
 
@@ -97,10 +79,8 @@
 
 						// Envoi de l'e-mail
 						$email->send();
-					}
-
-
-					return redirect()->to('/admin/blog/ajouter')->with('success', 'Article ajouté avec succès.');
+					}	
+					return redirect()->to('/admin/blog')->with('success', 'Article ajouté avec succès.');
 				}
 				catch (\Exception $e)
 				{
@@ -111,12 +91,16 @@
 
 		public function ajouterArticleGet()
 		{
-			$mediaModel = new MediaModel();
+			$var = 
+			[
+				'images'    => $this->mediaModel->findAll(),
+			];
 
 			$data = [
+				
 				'pageTitle' => 'Blog',
-				'content'   => view('Admin/add_article'),
-				'images'    => $mediaModel->findAll()
+				'content'   => view('Admin/add_article',$var),
+				
 			];
 	
 			return View('Layout/main', $data);

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\AProposModel;
 use App\Models\FaqModel;
 use App\Models\BlogModel;
+use App\Models\MediaModel;
 
 class AdminController extends BaseController
 {
@@ -283,13 +284,16 @@ class AdminController extends BaseController
     public function blog()
     {
         $blogModel = new BlogModel();
+        $mediaModel = new MediaModel();
 
         $blog = $blogModel->getArticle();
+        $images = $mediaModel->findAll();
         $data = [
             'pageTitle' => 'Gestion Blog',
             'content'   => view('Admin/articles',
                 [
-                    'articles' => $blog
+                    'articles' => $blog,
+                    'images' => $images
                 ]
             ) // Contenu principal
         ];
@@ -298,40 +302,23 @@ class AdminController extends BaseController
 
     }
 
-    public function modifierArticle($id_art)
+
+    public function modifierArticleGet($id_art)
     {
-        helper(['form']);
         $blogModel = new BlogModel();
+        $mediaModel = new MediaModel();
 
         // Vérifier si l'article existe
-        $article = $blogModel->find($id_art);
+        $article = $blogModel->getArticleById($id_art);
+
+
         if (!$article)
         {
             return redirect()->to('/admin/blog')->with('error', 'Article introuvable.');
         }
 
-        if ($this->request->getMethod() === 'POST')
-        {
-            $rules = [
-                'title'   => 'required|max_length[255]',
-                'content' => 'required',
-            ];
+        $article = $article[0];
 
-            if (!$this->validate($rules))
-            {
-                return redirect()->back()->withInput()->with('validation', $this->validator);
-            }
-
-            // Mise à jour de l'article
-            $updatedData = [
-                'art_title' => $this->request->getPost('art_title'),
-                'art_text'  => $this->request->getPost('content'),
-            ];
-
-            $blogModel->update($id_art, $updatedData);
-
-            return redirect()->to('/admin/blog')->with('success', 'Article modifié avec succès.');
-        }
 
         // Préparer les données pour la vue
         $data = [
@@ -341,10 +328,35 @@ class AdminController extends BaseController
             'content'        => view('Admin/edit_article', [
                 'currentContent' => $article['art_text'], // Injecter dans Quill
                 'article'        => $article,
+                'images' => $mediaModel->findAll()
             ]),
         ];
 
         return view('Layout/main', $data);
+    }
+
+    public function modifierArticlePost()
+    {
+        helper(['form']);
+        $blogModel = new BlogModel();
+
+        if ($this->request->getMethod() === 'POST')
+        {
+            
+            // Mise à jour de l'article
+            $updatedData = [
+                'art_title' => $this->request->getPost('art_title'),
+                'art_text'  => $this->request->getPost('content'),
+                'id_img' => $this->request->getPost('existing_imgs')
+            ];
+
+            $articleId = $this->request->getPost('id_art');
+
+            $blogModel->update($articleId,$updatedData);
+
+            return redirect()->to('/admin/blog')->with('success', 'Article modifié avec succès.');
+        }
+
     }
 
 

@@ -2,14 +2,46 @@
 	<h1>Modifier Blog</h1>
 </div>
 
-<form method="post" action="<?= site_url('admin/blog/modifier/' . $article['id_art']) ?>">
+
+
+<form method="post" action="<?= site_url('admin/blog/modifier/')?>">
 	<div class="d-flex p-2">
 		<!-- Conteneur de l'éditeur -->
 		<div class="w-30">
+			<!-- Formulaire d'upload -->
 			<div class="mb-3">
-				<label for="title" class="form-label">Titre de l'article</label>
-				<input type="text" id="title" name="title" class="form-control" 
-					   value="<?= isset($article['art_title']) ? esc($article['art_title']) : '' ?>" required>
+				<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
+				<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
+				<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label">Choisir une ou plusieurs images :</label>
+				<div id="media-library" class="row">
+					<?php if (isset($images)): ?>
+						<!-- Boucle PHP pour afficher toutes les images -->
+						<?php foreach ($images as $image): ?>
+							<div class="col-md-3">
+								<div class="card image-card <?= $image['id_img'] == $article['id_img'] ? 'border-primary' : '' ?>"
+									data-id="<?= $image['id_img'] ?>">
+									<img src="<?= esc($image['img_path']) ?>"
+										alt="<?= esc($image['img_name']) ?>"
+										class="card-img-top"
+										style="cursor: pointer;">
+								</div>
+							</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+				<input type="hidden" id="existing_imgs" name="existing_imgs" value="<?= $article['id_img'] ?>">
+			</div>
+
+
+		
+			<div class="mb-3">
+				<label for="art_title" class="form-label">Titre de l'article</label>
+				<input type="text" id="art_title" name="art_title" class="form-control"
+					value="<?= isset($article['art_title']) ? esc($article['art_title']) : '' ?>" required>
 			</div>
 
 			<div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>
@@ -24,6 +56,8 @@
 			<div id="previewContent" class="page-content"></div>
 		</div>
 	</div>
+	<input type="hidden" name="id_art" value="<?= $article['id_art'] ?>">
+
 </form>
 
 <!-- Charger Quill.js -->
@@ -83,3 +117,40 @@
 		});
 	});
 </script>
+
+<style>
+    .image-card {
+        border: 2px solid transparent;
+        transition: border-color 0.3s;
+    }
+
+    .image-card:hover {
+        border: 2px solid #007bff;
+    }
+
+    .border-primary {
+        border: 10px solid #007bff !important;
+    }
+
+    .category-tag {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        margin: 3px;
+        border-radius: 15px;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .category-tag span {
+        margin-left: 8px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .category-tag span:hover {
+        color: #000;
+    }
+</style>

@@ -20,17 +20,13 @@
             </tr>
         </thead>
         <tbody>
-<?php
-        ?>
+
         <?php if (isset($articles)): ?>
             <?php foreach ($articles as $article): ?>
-            <?php
-
-            ?>
                 <tr>
                     <td>
                         <img
-                            src="<?= isset($article['images'][0]['img_path']) ? $article['images'][0]['img_path'] : base_url('path/to/default-image.jpg') ?>"
+                            src="<?= isset($article['img_path']) ? $article['img_path'] : base_url('path/to/default-image.jpg') ?>"
                             class="img-thumbnail"
                             style="width: 100px;"
                         >
