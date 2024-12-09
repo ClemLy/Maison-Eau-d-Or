@@ -40,7 +40,31 @@
                         <i class="bi bi-cart"></i> Ajouter au panier
                     </button>
                 </div>
+
             </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="related-products mt-5">
+        <h3 class="texte-doree">Produits connexes</h3>
+        <div class="row">
+            <?php if (!empty($relatedProducts)): ?>
+                <?php foreach ($relatedProducts as $related): ?>
+                    <div class="col-md-3 related-products-card">
+                        <a href="<?= site_url('boutique/produit/' . $related['id_prod']) ?>">
+                            <div class="card">
+                                <img src="<?= esc($related['img_path']) ?>" class="card-img-top" alt="<?= esc($related['p_name']) ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= esc($related['p_name']) ?></h5>
+                                    <p class="card-text"><?= number_format($related['p_price'], 2) ?> €</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
