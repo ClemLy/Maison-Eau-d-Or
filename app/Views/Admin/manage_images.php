@@ -12,13 +12,6 @@
                             </div>
                         </div>
 
-                        <div class="d-flex flex-wrap">
-                            <h5 class="font-size-16 me-3">Recent Files</h5>
-                            <div class="ms-auto">
-                                <a href="javascript: void(0);" class="fw-medium text-reset">View All</a>
-                            </div>
-                        </div>
-                    </div>
                     <hr class="mt-2">
                     <div class="table-responsive">
                         <table class="table align-middle table-nowrap table-hover mb-0">
