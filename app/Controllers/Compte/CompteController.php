@@ -3,6 +3,10 @@
 	namespace App\Controllers\Compte;
 
 	use App\Models\AccountModel;
+	use App\Models\OrderProductModel;
+	use App\Models\OrderModel;
+
+	
 	use App\Controllers\BaseController;
 
 	class CompteController extends BaseController
@@ -154,5 +158,30 @@
 
 			return redirect()->to('/');
 		}
-	}
+
+
+    public function historique()
+    {
+        $orderModel = new OrderModel();
+        $orderProductModel = new OrderProductModel();
+
+        $userId = session()->get('id_user');
+        if (!$userId) {
+            return redirect()->to('/');
+        }
+
+        $orders = $orderModel->where('id_user', $userId)->findAll();
+
+        foreach ($orders as &$order) {
+            $order['products'] = $orderProductModel->getProductsByOrder($order['id_order']);
+        }
+
+        $data = ['orders' => $orders];
+
+        echo view('commun/header');
+        echo view('Compte/historique', $data);
+        echo view('commun/footer');
+    }
+}
+
 ?>

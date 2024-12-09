@@ -29,6 +29,7 @@ $routes->get('faq', 'Faq\FaqController::index');
 
 // Compte
 $routes->get('account', 'Compte\CompteController::index'); // affiche le profil
+$routes->get('account/historique', 'Compte\CompteController::historique');
 $routes->get('account/update', 'Compte\CompteController::update');
 $routes->post('account/update', 'Compte\CompteController::update');
 $routes->get('account/delete', 'Compte\CompteController::delete');

@@ -70,6 +70,7 @@
 								Mon Compte
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="accountDropdown">
+								<li><a class="dropdown-item" href="<?= site_url('account/historique'); ?>">Historique</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a></li>
