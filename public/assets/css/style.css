@@ -527,108 +527,18 @@ header li a:hover  {
 
 
 
-/* Styles pour la page Mon Compte */
-.account-container {
-    max-width: 600px;
-    margin: 100px auto 20px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #dee2e6;
-}
-
-.account-container h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.account-container p {
-    font-size: 1.2rem;
-    color: #495057;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.account-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.account-container li {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    color: #333;
-}
-
-.account-container li a {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.account-container li a:hover {
-    color: #0056b3;
-}
-
-.account-container .success-message {
-    color: green;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* Style des boutons */
-.account-container a.button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    background-color: #007bff;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin: 10px 0;
-}
-
-.account-container a.button:hover {
-    background-color: #0056b3;
-}
-
-/* Message de confirmation */
-.account-container .confirm-delete {
-    color: red;
-    font-weight: bold;
-}
-
-.account-container li:last-child {
-    margin-bottom: 0;
-}
-
-
-
-
 /* Styles communs pour les pages de formulaire */
-body, html {
-    overflow-y: hidden;
-}
-
 .form-container {
     max-width: 500px;
     margin: 100px auto;
     padding: 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
+    background-color: #ffffff; /* Blanc pur pour un look épuré */
+    border: 1px solid #d4af37; /* Bordure avec la couleur dorée */
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Titres principaux */
 .form-container h1,
 .form-container h2 {
     text-align: center;
@@ -636,6 +546,19 @@ body, html {
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
+    position: relative;
+}
+
+/* Ligne dorée sous les titres */
+.form-container h1::after,
+.form-container h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 form {
@@ -644,17 +567,20 @@ form {
     flex-direction: column;
 }
 
-label {
+/* Styles des labels */
+.form-container label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #333;
+    font-size: 1rem;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+/* Champs de formulaire */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 15px;
     font-size: 1rem;
     border: 1px solid #ced4da;
@@ -662,89 +588,63 @@ input[type="password"] {
     background-color: #fff;
     color: #495057;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #80bdff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+/* Focus sur les champs */
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus,
+.form-container input[type="password"]:focus {
+    border-color: #d4af37; /* Couleur dorée */
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5); /* Effet lumineux */
 }
 
-button[type="submit"],
-button[type="button"] {
+/* Boutons */
+.form-container button[type="submit"],
+.form-container button[type="button"] {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     font-weight: bold;
     color: white;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button[type="submit"]:hover,
-button[type="button"]:hover {
-    background-color: #0056b3;
+/* Effet hover sur les boutons */
+.form-container button[type="submit"]:hover,
+.form-container button[type="button"]:hover {
+    background: linear-gradient(45deg, #b8860b, #d4af37, #c1a15a);
+    transform: scale(1.02); /* Légère augmentation de la taille */
 }
 
+/* Bouton retour secondaire */
 .form-container a.btn-secondary {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a);
     color: white;
     padding: 8px 15px;
     margin-bottom: 20px;
     border-radius: 5px;
     font-size: 0.9rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .form-container a.btn-secondary:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #b8860b, #d4af37, #c1a15a);
+    transform: scale(1.02);
 }
 
 .form-container i {
     margin-right: 5px;
 }
 
-/* Conteneur des erreurs */
-.form-container .form-error {
-    background-color: #ffe6e6; /* Fond rouge clair pour attirer l'attention */
-    border: 1px solid #ff4d4d; /* Bordure rouge */
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    color: #a94442; /* Rouge foncé pour le texte */
-    font-size: 14px;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Liste des erreurs */
-.form-container .error-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Chaque élément d'erreur */
-.form-container .error-list li {
-    margin-bottom: 5px;
-    line-height: 1.5;
-}
-
-.form-container .error-list li::before {
-    content: '⚠️'; /* Icône d'avertissement */
-    margin-right: 10px;
-    color: #ff4d4d;
-}
-
-/* Paragraphes et liens */
+/* Liens */
 .form-container p {
     text-align: center;
     font-size: 0.85rem;
@@ -753,13 +653,14 @@ button[type="button"]:hover {
 }
 
 .form-container p a {
-    color: #007bff;
+    color: #d4af37; /* Couleur dorée */
     text-decoration: none;
+    font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .form-container p a:hover {
-    color: #0056b3;
+    color: #b8860b;
 }
 
 

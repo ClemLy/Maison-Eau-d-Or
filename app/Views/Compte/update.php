@@ -1,13 +1,13 @@
 <div class="form-container">
-	<a href="<?= site_url('account'); ?>" class="btn btn-secondary mb-3">
+	<a href="<?= site_url('account'); ?>" class="btn btn-secondary mb-3" style="border: none;">
 		<i class="bi bi-arrow-left"></i>
 	</a>
 
 	<h1>Modifier Mon Compte</h1>
 
 	<?php if (isset($validation)) : ?>
-		<div class="error-list">
-			<ul>
+		<div class="alert alert-danger">
+			<ul class="text-start">
 				<?= $validation->listErrors(); ?>
 			</ul>
 		</div>

@@ -2,8 +2,8 @@
 	<h2>Inscription</h2>
 
 	<?php if(isset($validation)): ?>
-		<div class="form-error">
-			<ul class="error-list">
+		<div class="alert alert-danger">
+			<ul class="text-start">
 				<?php foreach($validation->getErrors() as $error): ?>
 					<li><?= esc($error) ?></li>
 				<?php endforeach; ?>
