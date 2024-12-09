@@ -202,9 +202,11 @@ input[type="number"] {
 
 
 hr {
-    border: none !important;
     height: 2px;
+    border: none !important;
     margin: 0 auto;
+    background: 
+    linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
 }
 
 .trait-doree{
