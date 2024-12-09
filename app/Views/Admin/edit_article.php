@@ -5,44 +5,46 @@
 
 
 <form method="post" action="<?= site_url('admin/blog/modifier/')?>">
+	<!-- Formulaire d'upload -->
+	<div class="upload-section">
+
+		<div class="mb-3">
+			<label for="art_title" class="form-label">Titre de l'article</label>
+			<input type="text" id="art_title" name="art_title" class="form-control"
+				value="<?= isset($article['art_title']) ? esc($article['art_title']) : '' ?>" required>
+		</div>
+
+		<div class="mb-3">
+			<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
+			<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
+			<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Choisir une image :</label>
+			<div id="media-library" class="row">
+				<?php if (isset($images)): ?>
+					<!-- Boucle PHP pour afficher toutes les images -->
+					<?php foreach ($images as $image): ?>
+						<div class="col-md-3">
+							<div class="card image-card <?= $image['id_img'] == $article['id_img'] ? 'border-primary' : '' ?>"
+								data-id="<?= $image['id_img'] ?>">
+								<img src="<?= esc($image['img_path']) ?>"
+									alt="<?= esc($image['img_name']) ?>"
+									class="card-img-top"
+									style="cursor: pointer;">
+							</div>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</div>
+			<input type="hidden" id="existing_imgs" name="existing_imgs" value="<?= $article['id_img'] ?>">
+		</div>
+	</div>
+
 	<div class="d-flex p-2">
 		<!-- Conteneur de l'éditeur -->
 		<div class="w-30">
-			<!-- Formulaire d'upload -->
-			<div class="mb-3">
-				<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
-				<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
-				<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
-			</div>
-
-			<div class="mb-3">
-				<label class="form-label">Choisir une ou plusieurs images :</label>
-				<div id="media-library" class="row">
-					<?php if (isset($images)): ?>
-						<!-- Boucle PHP pour afficher toutes les images -->
-						<?php foreach ($images as $image): ?>
-							<div class="col-md-3">
-								<div class="card image-card <?= $image['id_img'] == $article['id_img'] ? 'border-primary' : '' ?>"
-									data-id="<?= $image['id_img'] ?>">
-									<img src="<?= esc($image['img_path']) ?>"
-										alt="<?= esc($image['img_name']) ?>"
-										class="card-img-top"
-										style="cursor: pointer;">
-								</div>
-							</div>
-						<?php endforeach; ?>
-					<?php endif; ?>
-				</div>
-				<input type="hidden" id="existing_imgs" name="existing_imgs" value="<?= $article['id_img'] ?>">
-			</div>
-
-
-		
-			<div class="mb-3">
-				<label for="art_title" class="form-label">Titre de l'article</label>
-				<input type="text" id="art_title" name="art_title" class="form-control"
-					value="<?= isset($article['art_title']) ? esc($article['art_title']) : '' ?>" required>
-			</div>
 
 			<div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>
 			<input type="hidden" id="hiddenContent" name="content">
@@ -59,6 +61,22 @@
 	<input type="hidden" name="id_art" value="<?= $article['id_art'] ?>">
 
 </form>
+
+<!-- Ajout d'un événement de clic pour sélectionner une seule image -->
+<script>
+	document.querySelectorAll('.image-card').forEach(card => {
+		card.addEventListener('click', function () {
+			// Supprime la classe 'border-primary' de toutes les cartes
+			document.querySelectorAll('.image-card').forEach(c => c.classList.remove('border-primary'));
+			
+			// Ajoute la classe 'border-primary' à la carte cliquée
+			this.classList.add('border-primary');
+			
+			// Met à jour la valeur du champ caché avec l'ID de l'image sélectionnée
+			document.getElementById('existing_imgs').value = this.dataset.id;
+		});
+	});
+</script>
 
 <!-- Charger Quill.js -->
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
@@ -117,40 +135,3 @@
 		});
 	});
 </script>
-
-<style>
-    .image-card {
-        border: 2px solid transparent;
-        transition: border-color 0.3s;
-    }
-
-    .image-card:hover {
-        border: 2px solid #007bff;
-    }
-
-    .border-primary {
-        border: 10px solid #007bff !important;
-    }
-
-    .category-tag {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 5px 10px;
-        margin: 3px;
-        border-radius: 15px;
-        font-size: 14px;
-        position: relative;
-    }
-
-    .category-tag span {
-        margin-left: 8px;
-        cursor: pointer;
-        color: #fff;
-        font-weight: bold;
-    }
-
-    .category-tag span:hover {
-        color: #000;
-    }
-</style>

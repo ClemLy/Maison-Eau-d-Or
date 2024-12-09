@@ -12,7 +12,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Choisir une ou plusieurs images :</label>
+            <label class="form-label">Choisir une image :</label>
             <div id="media-library" class="row">
                 <?php if (isset($images)): ?>
                     <!-- Boucle PHP pour afficher les images -->
@@ -25,8 +25,6 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-            <small id="selected-count" class="text-muted">Images sélectionnées : 0</small>
-            <input type="hidden" id="existing_imgs" name="existing_imgs">
         </div>
 
 		<!-- Titre de l'article -->
@@ -45,6 +43,22 @@
 		<button type="submit" class="btn btn-primary">Publier l'article</button>
 	</form>
 </div>
+
+<!-- Ajout d'un événement de clic pour sélectionner une seule image -->
+<script>
+	document.querySelectorAll('.image-card').forEach(card => {
+		card.addEventListener('click', function () {
+			// Supprime la classe 'border-primary' de toutes les cartes
+			document.querySelectorAll('.image-card').forEach(c => c.classList.remove('border-primary'));
+			
+			// Ajoute la classe 'border-primary' à la carte cliquée
+			this.classList.add('border-primary');
+			
+			// Met à jour la valeur du champ caché avec l'ID de l'image sélectionnée
+			document.getElementById('existing_imgs').value = this.dataset.id;
+		});
+	});
+</script>
 
 <!-- Quill.js -->
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
@@ -81,41 +95,4 @@
 	.image-card.selected {
 		border: 2px solid #007bff;
 	}
-</style>
-
-<style>
-    .image-card {
-        border: 2px solid transparent;
-        transition: border-color 0.3s;
-    }
-
-    .image-card:hover {
-        border: 2px solid #007bff;
-    }
-
-    .border-primary {
-        border: 10px solid #007bff !important;
-    }
-
-    .category-tag {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 5px 10px;
-        margin: 3px;
-        border-radius: 15px;
-        font-size: 14px;
-        position: relative;
-    }
-
-    .category-tag span {
-        margin-left: 8px;
-        cursor: pointer;
-        color: #fff;
-        font-weight: bold;
-    }
-
-    .category-tag span:hover {
-        color: #000;
-    }
 </style>

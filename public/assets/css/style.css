@@ -841,6 +841,32 @@ header li a:hover  {
     font-style: italic;
 }
 
+.upload-section {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 100px;
+}
+
+.upload-section label {
+    font-weight: bold;
+    color: #333;
+}
+
+.upload-section .form-control {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+}
+
+.upload-section #uploadBtn {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+}
+
 
 
 
@@ -877,4 +903,37 @@ header li a:hover  {
 #previewContent {
     height: 50%;
     overflow-y: scroll;
+}
+
+
+
+/* Images Ajout */
+.image-card {
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    max-width: 200px;
+    margin: 5px auto;
+    cursor: pointer;
+}
+
+.image-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.image-card:hover {
+    border: 2px solid #007bff;
+}
+
+.border-primary {
+    border: 10px solid #007bff !important;
+}
+
+/* Style global pour les conteneurs */
+#media-library {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
