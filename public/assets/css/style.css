@@ -614,38 +614,46 @@ header li a:hover  {
 
 
 
+/* Styles communs pour les pages de formulaire */
+body, html {
+    overflow-y: hidden;
+}
 
-/* Styles pour la page Modifier Mon Compte */
-.update-container {
+.form-container {
     max-width: 500px;
     margin: 100px auto;
     padding: 20px;
     background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.update-container h1 {
+.form-container h1,
+.form-container h2 {
     text-align: center;
     font-size: 2rem;
+    font-weight: bold;
     color: #333;
     margin-bottom: 20px;
 }
 
-.update-container form {
+form {
+    font-size: 0.9rem;
     display: flex;
     flex-direction: column;
 }
 
-.update-container label {
+label {
     font-weight: bold;
     margin-bottom: 5px;
     color: #333;
 }
 
-.update-container input[type="text"],
-.update-container input[type="email"] {
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     font-size: 1rem;
@@ -657,13 +665,16 @@ header li a:hover  {
     transition: border-color 0.3s ease;
 }
 
-.update-container input[type="text"]:focus,
-.update-container input[type="email"]:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
     border-color: #80bdff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.update-container button[type="submit"] {
+button[type="submit"],
+button[type="button"] {
+    width: 100%;
     padding: 10px;
     font-size: 1rem;
     font-weight: bold;
@@ -675,38 +686,85 @@ header li a:hover  {
     transition: background-color 0.3s ease;
 }
 
-.update-container button[type="submit"]:hover {
+button[type="submit"]:hover,
+button[type="button"]:hover {
     background-color: #0056b3;
 }
 
-.update-container .error-list {
-    background-color: #ffe6e6;
-    border: 1px solid #ff4d4d;
-    padding: 10px;
-    border-radius: 5px;
-    color: #a94442;
-    margin-bottom: 20px;
-}
-
-.update-container .error-list li {
-    margin-bottom: 5px;
-    line-height: 1.5;
-}
-
-.update-container a.btn-secondary {
+.form-container a.btn-secondary {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
     background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
 }
 
-.update-container a.btn-secondary:hover {
+.form-container a.btn-secondary:hover {
     background-color: #0056b3;
 }
 
-.update-container i {
+.form-container i {
     margin-right: 5px;
 }
+
+/* Conteneur des erreurs */
+.form-container .form-error {
+    background-color: #ffe6e6; /* Fond rouge clair pour attirer l'attention */
+    border: 1px solid #ff4d4d; /* Bordure rouge */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #a94442; /* Rouge foncé pour le texte */
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Liste des erreurs */
+.form-container .error-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Chaque élément d'erreur */
+.form-container .error-list li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.form-container .error-list li::before {
+    content: '⚠️'; /* Icône d'avertissement */
+    margin-right: 10px;
+    color: #ff4d4d;
+}
+
+/* Paragraphes et liens */
+.form-container p {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    color: #495057;
+}
+
+.form-container p a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.form-container p a:hover {
+    color: #0056b3;
+}
+
+
+
+
 
 
 /* Styles pour les pages */
@@ -878,6 +936,8 @@ header li a:hover  {
     overflow-y: auto;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 900px;
+    margin-bottom: 20px;
 }
 
 /* Style de la scrollbar */

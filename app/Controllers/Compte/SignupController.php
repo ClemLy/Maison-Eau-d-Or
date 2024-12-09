@@ -47,9 +47,10 @@
 					]
 				],
 				'phone_number' => [
-					'rules'  => 'permit_empty|numeric|max_length[10]',
+					'rules'  => 'permit_empty|numeric|min_length[10]|max_length[10]',
 					'errors' => [
 						'numeric'    => 'Le numéro de téléphone doit contenir uniquement des chiffres.',
+						'min_length' => 'Le numéro de téléphone contient 10 chiffres.',
 						'max_length' => 'Le numéro de téléphone ne doit pas dépasser 10 chiffres.'
 					]
 				],

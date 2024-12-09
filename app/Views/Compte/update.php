@@ -1,4 +1,4 @@
-<div class="update-container">
+<div class="form-container">
 	<a href="<?= site_url('account'); ?>" class="btn btn-secondary mb-3">
 		<i class="bi bi-arrow-left"></i>
 	</a>
