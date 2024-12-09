@@ -1,5 +1,5 @@
 <div class="container my-5">
-<h1 class="text-center mb-2 text-gold" style="margin-top:100px;margin-bottom: 0; padding: 0;"><?= esc($category['cat_name']) ?></h1>
+<h1 class="text-center mb-2 texte-doree" style="margin-top:100px;margin-bottom: 0; padding: 0;"><?= esc($category['cat_name']) ?></h1>
     <div class="d-flex justify-content-center" style="margin-bottom:25px;margin-top: -5px;">
         <hr class="trait-doree">
     </div>
@@ -15,7 +15,7 @@
                             <img src="<?= esc($product['img_path']) ?>" class="card-img-top product-image" 
                                  alt="<?= esc($product['p_name']) ?>" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
-                                <h5 class="card-title text-gold-gradient"><?= esc($product['p_name']) ?></h5>
+                                <h5 class="card-title texte-doree"><?= esc($product['p_name']) ?></h5>
                                 <p class="card-text" style="color: #555;"><strong>Prix:</strong> <?= esc($product['p_price']) ?> €</p>
                             </div>
                         </a>
