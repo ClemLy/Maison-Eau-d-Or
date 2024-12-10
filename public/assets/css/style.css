@@ -130,8 +130,8 @@ input[type="number"] {
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.05);
-    filter: brightness(0.95);
+    transform: scale(1.015);
+    filter: brightness(0.92);
 }
 
 
