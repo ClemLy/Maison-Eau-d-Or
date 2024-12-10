@@ -13,7 +13,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/assets/js/app.js"></script>
 </head>
+<?php
 
+use App\Models\CategoryModel;
+ 
+$categoryModel = new CategoryModel();
+
+$categories = $categoryModel->findAll();
+?>
 <body>
 	<header>
 		<nav>
@@ -81,7 +88,7 @@
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
 
-					<li><a href="<?= site_url('panier'); ?>">Panier</a></li>
+					<li><a href="<?= site_url('panier'); ?>"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li>
 				</div>
 			</ul>
 		</nav>
