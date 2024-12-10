@@ -93,8 +93,9 @@ $categories = $categoryModel->findAll();
 					<?php else: ?>
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
+					<li><a class="btn" data-bs-toggle="offcanvas" href="#panier_sideMenu" role="button" aria-controls="panier_sideMenu"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li>
 
-					<li><a href="<?= site_url('panier'); ?>"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li>
+					<!-- <li><a href="<?= site_url('panier'); ?>"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li> -->
 				</div>
 			</ul>
 		</nav>
@@ -103,3 +104,4 @@ $categories = $categoryModel->findAll();
         <?php endif; ?>
 	</header>
 
+<?php include('panier_sideMenu.php');
