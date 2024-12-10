@@ -16,10 +16,24 @@
 <?php
 
 use App\Models\CategoryModel;
- 
+use App\Models\CartModel;
+$cartModel = new CartModel();
 $categoryModel = new CategoryModel();
 
 $categories = $categoryModel->findAll();
+
+
+
+$id_user = session()->get('id_user');
+
+		
+$cartItems = $cartModel
+		->select('cart.id_prod, cart.quantity, product.p_name, product.p_price, image.img_path')
+		->join('product', 'cart.id_prod = product.id_prod')
+		->join('product_image', 'product.id_prod = product_image.id_prod')
+		->join('image', 'product_image.id_img = image.id_img')
+		->where('cart.id_user', $id_user)
+		->findAll();
 ?>
 <body>
 	<header>
