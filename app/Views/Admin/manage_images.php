@@ -11,7 +11,7 @@
                             <div class="search-box mb-2 me-2">
                             </div>
                         </div>
-
+                    </div>
                     <hr class="mt-2">
                     <div class="table-responsive">
                         <table class="table align-middle table-nowrap table-hover mb-0">
@@ -97,7 +97,6 @@
         </div>
     </div>
 </div>
-
 
 
 

@@ -495,7 +495,7 @@ header li a:hover  {
 
 /* Newsletter Section */
 .newsletter-section {
-    background-color: #ffe1c4; /* Fond léger */
+    background-color: #ffedda;
     border: solid;
     border-width: 2px;
     border-color: #000;
@@ -541,8 +541,8 @@ header li a:hover  {
     max-width: 500px;
     margin: 100px auto;
     padding: 20px;
-    background-color: #ffffff; /* Blanc pur pour un look épuré */
-    border: 1px solid #d4af37; /* Bordure avec la couleur dorée */
+    background-color: #ffffff;
+    border: 1px solid #d4af37;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
