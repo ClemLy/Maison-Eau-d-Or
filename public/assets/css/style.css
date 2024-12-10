@@ -674,6 +674,78 @@ form {
 
 
 
+/* Historique */
+
+.container h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.container h1::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
+    margin: 10px auto 0;
+}
+
+
+.history-order-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+
+.history-order-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+
+.history-order-table {
+    margin-bottom: 20px;
+}
+
+.history-order-table th, 
+.history-order-table td {
+    text-align: left;
+    vertical-align: middle;
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+.history-order-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: #333;
+}
+
+.history-order-total {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.history-order-button {
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 25px !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+}
 
 
 
