@@ -7,6 +7,7 @@
 	use App\Models\ProductModel;
 	use App\Models\MediaModel; // Pour gérer les images du carrousel principal
 	use App\Models\ShowcaseModel;
+	use App\Models\CarouselModel;
 
 	class CarrouselController extends BaseController
 	{
@@ -16,8 +17,21 @@
 		public function index()
 		{
 			$categoryModel = new CategoryModel();
-			$mediaModel = new MediaModel();
+			$mediaModel    = new MediaModel();
 			$showcaseModel = new ShowcaseModel();
+			$carouselModel = new CarouselModel();
+
+
+			// Récupérer les images du carrousel principal
+			$carrouselImages = $carouselModel
+				->select('carousel.id_car, carousel.id_img, image.img_path')
+				->join('image', 'carousel.id_img = image.id_img')
+				->findAll();
+
+			// Récupérer toutes les images disponibles pour le carrousel
+			$images = $mediaModel->findAll();
+
+
 
 			// Récupérer toutes les catégories disponibles
 			$categories = $categoryModel->findAll();
@@ -30,12 +44,15 @@
 				->findAll();
 
 			// Ajouter un indicateur `active` et `position` pour chaque catégorie
-			foreach ($categories as &$category) {
+			foreach ($categories as &$category)
+			{
 				$category['active'] = false; // Par défaut, la catégorie n'est pas active
 				$category['position'] = null; // Par défaut, aucune position
 
-				foreach ($showcaseCategories as $index => $showcaseCategory) {
-					if ($category['id_cat'] === $showcaseCategory['id_cat']) {
+				foreach ($showcaseCategories as $index => $showcaseCategory)
+				{
+					if ($category['id_cat'] === $showcaseCategory['id_cat'])
+					{
 						$category['active'] = true;
 						$category['position'] = $index + 1; // La position dans `showcase` (commence à 1)
 						break; // Sortir dès que la catégorie est trouvée
@@ -44,7 +61,8 @@
 			}
 
 			// Trier les catégories par leur position
-			usort($categories, function ($a, $b) {
+			usort($categories, function ($a, $b)
+			{
 				// Les catégories sans position vont en bas
 				if ($a['position'] === null) return 1;
 				if ($b['position'] === null) return -1;
@@ -53,8 +71,10 @@
 
 			// Passer les données à la vue
 			$carrouselView = view('Admin/manage_carrousel', [
-				'categories' => $categories,
+				'categories'         => $categories,
+				'carrousel'          => $carrouselImages,
 				'showcaseCategories' => $showcaseCategories,
+				'images'             => $images
 			]);
 
 			$data = [
@@ -143,22 +163,38 @@
 		 */
 		public function updateMainCarousel()
 		{
-			$mediaModel = new MediaModel();
-			$selectedImages = $this->request->getPost('selectedImages'); // Tableau contenant les ID des images sélectionnées
+			// Récupérer les données envoyées (les ID des images sélectionnées)
+			$selectedImages = $this->request->getPost('selectedImages'); // C'est un tableau contenant les IDs des images sélectionnées
+			$carouselModel  = new CarouselModel(); // Instancier le modèle pour la table CAROUSEL
+			$mediaModel     = new MediaModel();
 
-			// Réinitialiser toutes les images
-			$mediaModel->update(null, ['is_selected' => false]);
-
-			// Mettre à jour les images sélectionnées
-			if (!empty($selectedImages))
+			// Vérifiez si les images sélectionnées sont envoyées
+			if (empty($selectedImages))
 			{
-				foreach ($selectedImages as $imageId)
+				return redirect()->back()->with('error', 'Aucune image sélectionnée.');
+			}
+
+			// Réinitialiser toutes les images dans le carrousel principal (par exemple, les désélectionner)
+			$carouselModel->truncate(); // Cette méthode vide la table CAROUSEL (réinitialise les données)
+
+			// Ajouter les images sélectionnées dans le carrousel
+			foreach ($selectedImages as $imageId)
+			{
+				// Vérifiez si l'image existe dans la table Media
+				$image = $mediaModel->find($imageId);
+
+				if ($image)
 				{
-					$mediaModel->update($imageId, ['is_selected' => true]);
+					// Si l'image existe, on l'ajoute au carrousel
+					$carouselModel->save([
+						'id_img'   => $image['id_img'],
+						'link_car' => $image['img_path'], // Exemple d'ajout de lien de l'image
+					]);
 				}
 			}
 
-			return redirect()->to('/admin/carrousel')->with('success', 'Le carrousel principal a été mis à jour avec succès.');
+			// Retourner une réponse avec succès
+			return redirect()->to('/admin/carrousel')->with('success', 'Carrousel principal mis à jour avec succès.');
 		}
 	}
 ?>

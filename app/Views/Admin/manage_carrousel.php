@@ -45,29 +45,56 @@
 	</head>
 
 	<body>
-	<div class="container my-5">
-    <h2 class="mb-4">Gestion du carrousel des catégories</h2>
-    <form id="reorderForm" method="post" action="<?= site_url('admin/carrousel/modifierCategorie'); ?>">
-		<ul id="draggable-list" class="list-group dropzone">
-			<?php foreach ($categories as $category): ?>
-				<li class="list-group-item draggable" 
-					draggable="true" 
-					data-id="<?= esc($category['id_cat']) ?>"
-					data-position="<?= esc($category['position']) ?>">
-					<span class="grip-icon">&#x2630;</span>
-					<?= esc($category['cat_name']) ?>
-					<div>
-						<input type="checkbox" 
-							class="toggle-active" 
-							<?= $category['active'] ? 'checked' : '' ?> 
-						>
-					</div>
-				</li>
-			<?php endforeach; ?>
-		</ul>
-        <button type="submit" class="btn btn-primary mt-3">Enregistrer les modifications</button>
-    </form>
-</div>
+		<div class="page-container">
+			<h1 class="mb-4">Gestion du carrousel principal</h1>
+			<div class="mb-3">
+				<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
+				<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
+				<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label">Choisir une image :</label>
+				<div id="media-library" class="row">
+					<?php if (isset($images)): ?>
+						<!-- Boucle PHP pour afficher les images -->
+						<?php foreach ($images as $image): ?>
+							<div class="col-md-3">
+								<div class="card image-card" data-id="<?= $image['id_img'] ?>">
+									<img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top" style="cursor: pointer;">
+								</div>
+							</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+
+				<input type="hidden" id="existing_imgs" name="existing_imgs">
+			</div>
+
+			<div class="container my-5">
+				<h1 class="mb-4">Gestion du carrousel des catégories</h1>
+				<form id="reorderForm" method="post" action="<?= site_url('admin/carrousel/modifierCategorie'); ?>">
+					<ul id="draggable-list" class="list-group dropzone">
+						<?php foreach ($categories as $category): ?>
+							<li class="list-group-item draggable" 
+								draggable="true" 
+								data-id="<?= esc($category['id_cat']) ?>"
+								data-position="<?= esc($category['position']) ?>">
+								<span class="grip-icon">&#x2630;</span>
+								<?= esc($category['cat_name']) ?>
+								<div>
+									<input type="checkbox" 
+										class="toggle-active" 
+										<?= $category['active'] ? 'checked' : '' ?> 
+									>
+								</div>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+					<button type="submit" class="btn btn-primary mt-3">Enregistrer les modifications</button>
+				</form>
+			</div>
+		</div>
 
         <script>
 	document.addEventListener('DOMContentLoaded', () => {
