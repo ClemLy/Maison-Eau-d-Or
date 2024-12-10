@@ -41,15 +41,18 @@
 
 
     <div class="categories-vedette d-flex justify-content-around py-4">
-        <?php
-        if (isset($categories) && !empty($categories)) {
-            foreach ($categories as $categ) {
-                // Vérifier si la catégorie est sélectionnée
-                $activeClass = ($categ['id_cat'] == $selectedCategoryId) ? 'active' : '';
-                echo '<h3><a href="?category_id=' . $categ['id_cat'] . '" class="' . $activeClass . '">' . $categ['cat_name'] . '</a></h3>';
-            }
-        }
-        ?>
+        <?php if (!empty($categories)): ?>
+            <?php foreach ($categories as $categ): ?>
+                <h3>
+                    <a href="?category_id=<?= esc($categ['id_cat']) ?>" 
+                    class="<?= ($categ['id_cat'] == $selectedCategoryId) ? 'active' : '' ?>">
+                    <?= esc($categ['cat_name']) ?>
+                    </a>
+                </h3>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Aucune catégorie disponible pour le moment.</p>
+        <?php endif; ?>
     </div>
 
     <hr>

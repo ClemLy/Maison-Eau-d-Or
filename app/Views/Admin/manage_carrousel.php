@@ -45,107 +45,110 @@
 	</head>
 
 	<body>
-		<div class="container my-5">
-			<h2 class="mb-4">Gestion du carrousel des catégories</h2>
-			<form id="reorderForm" method="post" action="<?= site_url('admin/carrousel/updateCategoryCarousel'); ?>">
-				<ul id="draggable-list" class="list-group dropzone">
-					<?php foreach ($categories as $category): ?>
-						<li class="list-group-item draggable" 
-							draggable="true" 
-							data-id="<?= $category['id_cat'] ?>">
-							<span class="grip-icon">&#x2630;</span>
-							<?= esc($category['cat_name']); ?>
-							<div>
-								<input type="checkbox" 
-									class="toggle-active" 
-									>
-							</div>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-				<button type="submit" class="btn btn-primary mt-3">Enregistrer les modifications</button>
-			</form>
-		</div>
+	<div class="container my-5">
+    <h2 class="mb-4">Gestion du carrousel des catégories</h2>
+    <form id="reorderForm" method="post" action="<?= site_url('admin/carrousel/modifierCategorie'); ?>">
+		<ul id="draggable-list" class="list-group dropzone">
+			<?php foreach ($categories as $category): ?>
+				<li class="list-group-item draggable" 
+					draggable="true" 
+					data-id="<?= esc($category['id_cat']) ?>"
+					data-position="<?= esc($category['position']) ?>">
+					<span class="grip-icon">&#x2630;</span>
+					<?= esc($category['cat_name']) ?>
+					<div>
+						<input type="checkbox" 
+							class="toggle-active" 
+							<?= $category['active'] ? 'checked' : '' ?> 
+						>
+					</div>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+        <button type="submit" class="btn btn-primary mt-3">Enregistrer les modifications</button>
+    </form>
+</div>
 
-<script>
+        <script>
 	document.addEventListener('DOMContentLoaded', () => {
-    const list = document.getElementById('draggable-list');
-    let draggedItem = null;
+		const list = document.getElementById('draggable-list');
+		let draggedItem = null;
 
-    // Gestion du drag and drop
-    list.addEventListener('dragstart', (e) => {
-        const listItem = e.target;
-        if (listItem.classList.contains('inactive')) {
-            e.preventDefault(); // Empêche le drag si l'élément est inactif
-            return;
-        }
-        draggedItem = listItem;
-        listItem.classList.add('dragging');
-    });
+		// Gestion du drag and drop
+		list.addEventListener('dragstart', (e) => {
+			const listItem = e.target;
+			if (listItem.classList.contains('inactive')) {
+				e.preventDefault(); // Empêche le drag si l'élément est inactif
+				return;
+			}
+			draggedItem = listItem;
+			listItem.classList.add('dragging');
+		});
 
-    list.addEventListener('dragend', (e) => {
-        e.target.classList.remove('dragging');
-        draggedItem = null;
-    });
+		list.addEventListener('dragend', (e) => {
+			e.target.classList.remove('dragging');
+			draggedItem = null;
+		});
 
-    list.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        const afterElement = getDragAfterElement(list, e.clientY);
-        if (afterElement == null) {
-            list.appendChild(draggedItem);
-        } else {
-            list.insertBefore(draggedItem, afterElement);
-        }
-    });
+		list.addEventListener('dragover', (e) => {
+			e.preventDefault();
+			const afterElement = getDragAfterElement(list, e.clientY);
+			if (afterElement == null) {
+				list.appendChild(draggedItem);
+			} else {
+				list.insertBefore(draggedItem, afterElement);
+			}
+		});
 
-    function getDragAfterElement(container, y) {
-        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
-        return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
+		function getDragAfterElement(container, y) {
+			const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+			return draggableElements.reduce((closest, child) => {
+				const box = child.getBoundingClientRect();
+				const offset = y - box.top - box.height / 2;
+				if (offset < 0 && offset > closest.offset) {
+					return { offset: offset, element: child };
+				} else {
+					return closest;
+				}
+			}, { offset: Number.NEGATIVE_INFINITY }).element;
+		}
 
-    // Activation/désactivation des éléments via la checkbox
-    document.querySelectorAll('.toggle-active').forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            const listItem = this.closest('.list-group-item');
-            if (this.checked) {
-                listItem.classList.remove('inactive');
-            } else {
-                listItem.classList.add('inactive');
-            }
-        });
-    });
+		// Activation/désactivation des éléments via la checkbox
+		document.querySelectorAll('.toggle-active').forEach(checkbox => {
+			checkbox.addEventListener('change', function () {
+				const listItem = this.closest('.list-group-item');
+				if (this.checked) {
+					listItem.classList.remove('inactive');
+				} else {
+					listItem.classList.add('inactive');
+				}
+			});
+		});
 
-    // Soumission du formulaire
-    document.getElementById('reorderForm').addEventListener('submit', (e) => {
-        e.preventDefault();
+		// Soumission du formulaire avec JSON
+		document.getElementById('reorderForm').addEventListener('submit', (e) => {
+			e.preventDefault();
 
-        // Créer un tableau d'objets avec l'ID et l'état de la catégorie
-        const reorderedItems = [...list.querySelectorAll('.list-group-item')].map(item => ({
-            id: item.getAttribute('data-id'),
-            active: !item.classList.contains('inactive')
-        }));
+			// Créer un tableau d'objets avec l'ID et l'état de la catégorie
+			const reorderedItems = [...list.querySelectorAll('.list-group-item')].map((item, index) => ({
+				id: item.getAttribute('data-id'),
+				active: !item.classList.contains('inactive'),
+				position: index + 1 // Ordre dans la liste
+			}));
 
-        // Convertir le tableau en JSON et l'ajouter dans un champ caché
-        const formData = new FormData();
-        formData.append('selectedCategories', JSON.stringify(reorderedItems));
+			console.log(JSON.stringify(reorderedItems));
 
-        fetch('<?= site_url('admin/carrousel/updateCategoryCarousel'); ?>', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => alert('Modifications enregistrées !'))
-        .catch(error => alert('Erreur lors de l\'enregistrement'));
-    });
-});
+			// Envoi des données au serveur
+            fetch('<?= site_url('admin/carrousel/modifierCategorie'); ?>', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Requested-With': 'XMLHttpRequest'
+				},
+				body: JSON.stringify({ categories: reorderedItems })
+			})
+					});
+					});
 </script>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

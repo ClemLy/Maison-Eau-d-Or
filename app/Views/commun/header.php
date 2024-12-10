@@ -56,25 +56,15 @@
 								Admin
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
-<<<<<<< HEAD
-								<li><a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/carrousel'); ?>">Gestion Carrousel</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a></li>
-                                <li><a class="dropdown-item" href="<?= site_url('admin/gestionImage'); ?>">Gestion Images</a></li>
-=======
 								<li>
 									<a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits	</a>
-									<a class="dropdown-item" href="<?= site_url('admin/categories'); ?>">Gestion Catégories</a>
+									<a class="dropdown-item" href="<?= site_url('admin/carrousel'); ?>">Gestion Carrousel</a>
 									<a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a>
 									<a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a>
 									<a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a>
 									<a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a>
 									<a class="dropdown-item" href="<?= site_url('admin/gestionImage'); ?>">Gestion Images</a>
 								</li>
->>>>>>> 1814983fac1fecc9c2d3d77860aa0efea9ed9bef
 							</ul>
 						</li>
 					<?php endif; ?>
