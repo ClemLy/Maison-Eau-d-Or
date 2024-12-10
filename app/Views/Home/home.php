@@ -100,7 +100,7 @@
 
 
     <div class="text-center mt-4">
-        <a href="#PRODUITS">
+        <a href="<?= site_url('boutique');?>">
             <p>Voir tous les produits</p>
         </a>
     </div>
