@@ -17,10 +17,10 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
 
 1. **Cloner le dépôt**
 
-```bash
-   git clone git@github.com:ClemLy/Maison-Eau-d-Or.git
-   cd Maison-Eau-d-Or
-```
+   ```bash
+      git clone git@github.com:ClemLy/Maison-Eau-d-Or.git
+      cd Maison-Eau-d-Or
+   ```
 
 2. **Installer les dépendances**
 
