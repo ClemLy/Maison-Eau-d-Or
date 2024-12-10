@@ -123,7 +123,10 @@ class CommanderController extends BaseController
             $cartModel->where('id_user', $id_user)->delete();
         }
 
-        return redirect()->to('order/pdf/' . $id_order);
+        $session = session();
+        $session->setFlashdata('success', 'Votre commande a bien été passée.');
+
+        return redirect()->to('account/historique/');
     }
 
     public function generatePDF($orderId)

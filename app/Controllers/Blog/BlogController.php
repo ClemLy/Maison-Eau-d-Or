@@ -55,15 +55,12 @@
 		
 				try
 				{
-
 					// Insertion de l'article
 					$blogModel->save([
 						'id_img'    => $data['existing_imgs'],
 						'art_title' => $data['title'],
 						'art_text'  => $data['content']
 					]);
-
-			
 
 					$users = $accountModel->where('newsletter', true)->findAll();
 

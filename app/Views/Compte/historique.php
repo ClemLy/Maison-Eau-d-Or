@@ -1,8 +1,19 @@
 <div class="container">
-    <h1 class="history-title mb-3" style="margin-top:100px;margin-bottom: 0; padding: 0;">Historique de vos commandes</h2>
+    <h1 class="history-title mb-3" style="margin-top:100px; margin-bottom: 0; padding: 0;">Historique de vos commandes</h1>
+
+    <?php if(session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
+
     <?php if (!empty($orders)): ?>
         <div class="d-flex flex-wrap justify-content-center gap-4">
-            <?php foreach ($orders as $order): ?>
+            <?php 
+            // Inverser l'ordre des commandes
+            $reversedOrders = array_reverse($orders); 
+            foreach ($reversedOrders as $order): 
+            ?>
                 <div class="history-order-card flex-grow-1" style="width:100%;">
                     <h4 class="history-order-title">Commande #<?= esc($order['id_order']) ?></h4>
                     <p class="history-order-info">
@@ -54,7 +65,3 @@
         <p class="text-center history-order-info">Vous n'avez pas encore passé de commande</p>
     <?php endif; ?>
 </div>
-
-<style>
-
-</style>
