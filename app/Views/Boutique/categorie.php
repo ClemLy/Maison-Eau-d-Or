@@ -1,5 +1,5 @@
 <div class="container my-5">
-<h1 class="text-center mb-2 texte-doree" style="margin-top:100px;margin-bottom: 0; padding: 0;"><?= esc($category['cat_name']) ?></h1>
+<h1 class="text-center mb-2" style="margin-top:100px;margin-bottom: 0; padding: 0;"><?= esc($category['cat_name']) ?></h1>
 
 
 <?php include('menu-categories.php'); ?>
