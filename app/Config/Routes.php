@@ -95,8 +95,9 @@ $routes->post('admin/carrousel/modifierCategorie', 'Carrousel\CarrouselControlle
 
 
 $routes->get('admin/commande/(:num)', 'Admin\AdminController::commandes/$1', ['filter' => 'admin']);
-$routes->get('admin/commandes/', 'Admin\AdminController::commande/',['filter' => 'admin']);
 
+// Gestionc ommande 
+$routes->get('admin/commandes', 'Admin\AdminController::historique_admin', ['filter' => 'admin']);
 
 $routes->get('admin/blog', 'Admin\AdminController::blog', ['filter' => 'admin']);
 

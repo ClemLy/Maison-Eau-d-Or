@@ -124,7 +124,7 @@ class CommanderController extends BaseController
         }
 
         $session = session();
-        $session->setFlashdata('success', 'Votre commande a bien été passée.');
+        $session->setFlashdata('success', 'Votre commande #'.$id_order.' a bien été passée.');
 
         return redirect()->to('account/historique/');
     }

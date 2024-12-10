@@ -7,6 +7,8 @@ use App\Models\AProposModel;
 use App\Models\FaqModel;
 use App\Models\BlogModel;
 use App\Models\MediaModel;
+use App\Models\OrderModel;
+use App\Models\OrderProductModel;
 
 class AdminController extends BaseController
 {
@@ -301,5 +303,30 @@ class AdminController extends BaseController
         return View('Layout/main', $data);
 
     }
+
+    /* ------------------ */
+    /* ----Historique---- */
+    /* ------------------ */
+
+
+	public function historique_admin()
+    {
+        $orderModel = new OrderModel();
+        $orderProductModel = new OrderProductModel();
+
+
+        $orders = $orderModel->findAll();
+
+        foreach ($orders as &$order) {
+            $order['products'] = $orderProductModel->getProductsByOrder($order['id_order']);
+        }
+
+        $data = ['orders' => $orders];
+
+        echo view('commun/header');
+        echo view('Admin/read_historique', $data);
+        echo view('commun/footer');
+    }
+
 
 }
