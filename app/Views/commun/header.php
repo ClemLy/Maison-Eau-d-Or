@@ -40,11 +40,13 @@ $categories = $categoryModel->findAll();
 						Boutique
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<?php if (isset($categories)): ?>
-								<?php foreach ($categories as $category): ?>
-									<li><a class="dropdown-item" href="<?= site_url("boutique/categorie/" .$category['cat_name']); ?>"><?php echo esc($category['cat_name']); ?></a></li>
-								<?php endforeach; ?>
-							<?php endif; ?>
+							<li>
+								<?php if (isset($categories)): ?>
+									<?php foreach ($categories as $category): ?>
+										<a class="dropdown-item" href="<?= site_url("boutique/categorie/" .$category['cat_name']); ?>"><?php echo esc($category['cat_name']); ?></a>
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</li>
 						</ul>
 					</li>
 
@@ -61,13 +63,15 @@ $categories = $categoryModel->findAll();
 								Admin
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
-								<li><a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/categories'); ?>">Gestion Catégories</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a></li>
-                                <li><a class="dropdown-item" href="<?= site_url('admin/gestionImage'); ?>">Gestion Images</a></li>
+								<li>
+									<a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits	</a>
+									<a class="dropdown-item" href="<?= site_url('admin/categories'); ?>">Gestion Catégories</a>
+									<a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a>
+									<a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a>
+									<a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a>
+									<a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a>
+									<a class="dropdown-item" href="<?= site_url('admin/gestionImage'); ?>">Gestion Images</a>
+								</li>
 							</ul>
 						</li>
 					<?php endif; ?>
@@ -78,10 +82,12 @@ $categories = $categoryModel->findAll();
 								Mon Compte
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="accountDropdown">
-								<li><a class="dropdown-item" href="<?= site_url('account/historique'); ?>">Historique</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a></li>
+								<li>
+									<a class="dropdown-item" href="<?= site_url('account/historique'); ?>">Historique</a>
+									<a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
+									<a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
+									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>
+								</li>
 							</ul>
 						</li>
 					<?php else: ?>
