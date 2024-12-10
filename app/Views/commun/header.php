@@ -29,8 +29,8 @@
 
 				<div class="header-milieu">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Boutique
+						<a class="nav-link dropdown-toggle" onclick="window.location.href='<?= site_url('boutique'); ?>'" href="<?= site_url('boutique');?>" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Boutique
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<?php if (isset($categories)): ?>
@@ -50,7 +50,7 @@
 				<div class="header-droite">
 					<?php if (session()->get('admin')): ?>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="<?= site_url('admin'); ?>" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" onclick="window.location.href='<?= site_url('admin'); ?>'" href="<?= site_url('admin'); ?>" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Admin
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
@@ -67,7 +67,7 @@
 
 					<?php if (session()->get('isLoggedIn')): ?>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="<?= site_url('account'); ?>" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" onclick="window.location.href='<?= site_url('account'); ?>'" href="<?= site_url('account'); ?>" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								Mon Compte
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="accountDropdown">
