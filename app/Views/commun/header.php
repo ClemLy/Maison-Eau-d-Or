@@ -13,7 +13,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="/assets/js/app.js"></script>
 </head>
+<?php
 
+use App\Models\CategoryModel;
+ 
+$categoryModel = new CategoryModel();
+
+$categories = $categoryModel->findAll();
+?>
 <body>
 	<header>
 		<nav>
@@ -79,7 +86,7 @@
 									<a class="dropdown-item" href="<?= site_url('account/historique'); ?>">Historique</a>
 									<a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
 									<a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
-									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>
+									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>						
 								</li>
 							</ul>
 						</li>
@@ -87,7 +94,7 @@
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
 
-					<li><a href="<?= site_url('panier'); ?>">Panier</a></li>
+					<li><a href="<?= site_url('panier'); ?>"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li>
 				</div>
 			</ul>
 		</nav>

@@ -19,6 +19,7 @@
 /* Afficher le dropdown lors du survol du menu parent */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+    width:auto !important;
 }
 
 /* Personnalisation du style du dropdown */
@@ -32,6 +33,7 @@
     padding: 10px 20px;
     color: #333;
 }
+
 .related-products-card a {
     text-decoration: none !important; 
     color: inherit !important;
@@ -368,11 +370,11 @@ nav ul li:last-child {
 }
 
 header li a:hover  {
-    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
-    -webkit-background-clip: text;
-    color: transparent;
-    display: inline;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37) !important;
+    -webkit-background-clip: text !important;
+    color: transparent !important;
+    display: inline !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), 0 0 5px rgba(0, 0, 0, 0.3) !important;
 }
 
 
