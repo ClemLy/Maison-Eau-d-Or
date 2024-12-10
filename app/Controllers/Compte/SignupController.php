@@ -94,7 +94,7 @@
 				$email->setFrom(env('email_user', ''), 'Maison Eau d\'Or');
 				$email->setTo($data['email']);
 				$email->setSubject('Activation de votre compte');
-				$email->setMessage('Cliquez sur ce lien pour activer votre compte : ' . site_url('activate/' . $data['activ_token']));
+				$email->setMessage($this->getEmail($data));
 				$email->send();
 
 				return redirect()->to('/signin')->with('msg', 'Un lien d\'activation a été envoyé à votre adresse email. Veuillez vérifier votre boîte mail.');
@@ -129,7 +129,7 @@
 			}
 		}
 
-		public function getEmail()
+		public function getEmail($data)
 		{
 			return " <!DOCTYPE html>
 			<html lang=\"fr\">
@@ -142,7 +142,7 @@
 					  <!-- Header -->
 					  <tr>
 						<td align=\"center\" style=\"padding: 10px 0;\">
-						  <a href=\"https://www.google.fr/\">
+						  <a href=\"".site_url('/')."\">
 							<img src=\"https://i.imgur.com/2Objlik.png\" alt=\"Logo\" width=\"200\" style=\"display: block;\">
 						  </a>
 						</td>
@@ -153,13 +153,13 @@
 						  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"60%\">
 							<tr>
 							  <td align=\"center\" style=\"padding: 5px;\">
-								<a href=\"https://www.google.fr/\" style=\"display: inline-block; text-decoration: none; color: #d4af37; font-size: 14px; font-weight: bold; border: 2px solid #d4af37; padding: 10px 20px; border-radius: 20px;\">Accueil</a>
+								<a href=\"".site_url('/')."\" style=\"display: inline-block; text-decoration: none; color: #d4af37; font-size: 14px; font-weight: bold; border: 2px solid #d4af37; padding: 10px 20px; border-radius: 20px;\">Accueil</a>
 							  </td>
 							  <td align=\"center\" style=\"padding: 5px;\">
-								<a href=\"https://www.google.fr/\" style=\"display: inline-block; text-decoration: none; color: #d4af37; font-size: 14px; font-weight: bold; border: 2px solid #d4af37; padding: 10px 20px; border-radius: 20px;\">Boutique</a>
+								<a href=\"".site_url('/boutique')."\" style=\"display: inline-block; text-decoration: none; color: #d4af37; font-size: 14px; font-weight: bold; border: 2px solid #d4af37; padding: 10px 20px; border-radius: 20px;\">Boutique</a>
 							  </td>
 							  <td align=\"center\" style=\"padding: 5px;\">
-								<a href=\"https://www.google.fr/\" style=\"display: inline-block; text-decoration: none; color: #d4af37; font-size: 14px; font-weight: bold; border: 2px solid #d4af37; padding: 10px 20px; border-radius: 20px;\">Blog</a>
+								<a href=\"". site_url('/blog') ."\" style=\"display: inline-block; text-decoration: none; color: #d4af37; font-size: 14px; font-weight: bold; border: 2px solid #d4af37; padding: 10px 20px; border-radius: 20px;\">Blog</a>
 							  </td>
 							</tr>
 						  </table>
@@ -200,6 +200,5 @@
 			</body>
 			</html>";
 		}
-
 	}
 ?>
