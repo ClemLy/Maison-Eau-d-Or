@@ -207,13 +207,13 @@ class CommanderController extends BaseController
 
         // Ajouter les informations de commande
         $pdf->SetXY(37, 83); // Position : Nom
-        $pdf->Write(10, $order['last_name'] . " " . $order['first_name']); 
+        $pdf->Write(10, mb_convert_encoding($order['last_name'] . " " . $order['first_name'], 'ISO-8859-15', 'UTF-8')); 
 
         $pdf->SetXY(47, 92.5); // Position : Téléphone
         $pdf->Write(10, $order['phone_number_order']); 
 
         $pdf->SetXY(37, 101); // Position : Email
-        $pdf->Write(10, $order['email']); 
+        $pdf->Write(10, mb_convert_encoding($order['email'], 'ISO-8859-15', 'UTF-8')); 
 
         $pdf->SetXY(130, 55); // Position : Numéro de commande
         $pdf->Write(10, $order['id_order']);
@@ -229,16 +229,13 @@ class CommanderController extends BaseController
         $pdf->Write(10, date('y', $orderDate)); // Moisid_imgPays
 
         $pdf->SetXY(130, 83); // Position : Adresse
-        $pdf->Write(10, $order['address_street']); // $order['address_street']
+        $pdf->Write(10, mb_convert_encoding($order['address_street'], 'ISO-8859-15', 'UTF-8')); // $order['address_street']
 
         $pdf->SetXY(110, 92); // Position : Adresse
-        $pdf->Write(10, $order['address_city']); // $order['address_zip']
-        $pdf->SetXY(150, 92); // Position : Adresse
-        $pdf->Write(10, $order['address_zip']); // $order['address_zip']
-
+        $pdf->Write(10, mb_convert_encoding($order['address_city'], 'ISO-8859-15', 'UTF-8')); // $order['address_zip']
 
         $pdf->SetXY(110, 101); // Position : Adresse
-        $pdf->Write(10, $order['address_country']); // $order['address_country']
+        $pdf->Write(10, mb_convert_encoding($order['address_zip']. ", ". $order['address_country'], 'ISO-8859-15', 'UTF-8')); // $order['address_country']
 
 
         // Var pour la position Y
