@@ -55,7 +55,7 @@
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
 								<li><a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits</a></li>
-								<li><a class="dropdown-item" href="<?= site_url('admin/categories'); ?>">Gestion Catégories</a></li>
+								<li><a class="dropdown-item" href="<?= site_url('admin/carrousel'); ?>">Gestion Carrousel</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a></li>
 								<li><a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a></li>

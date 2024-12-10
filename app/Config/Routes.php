@@ -90,7 +90,7 @@ $routes->get('admin/produit/supprimer/(:num)', 'Product\ProductController::suppr
 $routes->post('admin/produit/activer/', 'Product\ProductController::activerProduit', ['filter' => 'admin']); // id_produit
 $routes->post('admin/produit/desactiver/', 'Product\ProductController::desactiverProduit', ['filter' => '  admin']); // id_produit
 
-$routes->get('admin/categories', 'Admin\AdminController::categories', ['filter' => 'admin']);
+$routes->get('admin/carrousel', 'Carrousel\CarrouselController::index', ['filter' => 'admin']);
 $routes->post('admin/categorie/ajouter', 'Admin\AdminController::ajouterCategorie', ['filter' => 'admin']);
 $routes->post('admin/categorie/modifier/', 'Admin\AdminController::modifierCategorie/$1', ['filter' => 'admin']); // categorie
 $routes->post('admin/categorie/supprimer/', 'Admin\AdminController::supprimerCategorie/$1', ['filter' => 'admin']); // id_categorie

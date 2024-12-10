@@ -301,4 +301,5 @@ class AdminController extends BaseController
         return View('Layout/main', $data);
 
     }
+
 }

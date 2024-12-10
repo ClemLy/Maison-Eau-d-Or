@@ -10,4 +10,3 @@ class CategoryModel extends Model
     protected $allowedFields = ['cat_name'];
 
 }
-
