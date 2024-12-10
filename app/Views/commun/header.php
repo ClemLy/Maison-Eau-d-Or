@@ -79,7 +79,7 @@
 									<a class="dropdown-item" href="<?= site_url('account/historique'); ?>">Historique</a>
 									<a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
 									<a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
-									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>
+									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>						
 								</li>
 							</ul>
 						</li>

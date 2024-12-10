@@ -19,6 +19,7 @@
 /* Afficher le dropdown lors du survol du menu parent */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+    width:auto !important;
 }
 
 /* Personnalisation du style du dropdown */
@@ -32,6 +33,7 @@
     padding: 10px 20px;
     color: #333;
 }
+
 .related-products-card a {
     text-decoration: none !important; 
     color: inherit !important;
