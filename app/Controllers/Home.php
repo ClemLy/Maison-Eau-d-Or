@@ -5,20 +5,32 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\ProductModel;
 use App\Models\CategoryModel;
+use App\Models\ShowcaseModel;
 
 class Home extends BaseController
 {
     public function index()
     {
-        $productModel = new ProductModel();
+        $productModel  = new ProductModel();
         $categoryModel = new CategoryModel();
+        $showcaseModel = new ShowcaseModel();
 
+         // Récupérer les produits vedettes
         $starProduct = $productModel->getStarProduct();
-        $categories = $categoryModel->findAll();
+
+        // Récupérer les catégories du showcase
+        $categories = $showcaseModel
+            ->select('category.id_cat, category.cat_name')
+            ->join('category', 'showcase.id_cat = category.id_cat')
+            ->orderBy('showcase.id_show', 'ASC') // Tri par position
+            ->findAll();
+
+        // Vérification si les catégories existent
         $defaultCategoryId = isset($categories[0]['id_cat']) ? $categories[0]['id_cat'] : null;  // Vérification si les catégories existent
 
         $productsByCategory = [];
-        foreach ($categories as $category) {
+        foreach ($categories as $category)
+        {
             // Récupérer les produits pour chaque catégorie
             $products = $productModel
                 ->select('product.*, image.img_path')
@@ -38,13 +50,15 @@ class Home extends BaseController
         // Si la catégorie sélectionnée a des produits, les afficher, sinon afficher un tableau vide
         $selectedProducts = isset($productsByCategory[$selectedCategoryId]) ? $productsByCategory[$selectedCategoryId] : [];
 
+
+        
         $data = [
-            'pageTitle' => 'Accueil',
-            'categories' => $categories,
-            'selectedProducts' => $selectedProducts,
-            'starProduct' => $starProduct,
-            'defaultCategoryId' => $defaultCategoryId,
-            'selectedCategoryId' => $selectedCategoryId  // Passer l'ID de la catégorie sélectionnée
+            'pageTitle'          => 'Accueil',
+            'categories'         => $categories,
+            'selectedProducts'   => $selectedProducts,
+            'starProduct'        => $starProduct,
+            'defaultCategoryId'  => $defaultCategoryId,
+            'selectedCategoryId' => $this->request->getGet('category_id')
         ];
 
         echo view('commun/header', $data);

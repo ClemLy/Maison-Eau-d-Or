@@ -65,7 +65,7 @@ $categories = $categoryModel->findAll();
 							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
 								<li>
 									<a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits	</a>
-									<a class="dropdown-item" href="<?= site_url('admin/categories'); ?>">Gestion Catégories</a>
+									<a class="dropdown-item" href="<?= site_url('admin/carrousel'); ?>">Gestion Carrousel</a>
 									<a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a>
 									<a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a>
 									<a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a>
@@ -86,7 +86,7 @@ $categories = $categoryModel->findAll();
 									<a class="dropdown-item" href="<?= site_url('account/historique'); ?>">Historique</a>
 									<a class="dropdown-item" href="<?= site_url('account/update'); ?>">Modifier</a></li>
 									<a class="dropdown-item" href="<?= site_url('account/delete'); ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">Supprimer</a></li>
-									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>
+									<a class="dropdown-item" href="<?= site_url('logout'); ?>">Se Déconnecter</a>						
 								</li>
 							</ul>
 						</li>
