@@ -21,6 +21,7 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
       git clone git@github.com:ClemLy/Maison-Eau-d-Or.git
       cd Maison-Eau-d-Or
    ```
+   Pour le reste des commandes, restez bien dans le dossier `Maison-Eau-d-Or`.
 
 2. **Installer les dépendances**
 
@@ -59,20 +60,17 @@ Avant d'installer l'application, assurez-vous d'avoir les éléments suivants :
 
    Afin d'exécuter votre fichier `.env`, installez la bibliothèque vlucas/phpdotenv en exécutant cette commande dans le terminal :
    ```cmd
-    cd Maison-Eau-d-Or
     composer require vlucas/phpdotenv
    ```
 
    Afin de permettre l'exportation du bon de commande, en PDF, installez la bibliothèque setasing/fpdf en exécutant cette commande dans le terminal :
    ```cmd
-   cd Maison-Eau-d-Or
    composer require setasign/fpdf
    ```
 
 6. **Démarrer le serveur local**
   
    ```bash
-    cd Maison-Eau-d-Or
     php spark serve
    ```
    
