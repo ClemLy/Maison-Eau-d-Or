@@ -63,6 +63,7 @@ CREATE TABLE ORDERS (
     address_city VARCHAR(255) NOT NULL,
     address_zip VARCHAR(5) NOT NULL,
     address_country VARCHAR(255) NOT NULL,
+    statut_commande VARCHAR(255) CHECK (statut_commande IN ('En attente', 'En cours', 'Envoyé')) NOT NULL DEFAULT 'En attente',
     FOREIGN KEY (id_user) REFERENCES USERS(id_user)
 );
 
