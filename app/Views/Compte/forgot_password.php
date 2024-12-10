@@ -102,7 +102,6 @@ a.return-link:hover {
     text-decoration: underline;
 }
 
-
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -126,9 +125,10 @@ a.return-link:hover {
 
 </style>
 <div class="div-login">
-	<div class="container">
+	<div class="form-container">
 		<h2>Mot de Passe Oublié</h2>
 
+		<!-- Messages de succès ou d'erreur -->
 		<?php if (session()->getFlashdata('success-password')): ?>
 			<div class="alert alert-success">
 				<?= session()->getFlashdata('success-password') ?>
@@ -139,14 +139,15 @@ a.return-link:hover {
 			</div>
 		<?php endif; ?>
 
+		<!-- Formulaire pour demander un lien de réinitialisation -->
 		<form action="<?= site_url('forgot-password/send-reset-link') ?>" method="post">
 			<div class="form-group">
-				<label for="email">Email</label>
+				<label for="email">Adresse email</label>
 				<input type="email" name="email" id="email" required>
 			</div>
 			<button type="submit">Envoyer le lien de réinitialisation</button>
 		</form>
 
-		<a href="/signin">Retour à la connexion</a>
+		<p><a href="<?= site_url('signin') ?>">Retour à la connexion</a></p>
 	</div>
 </div>

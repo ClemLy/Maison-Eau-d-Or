@@ -69,7 +69,7 @@
 				session()->setFlashdata('error-password', 'Adresse e-mail non valide.');
 			}
 
-			echo view('Compte/forgot_password');
+			return redirect()->to('/forgot-password');
 		}
 
 		public function getEmail($resetLink)

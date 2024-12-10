@@ -126,9 +126,10 @@ a.return-link:hover {
 </style>
 
 <div class="div-login">
-	<div class="container">
-		<h2>Réinitialisation du Mot de Passe</h2>
+	<div class="form-container">
+		<h2>Réinitialisation du <br> mot de passe</h2>
 
+		<!-- Affichage des messages de succès ou d'erreur -->
 		<?php if (session()->getFlashdata('success-reset')): ?>
 			<div class="alert alert-success">
 				<?= session()->getFlashdata('success-reset') ?>
@@ -139,22 +140,23 @@ a.return-link:hover {
 			</div>
 		<?php endif; ?>
 
+		<!-- Formulaire de réinitialisation -->
 		<form action="<?= site_url('reset-password/update') ?>" method="post">
 			<input type="hidden" name="token" value="<?= $token ?>">
 
 			<div class="form-group">
-				<label for="password">Nouveau Mot de Passe</label>
+				<label for="password">Nouveau mot de passe</label>
 				<input type="password" name="password" id="password" required>
 			</div>
 
 			<div class="form-group">
-				<label for="confirm_password">Confirmer Mot de Passe</label>
+				<label for="confirm_password">Confirmer le mot de passe</label>
 				<input type="password" name="confirm_password" id="confirm_password" required>
 			</div>
-			
-			<button type="submit">Réinitialiser Mot de Passe</button>
+
+			<button type="submit">Réinitialiser le mot de passe</button>
 		</form>
 
-		<a href="/signin">Retour à la connexion</a>
+		<p><a href="<?= site_url('signin') ?>">Retour à la connexion</a></p>
 	</div>
 </div>
