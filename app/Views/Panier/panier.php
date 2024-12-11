@@ -68,3 +68,6 @@
         <div class="alert alert-info">Votre panier est vide.</div>
     <?php endif; ?>
 </div>
+
+
+

@@ -118,7 +118,6 @@
 				]);
 			}
 
-			// Retourner une réponse JSON
 			return $this->response->setJSON([
 				'success' => true,
 				'message' => 'Produit ajouté au panier.'

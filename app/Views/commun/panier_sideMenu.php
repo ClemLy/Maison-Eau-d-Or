@@ -113,3 +113,77 @@
         font-size: 0.8rem;
     }
 </style>
+
+
+
+
+
+<?php if (null !== session()->get('isLoggedIn')): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const panierSideMenu = document.getElementById('panier_sideMenu');
+            console.log("Fdp");
+            if (panierSideMenu) {
+                // Initialiser l'Offcanvas avec le backdrop activé
+                let offcanvas = new bootstrap.Offcanvas(panierSideMenu, {
+                    backdrop: true,  // L'écran gris sera visible derrière le panier
+                    keyboard: true    // Permet de fermer l'Offcanvas avec la touche Échap
+                });
+
+                // Si vous avez un bouton pour ouvrir l'Offcanvas
+                const panierButton = document.getElementById('panierBtn');
+                if (panierButton) {
+                    panierButton.addEventListener('click', function () {
+                        offcanvas.show();
+                    });
+                }
+
+                // Fermer l'Offcanvas lorsque le backdrop est cliqué (clic à l'extérieur)
+                panierSideMenu.addEventListener('hidden.bs.offcanvas', function () {
+                    // Réinitialiser l'état après la fermeture
+                    document.body.style.overflow = '';  // Réinitialise le défilement
+                    // Retirer le backdrop lorsque l'Offcanvas est fermé
+                    const backdrop = document.querySelector('.offcanvas-backdrop');
+                    if (backdrop) {
+                        backdrop.remove();  // Supprime l'arrière-plan gris
+                    }
+                });
+
+                // Facultatif : si vous voulez gérer les comportements au clic à l'extérieur
+                // Quand le backdrop est cliqué, on cache l'Offcanvas
+                const backdrop = document.querySelector('.offcanvas-backdrop');
+                if (backdrop) {
+                    backdrop.addEventListener('click', function () {
+                        offcanvas.hide(); // Cache le panier si l'on clique à l'extérieur
+                    });
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.add-to-cart-form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const formData = new FormData(form);
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            updateCartDisplay();
+                            let offcanvas = new bootstrap.Offcanvas(document.getElementById('panier_sideMenu'));
+                            offcanvas.show();
+                        } else {
+                            alert('Erreur lors de l\'ajout au panier');
+                        }
+                    });
+                });
+            });
+
+        
+        });
+    </script>
+<?php endif; ?>
