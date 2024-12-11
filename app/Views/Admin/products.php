@@ -9,15 +9,18 @@
            style="background-color: #d4af37; border-color: #d4af37; color: #fff;">
            Ajouter un produit
         </a>
-        <form action="<?= base_url('admin/produits') ?>" method="get">
-            <button type="submit" 
-                class="btn btn-outline-primary" 
+
+        <form action="<?= base_url('admin/produits') ?>" method="get" class="d-flex" style="gap: 5px;">
+          <input type="text" name="search" class="form-control me-2" placeholder="Rechercher un produit" 
+          style="border-color: #d4af37; flex: 1;">
+
+          <button type="submit" class="btn btn-outline-primary" 
                 style="color: #d4af37; border-color: #d4af37;">
                 Rechercher
             </button>
-        
-            <input type="text" name="search" class="form-control me-2" placeholder="Rechercher un produit" style="border-color: #d4af37;">
+
         </form>
+
       </div>
 
       <table class="table table-striped">
@@ -44,6 +47,7 @@
                 <td><?= esc($product['p_name']) ?></td>
                 <td><?= esc($product['p_price']) ?> €</td>
                 <td>
+
                   <?php foreach ($product['categories'] as $category): ?>
                     <?= esc($category['cat_name']) ?><br>
                   <?php endforeach; ?>

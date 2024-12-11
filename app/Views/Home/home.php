@@ -21,21 +21,19 @@
     <!-- Carrousel Image d'accueil -->
     <div id="carouselImgAcceuil" class="carousel slide mx-auto" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselImgAcceuil" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselImgAcceuil" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselImgAcceuil" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <?php foreach ($carouselImages as $index => $image): ?>
+                <button type="button" data-bs-target="#carouselImgAcceuil" data-bs-slide-to="<?= $index ?>" class="<?= $index === 0 ? 'active' : '' ?>" aria-label="Slide <?= $index + 1 ?>"></button>
+            <?php endforeach; ?>
         </div>
 
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="https://www.beautysuccess.fr/media/catalog/product/cache/02280392440d22bedc5c4ce4592badc4/4/3/4371782058-guerlain-l-homme-ideal-100ml-visuel_4.webp" class="d-block w-100" alt="Image 1">
-            </div>
-            <div class="carousel-item">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/3f1302d3-be16-4ce7-b177-b4421213d687.jpeg" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="https://cdn.sumup.store/2/th640/5d5cee579871afa9fc5ea0b02c0bf18e/77f77e8d-ceb1-4544-bcdd-b216e52c0d1a.jpeg" class="d-block w-100">
-            </div>
+            <?php foreach ($carouselImages as $index => $image): ?>
+                <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                    <a href="<?= esc($image['link_car']) ?>">
+                        <img src="<?= esc($image['img_path']) ?>" class="d-block w-100" alt="Image <?= $index + 1 ?>">
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 

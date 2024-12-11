@@ -1,4 +1,5 @@
 <div class="container my-5">
+
     <!-- Fil d'Ariane -->
     <div class="breadcrumb-container">
         <nav aria-label="breadcrumb">
@@ -7,8 +8,9 @@
                     <a href="<?= site_url('/') ?>">Accueil</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="<?= site_url('boutique/categorie/' . $product['cat_name']) ?>">
-                        <?= esc($product['cat_name']) ?>
+     
+                    <a href="<?= site_url('boutique/categorie/' . $product['categories'][0]) ?>">
+                        <?= esc($product['categories'][0]) ?>
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
@@ -18,10 +20,9 @@
         </nav>
     </div>
 
-    <!-- Section produit -->
     <div class="row">
         <div class="col-md-5">
-            <img src="<?= esc($product['img_path']) ?>" class="img-fluid product-image" alt="<?= esc($product['p_name']) ?>" style="max-height: 500px; object-fit: cover;">
+            <img src="<?= esc($product['images'][0]['img_path']) ?>" class="img-fluid product-image" alt="<?= esc($product['p_name']) ?>" style="max-height: 500px; object-fit: cover;">
         </div>
         <div class="col-md-6 product-card-produit">
             <h1 class="mb-3 product-title texte-doree"><?= esc($product['p_name']) ?></h1>
@@ -55,7 +56,7 @@
                     <div class="col-md-3 related-products-card">
                         <a href="<?= site_url('boutique/produit/' . $related['id_prod']) ?>">
                             <div class="card">
-                                <img src="<?= esc($related['img_path']) ?>" class="card-img-top" alt="<?= esc($related['p_name']) ?>">
+                                <img src="<?= esc($related['images'][0]['img_path']) ?>" class="card-img-top" alt="<?= esc($related['p_name']) ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= esc($related['p_name']) ?></h5>
                                     <p class="card-text"><?= number_format($related['p_price'], 2) ?> €</p>

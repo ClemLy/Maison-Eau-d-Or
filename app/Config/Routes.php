@@ -92,6 +92,7 @@ $routes->post('admin/produit/activer/', 'Product\ProductController::activerProdu
 $routes->post('admin/produit/desactiver/', 'Product\ProductController::desactiverProduit', ['filter' => '  admin']); // id_produit
 
 $routes->get('admin/carrousel', 'Carrousel\CarrouselController::index', ['filter' => 'admin']);
+$routes->post('admin/carrousel/modifierMain', 'Carrousel\CarrouselController::updateMainCarousel', ['filter' => 'admin']);
 $routes->post('admin/carrousel/modifierCategorie', 'Carrousel\CarrouselController::updateCategoryCarousel', ['filter' => 'admin']);
 
 

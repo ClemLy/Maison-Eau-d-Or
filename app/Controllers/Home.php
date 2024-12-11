@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ProductModel;
 use App\Models\CategoryModel;
 use App\Models\ShowcaseModel;
+use App\Models\CarouselModel;
 
 class Home extends BaseController
 {
@@ -14,6 +15,7 @@ class Home extends BaseController
         $productModel  = new ProductModel();
         $categoryModel = new CategoryModel();
         $showcaseModel = new ShowcaseModel();
+        $carouselModel = new CarouselModel();
 
          // Récupérer les produits vedettes
         $starProduct = $productModel->getStarProduct();
@@ -49,6 +51,14 @@ class Home extends BaseController
 
         // Si la catégorie sélectionnée a des produits, les afficher, sinon afficher un tableau vide
         $selectedProducts = isset($productsByCategory[$selectedCategoryId]) ? $productsByCategory[$selectedCategoryId] : [];
+        
+
+        // Récupérer les images du carrousel principal
+        $carouselImages = $carouselModel
+            ->select('image.img_path, carousel.link_car')
+            ->join('image', 'carousel.id_img = image.id_img')
+            ->orderBy('carousel.id_car', 'ASC')
+            ->findAll();
 
 
         
@@ -58,7 +68,8 @@ class Home extends BaseController
             'selectedProducts'   => $selectedProducts,
             'starProduct'        => $starProduct,
             'defaultCategoryId'  => $defaultCategoryId,
-            'selectedCategoryId' => $this->request->getGet('category_id')
+            'selectedCategoryId' => $this->request->getGet('category_id'),
+            'carouselImages'     => $carouselImages
         ];
 
         echo view('commun/header', $data);
