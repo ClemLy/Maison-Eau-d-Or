@@ -173,3 +173,209 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialiser l'affichage des catégories existantes
     renderCategories();
 });
+
+
+
+// Enlever gond gris quand on clique à coté de offcanva
+document.addEventListener('DOMContentLoaded', function () {
+    const panierSideMenu = document.getElementById('panier_sideMenu');
+    if (panierSideMenu) {
+        // Initialiser l'Offcanvas avec le backdrop activé
+        let offcanvas = new bootstrap.Offcanvas(panierSideMenu, {
+            backdrop: true,  // L'écran gris sera visible derrière le panier
+            keyboard: true    // Permet de fermer l'Offcanvas avec la touche Échap
+        });
+
+        // Si vous avez un bouton pour ouvrir l'Offcanvas
+        const panierButton = document.getElementById('panierHeader');
+        if (panierButton) {
+            panierButton.addEventListener('click', function () {
+                offcanvas.show();
+            });
+        }
+
+        // Fermer l'Offcanvas lorsque le backdrop est cliqué (clic à l'extérieur)
+        panierSideMenu.addEventListener('hidden.bs.offcanvas', function () {
+            // Réinitialiser l'état après la fermeture
+            document.body.style.overflow = '';  // Réinitialise le défilement
+            // Retirer le backdrop lorsque l'Offcanvas est fermé
+            const backdrop = document.querySelector('.offcanvas-backdrop');
+            if (backdrop) {
+                backdrop.remove();  // Supprime l'arrière-plan gris
+            }
+        });
+
+        // Facultatif : si vous voulez gérer les comportements au clic à l'extérieur
+        // Quand le backdrop est cliqué, on cache l'Offcanvas
+        const backdrop = document.querySelector('.offcanvas-backdrop');
+        if (backdrop) {
+            backdrop.addEventListener('click', function () {
+                offcanvas.hide(); // Cache le panier si l'on clique à l'extérieur
+            });
+        }
+    }
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.add-to-cart-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateCartDisplay();
+                    let offcanvas = new bootstrap.Offcanvas(document.getElementById('panier_sideMenu'));
+                    offcanvas.show();
+                } else {
+                    alert('Erreur lors de l\'ajout au panier');
+                }
+            });
+        });
+    });
+
+   
+});
+
+function removeItem(productId, event) {
+    console.log("Suppression du produit avec ID:", productId);
+
+    event.preventDefault();
+
+    const itemToRemove = document.querySelector(`.cart-item[data-id-prod="${productId}"]`);
+    if (itemToRemove) {
+        itemToRemove.classList.add('removing');
+
+        setTimeout(() => {
+            itemToRemove.remove();
+            updateCartDisplay();
+        }, 600); 
+    }
+
+    // Effectuer la suppression côté serveur sans rediriger
+    fetch(`/panier/supprimer/${productId}`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Produit supprimé du panier côté serveur.');
+        } else {
+            alert('Erreur lors de la suppression du produit');
+        }
+    });
+}
+
+
+// Fonction pour mettre à jour le contenu de l'Offcanvas avec les produits du panier
+document.addEventListener('DOMContentLoaded', function() {
+    const panierHeader = document.getElementById('panierHeader');
+    if (panierHeader) {
+        panierHeader.addEventListener('click', updateCartDisplay);
+    } else {
+        console.error("L'élément avec l'ID 'panierHeader' n'a pas été trouvé.");
+    }
+});
+// Fonction pour mettre à jour l'affichage du panier
+function updateCartDisplay() {
+    fetch('/panier/actualiser') // Récupérer les données actualisées du panier
+        .then(response => response.json())
+        .then(data => {
+            console.log('Réponse du serveur :', data); // Log pour déboguer
+
+            const cartContainer = document.querySelector('.cart-items');
+            const cartTotalContainer = document.querySelector('.cart-total');
+            const cartButtonsContainer = document.querySelector('.cart-buttons');
+            const emptyCartMessage = document.querySelector('.empty-cart-message');
+
+            // Réinitialiser le panier avant de remplir à nouveau
+            cartContainer.innerHTML = '';
+            cartTotalContainer.innerHTML = '';
+            cartButtonsContainer.innerHTML = '';
+
+            // Vérification si la réponse contient bien des articles du panier
+            if (data.success && Array.isArray(data.cartItems)) {
+                if (data.cartItems.length > 0) {
+                    // Affichage des articles du panier
+                    data.cartItems.forEach(item => {
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.classList.add('cart-item', 'd-flex', 'align-items-center', 'mb-3');
+                        cartItemElement.setAttribute('data-id-prod', item.id_prod);
+                        cartItemElement.innerHTML = `
+                            <img src="${item.img_path}" alt="Produit" class="cart-item-img">
+                            <div class="cart-item-info ms-3">
+                                <h6 class="cart-item-title mb-1">${item.p_name}</h6>
+                                <p class="cart-item-price mb-1">${parseFloat(item.p_price).toFixed(2)} €</p>
+                                <p class="cart-item-quantity">Qté : ${item.quantity}</p>
+                            </div>
+                            <a href="#" class="btn ms-auto text-danger" aria-label="Remove" onclick="removeItem(${item.id_prod}, event)">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        `;
+                        cartContainer.appendChild(cartItemElement);
+                    });
+
+                    // Affichage du total
+                    const totalAmount = data.cartItems.reduce((sum, item) => sum + item.p_price * item.quantity, 0);
+                    cartTotalContainer.innerHTML = `
+                        <div class="d-flex justify-content-between">
+                            <span>Total :</span>
+                            <strong>${totalAmount.toFixed(2)} €</strong>
+                        </div>
+                    `;
+
+                    // Affichage des boutons d'action
+                    cartButtonsContainer.innerHTML = `
+                    <div class="mt-4">
+                        <a href="${panierUrl}" class="btn btn-gold-hover w-100 text-dark">Afficher les détails</a>
+                        <a href="${commanderUrl}" class="btn btn-gold-hover w-100 text-dark mt-2">Passer la commande</a>
+                        <a href="${viderPanierUrl}" class="btn btn-vider w-100 mt-2">Vider le Panier</a>
+                    </div>
+                `;
+                
+
+                    // Masquer le message "Votre panier est vide"
+                    emptyCartMessage.classList.add('d-none');
+                    // Afficher les boutons d'action
+                    cartButtonsContainer.classList.remove('d-none');
+                } else {
+                    // Si le panier est vide, afficher le message
+                    cartContainer.innerHTML = '';
+                    cartTotalContainer.innerHTML = '';
+                    cartButtonsContainer.classList.add('d-none');
+                    emptyCartMessage.classList.remove('d-none');
+                }
+            } else {
+                // Si la réponse du serveur est incorrecte
+                console.error('Erreur dans la réponse du serveur ou format inattendu :', data);
+                cartContainer.innerHTML = '<p class="text-center">Erreur de récupération du panier.</p>';
+            }
+        });
+}
+
+
+
+
+// Fonction pour mettre à jour le total du panier
+function updateTotal(cartItems) {
+    const totalElement = document.querySelector('.cart-total');
+    const totalAmount = cartItems.reduce((sum, item) => sum + item.p_price * item.quantity, 0);
+    totalElement.innerHTML = `
+        <div class="d-flex justify-content-between">
+            <span>Total :</span>
+            <strong>${totalAmount.toFixed(2)} €</strong>
+        </div>
+    `;
+}

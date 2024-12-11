@@ -29,14 +29,14 @@
             <p class="product-description mb-4"><?= esc($product['description']) ?></p>
             <div class="trait-doree-produit"></div>
 
-            <form action="<?= site_url('/panier/ajouter/' . $product['id_prod']) ?>" method="post">
+            <form action="<?= site_url('/panier/ajouter/' . $product['id_prod']) ?>" method="post" class="d-flex flex-row add-to-cart-form">
                 <div class="d-flex align-items-center mb-3">
                     <div class="input-group" style="width: 160px;">
                         <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValue(this, -1)">-</button>
                         <input type="number" class="form-control text-center" name="quantity" value="1" min="1" max="10" readonly>
                         <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValue(this, 1)">+</button>
                     </div>
-                    <button class="btn btn-primary ms-3 btn-gold-hover">
+                    <button type="submit" class="btn btn-dark ms-3 btn-gold-hover" data-bs-toggle="offcanvas" data-bs-target="#panier_sideMenu">
                         <i class="bi bi-cart"></i> Ajouter au panier
                     </button>
                 </div>

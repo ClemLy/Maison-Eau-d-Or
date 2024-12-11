@@ -127,7 +127,7 @@
                     <p><?= esc($starProduct['description']) ?></p>
                     <p class="texte-doree fs-4 fw-bold"><?= esc($starProduct['p_price']) . '€' ?></p>
 
-                    <form class="d-flex flex-row justify-content-between flex-space-between" action="<?= site_url('/panier/ajouter/' . $starProduct['id_prod']) ?>" method="post">
+                    <form class="d-flex flex-row justify-content-between flex-space-between add-to-cart-form" action="<?= site_url('/panier/ajouter/' . $starProduct['id_prod']) ?>" method="post">
                         <div class="d-flex align-items-center mt-3">
                             <div class="input-group" style="width: 150px;">
                                 <button class="btn btn-outline-dark btn-sm" type="button" id="decrement" onclick="updateValue(-1)">-</button>
@@ -136,7 +136,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-black mt-3 btn-gold-hover">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
+                        <button class="btn btn-black mt-3 btn-gold-hover" data-bs-toggle="offcanvas" data-bs-target="#panier_sideMenu">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
                     </form>
 
                 </div>

@@ -74,6 +74,7 @@ $routes->get('panier/supprimer/(:num)', 'Panier\PanierController::supprimer/$1',
 $routes->get('panier/vider', 'Panier\PanierController::vider', ['filter' => 'auth']); // id_produit
 $routes->post('panier/modifier/(:num)', 'Panier\PanierController::modifier/$1/$2', ['filter' => 'auth']); // id_produit/qte
 
+$routes->get('panier/actualiser', 'Panier\PanierController::actualiser', ['filter' => 'auth']);  // Route pour actualiser le panier
 
 // Admin 
 $routes->get('admin', 'Admin\AdminController::index', ['filter' => 'admin']);
