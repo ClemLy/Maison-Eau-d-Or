@@ -41,14 +41,21 @@
                                         $relatedEntities = [];
                                         if (!empty($image['related_products'])) {
                                             foreach ($image['related_products'] as $product) {
-                                                $relatedEntities[] = 'Produit: ' . esc($product['p_name']);
+                                                $relatedEntities[] = 'Produit : ' . esc($product['p_name']);
                                             }
                                         }
                                         if (!empty($image['related_articles'])) {
                                             foreach ($image['related_articles'] as $article) {
-                                                $relatedEntities[] = 'Article: ' . esc($article['art_title']);
+                                                $relatedEntities[] = 'Article : ' . esc($article['art_title']);
                                             }
                                         }
+
+                                        if (!empty($image['related_carousels'])) {
+                                            foreach ($image['related_carousels'] as $carousel) {
+                                                $relatedEntities[] = 'Carrousel Principal : ' . esc($carousel['id_car']);
+                                            }
+                                        }
+
                                         echo !empty($relatedEntities) ? implode('<br>', $relatedEntities) : 'Aucune liaison';
                                         ?>
                                     </td>

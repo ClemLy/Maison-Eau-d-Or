@@ -33,7 +33,12 @@ class MediaModel extends Model
             ->where('id_img', $id_img)
             ->countAllResults();
 
-        return ($relatedProducts > 0 || $relatedArticles > 0);
+        // Vérifier les relations avec le carrousel principal
+        $relatedCarousels = $this->db->table('carousel')
+            ->where('id_img', $id_img)
+            ->countAllResults();
+
+        return ($relatedProducts > 0 || $relatedArticles > 0 || $relatedCarousels > 0);
     }
 
     // Méthode pour récupérer les informations complètes des images
@@ -61,7 +66,14 @@ class MediaModel extends Model
                 ->get()
                 ->getResultArray();
 
-            if (file_exists(FCPATH .$imgPath)) {
+            $relatedCarousels = $this->db->table('carousel')
+                ->select('carousel.id_car, carousel.link_car')
+                ->where('carousel.id_img', $image['id_img'])
+                ->get()
+                ->getResultArray();
+
+            if (file_exists(FCPATH .$imgPath))
+            {
 
                 // Récupérer la taille et la dernière date de modification
                 $fileSize = filesize( FCPATH .$imgPath); // Taille en octets
@@ -69,22 +81,24 @@ class MediaModel extends Model
 
                 // Ajouter les informations de l'image
                 $imageDetails[] = [
-                    'id_img' => $image['id_img'],
-                    'img_name' => $image['img_name'],
-                    'img_path' => $imgPath,
-                    'file_size' => $fileSize, // Taille en octets
-                    'last_modified' => $lastModified, // Dernière modification
-                    'related_products' => $relatedProducts, // Produits liés
-                    'related_articles' => $relatedArticles, // Articles liés
+                    'id_img'            => $image['id_img'],
+                    'img_name'          => $image['img_name'],
+                    'img_path'          => $imgPath,
+                    'file_size'         => $fileSize, // Taille en octets
+                    'last_modified'     => $lastModified, // Dernière modification
+                    'related_products'  => $relatedProducts, // Produits liés
+                    'related_articles'  => $relatedArticles, // Articles liés
+                    'related_carousels' => $relatedCarousels, // Carrousels liés
                 ];
             } else {
                 // Si le fichier n'existe pas, enregistrer un message d'erreur
                 $imageDetails[] = [
-                    'id_img' => $image['id_img'],
-                    'img_name' => $image['img_name'],
-                    'img_path' => $imgPath,
-                    'related_products' => $relatedProducts, // Produits liés
-                    'related_articles' => $relatedArticles, // Articles liés
+                    'id_img'            => $image['id_img'],
+                    'img_name'          => $image['img_name'],
+                    'img_path'          => $imgPath,
+                    'related_products'  => $relatedProducts, // Produits liés
+                    'related_articles'  => $relatedArticles, // Articles liés
+                    'related_carousels' => $relatedCarousels, // Carrousels liés
                 ];
             }
         }
