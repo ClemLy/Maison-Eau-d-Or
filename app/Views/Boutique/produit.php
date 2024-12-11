@@ -1,5 +1,25 @@
 <div class="container my-5">
 
+    <!-- Fil d'Ariane -->
+    <div class="breadcrumb-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="<?= site_url('/') ?>">Accueil</a>
+                </li>
+                <li class="breadcrumb-item">
+     
+                    <a href="<?= site_url('boutique/categorie/' . $product['categories'][0]) ?>">
+                        <?= esc($product['categories'][0]) ?>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?= esc($product['p_name']) ?>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
     <div class="row">
         <div class="col-md-5">
             <img src="<?= esc($product['images'][0]['img_path']) ?>" class="img-fluid product-image" alt="<?= esc($product['p_name']) ?>" style="max-height: 500px; object-fit: cover;">
