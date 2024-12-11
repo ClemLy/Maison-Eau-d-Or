@@ -43,14 +43,16 @@ class ProductModel extends Model
 
     public function getProducts()
     {
-        // Récupérer les produits avec leurs données principales
-        $products = $this->select('product.*')
-            ->findAll();
+        $productsQuery = $this->select('product.*');
+        if ($_SESSION['admin'] != 1) {
+            $productsQuery->where('product.on_sale', 't');
+        }
+        $products = $productsQuery->findAll();
 
         foreach ($products as &$product) {
             // Récupérer les catégories associées au produit
             $categories = $this->db->table('category')
-                ->select('cat_name')
+                ->select('cat_name','id_cat')
                 ->join('product_category', 'category.id_cat = product_category.id_cat')
                 ->where('product_category.id_prod', $product['id_prod'])
                 ->get()
@@ -74,9 +76,12 @@ class ProductModel extends Model
     public function getProductById($id_prod)
     {
         // Récupérer le produit avec ses données principales
-        $product = $this->select('product.*')
-            ->where('product.id_prod', $id_prod)
-            ->first();
+        $productQuery = $this->select('product.*')
+        ->where('product.id_prod', $id_prod);
+        if ($_SESSION['admin'] != 1) {
+            $productQuery->where('product.on_sale', 't');
+        }
+        $product = $productQuery->first();
 
         if ($product) {
             $db = \Config\Database::connect();
@@ -103,6 +108,59 @@ class ProductModel extends Model
         }
 
         return $product;
+    }
+
+    public function getProductCategories($id_prod)
+    {
+
+        $categories = $this->db->table('category')
+            ->select('category.id_cat')
+            ->join('product_category', 'category.id_cat = product_category.id_cat')
+            ->where('product_category.id_prod', $id_prod)
+            ->get()
+            ->getResultArray();
+
+        // get all product of these categories
+        $products = [];
+        foreach ($categories as $category) {
+            $products = array_merge(
+                $products,
+                $this->db->table('product')
+                    ->select('product.*')
+                    ->join('product_category', 'product.id_prod = product_category.id_prod')
+                    ->where('product_category.id_cat', $category['id_cat'])
+                    ->where('product.on_sale', 't')
+                    ->get()
+                    ->getResultArray()
+            );
+        }
+
+        // Supprimer les doublons par id_prod
+                $uniqueProducts = [];
+                foreach ($products as $product) {
+                    $uniqueProducts[$product['id_prod']] = $product;
+                }
+
+        // Récupérer les valeurs sans doublons
+        $products = array_values($uniqueProducts);
+
+
+        if (count((array)$products) > 4) {
+
+            for ($i = 0; $i < 4; $i++) {
+                $randCategory = $products[array_rand($products)];
+                $relatedProducts[] = $randCategory[array_rand($randCategory)];
+            }
+        }
+        else{
+            $relatedProductsInfos = [];
+            foreach ($products as $product) {
+                $relatedProductsInfos[] = $this->getProductById($product['id_prod']);
+            }
+        }
+
+        return $relatedProductsInfos;
+
     }
 
 }

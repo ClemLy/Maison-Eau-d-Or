@@ -4,15 +4,15 @@
 
     <?php include('menu-categories.php'); ?>
 
-    
+
     <!-- Liste des produits -->
     <div class="row g-4">
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
-                <div class="col-md-3 col-sm-6 mb-4">
+                <div class="col-md-3 col-sm-6 mb-4 <?= $product['on_sale'] === 'f' ? 'opacity-50' : '' ?>">
                     <div class="card h-100 shadow border-0 product-card">
                         <a href="<?= site_url('boutique/produit/' . $product['id_prod']) ?>" class="text-decoration-none text-dark">
-                            <img src="<?= esc($product['img_path']) ?>" class="card-img-top product-image" 
+                            <img src="<?= esc($product['images'][0]['img_path']) ?>" class="card-img-top product-image"
                                  alt="<?= esc($product['p_name']) ?>" style="height: 200px; object-fit: cover;">
                             <div class="card-body text-center">
                                 <h5 class="card-title texte-doree"><?= esc($product['p_name']) ?></h5>

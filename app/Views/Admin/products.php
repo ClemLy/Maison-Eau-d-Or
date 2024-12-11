@@ -44,6 +44,7 @@
                 <td><?= esc($product['p_name']) ?></td>
                 <td><?= esc($product['p_price']) ?> €</td>
                 <td>
+
                   <?php foreach ($product['categories'] as $category): ?>
                     <?= esc($category['cat_name']) ?><br>
                   <?php endforeach; ?>
