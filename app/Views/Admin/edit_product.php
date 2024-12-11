@@ -8,7 +8,6 @@
             <input type="text" id="p_name" name="p_name" class="form-control" value="<?= esc($product['p_name']) ?>" required>
         </div>
 
-        <
         <!-- Prix du produit -->
         <div class="mb-3">
             <label for="p_price" class="form-label">Prix :</label>
@@ -90,7 +89,7 @@
         </div>
 
         <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Modifier le produit</button>
+            <button type="submit" class="btn btn-primary"> Modifier le produit </button>
         </div>
 
         <input type="hidden" name="id_prod" value="<?= $product['id_prod'] ?>">
