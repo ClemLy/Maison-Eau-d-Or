@@ -1,7 +1,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+
+
 <div class="page-container">
+<?php if (session()->has('error')): ?>
+            <div class="alert alert-danger"><?= session('error') ?></div>
+        <?php endif; ?>
     <div class="row">
         <div class="col-xl-12">
             <div class="card">

@@ -217,6 +217,21 @@
 			return redirect()->to('/panier');
 		}
 
+		public function getCartItemCount()
+		{
+			$id_user = session()->get('id_user');
+			$cartModel = new \App\Models\CartModel();
+		
+			// Calculer la quantité totale d'articles
+			$cartItems = $cartModel
+				->select('quantity')
+				->where('id_user', $id_user)
+				->findAll();
+			
+			$totalItems = array_sum(array_column($cartItems, 'quantity'));
+		
+			return $this->response->setJSON(['totalItems' => $totalItems]);
+		}		
 
 		public function modifier($id_prod)
 		{

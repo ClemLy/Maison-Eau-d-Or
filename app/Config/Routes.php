@@ -74,6 +74,9 @@ $routes->post('panier/modifier/(:num)', 'Panier\PanierController::modifier/$1/$2
 
 $routes->get('panier/actualiser', 'Panier\PanierController::actualiser', ['filter' => 'auth']);  // Route pour actualiser le panier
 
+$routes->get('panier/item-count', 'Panier\PanierController::getCartItemCount');
+
+
 // Admin 
 $routes->get('admin', 'Admin\AdminController::index', ['filter' => 'admin']);
 
@@ -95,6 +98,8 @@ $routes->post('admin/carrousel/modifierCategorie', 'Carrousel\CarrouselControlle
 
 
 $routes->get('admin/commande/(:num)', 'Admin\AdminController::commandes/$1', ['filter' => 'admin']);
+
+
 
 // Gestion commande 
 $routes->get('admin/commandes', 'Admin\AdminController::historique_admin', ['filter' => 'admin']);

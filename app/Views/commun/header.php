@@ -107,15 +107,21 @@ $cartItems = $cartModel
 					<?php else: ?>
 						<li><a href="<?= site_url('signin'); ?>">Se connecter</a></li>
 					<?php endif; ?>
-					<li><a class="btn" id="panierHeader" data-bs-toggle="offcanvas" href="#panier_sideMenu" role="button" aria-controls="panier_sideMenu"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li>
+					<?php $totalItems = array_sum(array_column($cartItems, 'quantity')); ?>
+
+					<li>
+						<a class="btn" id="panierHeader" data-bs-toggle="offcanvas" href="#panier_sideMenu" role="button" aria-controls="panier_sideMenu">
+							<i style="font-size:1.5em;" class="bi bi-bag"></i>
+							<span class="badge bg-danger" style="position: relative; top: -10px; left: -10px; font-size: 0.8em;">
+								<?= $totalItems ?>
+							</span>
+						</a>
+					</li>
 
 					<!-- <li><a href="<?= site_url('panier'); ?>"><i style="font-size:1.5em;" class="bi bi-bag"></i></a></li> -->
 				</div>
 			</ul>
 		</nav>
-        <?php if (session()->has('error')): ?>
-            <div class="alert alert-danger"><?= session('error') ?></div>
-        <?php endif; ?>
 	</header>
 
 <?php include('panier_sideMenu.php');
