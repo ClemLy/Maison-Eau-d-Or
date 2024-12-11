@@ -31,8 +31,6 @@
 			// Récupérer toutes les images disponibles pour le carrousel
 			$images = $mediaModel->findAll();
 
-
-
 			// Récupérer toutes les catégories disponibles
 			$categories = $categoryModel->findAll();
 
@@ -128,7 +126,8 @@
 			}
 						
 			$showcaseModel->truncate(); // Vider la table
-        // Préparer les données pour l'insertion
+
+        	// Préparer les données pour l'insertion
 			$categories = [];
 			foreach ($decodedData['categories'] as $index => $category)
 			{
@@ -163,38 +162,67 @@
 		 */
 		public function updateMainCarousel()
 		{
-			// Récupérer les données envoyées (les ID des images sélectionnées)
-			$selectedImages = $this->request->getPost('selectedImages'); // C'est un tableau contenant les IDs des images sélectionnées
-			$carouselModel  = new CarouselModel(); // Instancier le modèle pour la table CAROUSEL
-			$mediaModel     = new MediaModel();
-
-			// Vérifiez si les images sélectionnées sont envoyées
-			if (empty($selectedImages))
+			// Vérifiez que la requête est bien une requête AJAX
+			if (!$this->request->isAJAX())
 			{
-				return redirect()->back()->with('error', 'Aucune image sélectionnée.');
+				return $this->response->setJSON([
+					'success' => false,
+					'message' => 'Requête non valide.'
+				]);
 			}
 
-			// Réinitialiser toutes les images dans le carrousel principal (par exemple, les désélectionner)
-			$carouselModel->truncate(); // Cette méthode vide la table CAROUSEL (réinitialise les données)
+			// Récupérez les données JSON envoyées
+			$rawData = $this->request->getBody();
+			$decodedData = json_decode($rawData, true);
 
-			// Ajouter les images sélectionnées dans le carrousel
-			foreach ($selectedImages as $imageId)
+			// Vérifiez que le JSON est valide
+			if (json_last_error() !== JSON_ERROR_NONE)
 			{
-				// Vérifiez si l'image existe dans la table Media
-				$image = $mediaModel->find($imageId);
+				return $this->response->setJSON([
+					'success' => false,
+					'message' => 'JSON invalide : ' . json_last_error_msg()
+				]);
+			}
 
-				if ($image)
+			// Vérifiez que les données nécessaires sont présentes
+			if (empty($decodedData['images']) || !is_array($decodedData['images']))
+			{
+				return $this->response->setJSON([
+					'success' => false,
+					'message' => 'Les données des images sont absentes ou mal formatées.'
+				]);
+			}
+
+			$carouselModel = new CarouselModel();
+
+			// Vider le carrousel actuel
+			$carouselModel->truncate();
+
+			// Préparer les nouvelles entrées
+			$newCarouselEntries = [];
+			foreach ($decodedData['images'] as $image)
+			{
+				if (!empty($image['id']))
 				{
-					// Si l'image existe, on l'ajoute au carrousel
-					$carouselModel->save([
-						'id_img'   => $image['id_img'],
-						'link_car' => $image['img_path'], // Exemple d'ajout de lien de l'image
-					]);
+					$newCarouselEntries[] = [
+						'id_img'   => $image['id'],
+						'link_car' => '' // Ajouter ici un lien personnalisé si nécessaire
+					];
 				}
 			}
 
-			// Retourner une réponse avec succès
-			return redirect()->to('/admin/carrousel')->with('success', 'Carrousel principal mis à jour avec succès.');
+			// Insérer les nouvelles images si elles existent
+			if (!empty($newCarouselEntries))
+			{
+				$carouselModel->insertBatch($newCarouselEntries);
+			}
+
+			// Retournez une réponse JSON de succès
+			return $this->response->setJSON([
+				'success' => true,
+				'message' => 'Le carrousel principal a été mis à jour avec succès.'
+			]);
 		}
+
 	}
 ?>

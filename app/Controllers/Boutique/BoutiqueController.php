@@ -15,38 +15,7 @@
 
 			$categories = $categoryModel->findAll();
 
-			if ($cat_name) 
-			{
-				$category = $categoryModel->where('cat_name', $cat_name)->first();
-
-				if ($category) 
-				{
-					$products = $productModel
-						->select('product.*, image.img_path')
-						->join('product_category', 'product.id_prod = product_category.id_prod')
-						->join('product_image', 'product.id_prod = product_image.id_prod')
-						->join('image', 'product_image.id_img = image.id_img') 
-						->where('product_category.id_cat', $category['id_cat'])
-						->findAll();
-				} 
-				else 
-				{
-					$products = $productModel
-						->select('product.*, image.img_path')
-						->join('product_image', 'product.id_prod = product_image.id_prod')
-						->join('image', 'product_image.id_img = image.id_img') 
-						->findAll();
-				}
-			} 
-			else 
-			{
-
-				$products = $productModel
-					->select('product.*, image.img_path')
-					->join('product_image', 'product.id_prod = product_image.id_prod') 
-					->join('image', 'product_image.id_img = image.id_img') 
-					->findAll();
-			}
+            $products = $productModel->getProducts();
 
 			$data = [
 				'categories' => $categories,
@@ -76,6 +45,7 @@
 									->join('product_image', 'product.id_prod = product_image.id_prod')
 									->join('image', 'image.id_img = product_image.id_img') 
 									->where('product_category.id_cat', $category['id_cat'])
+                                    ->where('product.on_sale', 't')
 									->findAll();
 
 
@@ -97,25 +67,9 @@
 
 			$categories = $categoryModel->findAll();
 
-			$product = $productModel
-									->select('product.*, image.img_path, category.cat_name, category.id_cat')
-									->join('product_category', 'product.id_prod = product_category.id_prod')
-									->join('category', 'category.id_cat = product_category.id_cat')
-									->join('product_image', 'product.id_prod = product_image.id_prod')
-									->join('image', 'image.id_img = product_image.id_img')
-									->where('product.id_prod', $id_prod)
-									->first();
+			$product = $productModel->getProductById($id_prod);
 
-			$relatedProducts = $productModel
-								->select('product.*, image.img_path')
-								->join('product_category', 'product.id_prod = product_category.id_prod')
-								->join('product_image', 'product.id_prod = product_image.id_prod')
-								->join('image', 'image.id_img = product_image.id_img')
-								->where('product_category.id_cat', $product['id_cat'])
-								->where('product.id_prod !=', $id_prod)
-								->orderBy('random()')
-								->limit(4) 
-								->findAll();
+			$relatedProducts = $productModel->getProductCategories($id_prod);
 									
 			$data = [
 				'categories' => $categories,
