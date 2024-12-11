@@ -139,7 +139,9 @@
 			}
 
 			// Supprimer la session
-			session()->remove(['id_user', 'first_name', 'last_name', 'email', 'phone_number', 'isLoggedIn']);
+			session()->remove(['id_user', 'first_name', 'last_name', 'email', 'phone_number', 'isLoggedIn', 'admin']);
+
+			
 
 			// Supprimer le cookie "remember_token"
 			helper('cookie');
