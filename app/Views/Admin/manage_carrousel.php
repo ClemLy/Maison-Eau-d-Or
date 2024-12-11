@@ -46,94 +46,96 @@
 
 	<body>
 		<div class="page-container">
-			<!-- Formulaire pour modifier les images du carrousel principal -->
-			<h1 class="mb-4">Gestion du carrousel principal</h1>
+			<div class="page-content">
+				<!-- Formulaire pour modifier les images du carrousel principal -->
+				<h1 class="mb-4">Gestion du carrousel principal</h1>
 
-			<div class="row mb-5">
-				<?php for ($i = 0; $i < 3; $i++): ?>
-					<div class="col-md-4 text-center">
-						<div class="image-slot border border-secondary p-4 position-relative" data-index="<?= $i ?>" data-id="<?= isset($carrousel[$i]) ? esc($carrousel[$i]['id_img']) : '' ?>">
-							<?php if (isset($carrousel[$i])): ?>
-								<span class="placeholder-icon fs-1 d-none"> + </span>
-								<img src="<?= esc($carrousel[$i]['img_path']) ?>" alt="Image <?= $i + 1 ?>" class="selected-image" style="width: 100%; height: auto;">
-							<?php else: ?>
-								<span class="placeholder-icon fs-1">+</span>
-								<img src="" alt="Image <?= $i + 1 ?>" class="selected-image d-none" style="width: 100%; height: auto;">
-							<?php endif; ?>
-							<button type="button" class="btn btn-primary btn-sm position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#imageModal" data-index="<?= $i ?>">
-								+
-							</button>
-						</div>
-					</div>
-				<?php endfor; ?>
-			</div>
-
-			<!-- Bouton pour soumettre -->
-			<button id="saveCarouselBtn" class="btn btn-success">Enregistrer le carrousel principal</button>
-
-			<!-- Modale pour sélectionner une image -->
-			<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="imageModalLabel">Sélectionner une image</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="mb-3">
-								<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
-								<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
-								<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
+				<div class="row mb-5">
+					<?php for ($i = 0; $i < 3; $i++): ?>
+						<div class="col-md-4 text-center">
+							<div class="image-slot border border-secondary p-4 position-relative" data-index="<?= $i ?>" data-id="<?= isset($carrousel[$i]) ? esc($carrousel[$i]['id_img']) : '' ?>">
+								<?php if (isset($carrousel[$i])): ?>
+									<span class="placeholder-icon fs-1 d-none"> + </span>
+									<img src="<?= esc($carrousel[$i]['img_path']) ?>" alt="Image <?= $i + 1 ?>" class="selected-image" style="width: 100%; height: auto;">
+								<?php else: ?>
+									<span class="placeholder-icon fs-1">+</span>
+									<img src="" alt="Image <?= $i + 1 ?>" class="selected-image d-none" style="width: 100%; height: auto;">
+								<?php endif; ?>
+								<button type="button" class="btn btn-primary btn-sm position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#imageModal" data-index="<?= $i ?>">
+									+
+								</button>
 							</div>
-							
-							<div class="mb-3">
-								<label class="form-label">Choisir une image :</label>
-								<div id="media-library" class="row">
-									<?php if (isset($images)): ?>
-										<!-- Boucle PHP pour afficher les images -->
-										<?php foreach ($images as $image): ?>
-											<div class="col-md-3">
-												<div class="card image-card" data-id="<?= $image['id_img'] ?>" style="cursor: pointer;">
-													<img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top">
-												</div>
-											</div>
-										<?php endforeach; ?>
-									<?php endif; ?>
+						</div>
+					<?php endfor; ?>
+				</div>
+
+				<!-- Bouton pour soumettre -->
+				<button id="saveCarouselBtn" class="btn btn-primary">Enregistrer le carrousel principal</button>
+
+				<!-- Modale pour sélectionner une image -->
+				<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="imageModalLabel">Sélectionner une image</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="mb-3">
+									<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
+									<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
+									<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
 								</div>
-								<input type="hidden" id="existing_imgs" name="existing_imgs">
+								
+								<div class="mb-3">
+									<label class="form-label">Choisir une image :</label>
+									<div id="media-library" class="row">
+										<?php if (isset($images)): ?>
+											<!-- Boucle PHP pour afficher les images -->
+											<?php foreach ($images as $image): ?>
+												<div class="col-md-3">
+													<div class="card image-card" data-id="<?= $image['id_img'] ?>" style="cursor: pointer;">
+														<img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top">
+													</div>
+												</div>
+											<?php endforeach; ?>
+										<?php endif; ?>
+									</div>
+									<input type="hidden" id="existing_imgs" name="existing_imgs">
+								</div>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
 
-			<!-- Formulaire pour modifier les images du carrousel catégories -->
-			<div class="container my-5">
-				<h1 class="mb-4">Gestion du carrousel des catégories</h1>
-				<form id="reorderForm" method="post" action="<?= site_url('admin/carrousel/modifierCategorie'); ?>">
-					<ul id="draggable-list" class="list-group dropzone">
-						<?php foreach ($categories as $category): ?>
-							<li class="list-group-item draggable" 
-								draggable="true" 
-								data-id="<?= esc($category['id_cat']) ?>"
-								data-position="<?= esc($category['position']) ?>">
-								<span class="grip-icon">&#x2630;</span>
-								<?= esc($category['cat_name']) ?>
-								<div>
-									<input type="checkbox" 
-										class="toggle-active" 
-										<?= $category['active'] ? 'checked' : '' ?> 
-									>
-								</div>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-					<button type="submit" class="btn btn-primary mt-3">Enregistrer le carrousel catégories</button>
-				</form>
+				<!-- Formulaire pour modifier les images du carrousel catégories -->
+				<div class="container my-5">
+					<h1 class="mb-4">Gestion du carrousel des catégories</h1>
+					<form id="reorderForm" method="post" action="<?= site_url('admin/carrousel/modifierCategorie'); ?>">
+						<ul id="draggable-list" class="list-group dropzone">
+							<?php foreach ($categories as $category): ?>
+								<li class="list-group-item draggable" 
+									draggable="true" 
+									data-id="<?= esc($category['id_cat']) ?>"
+									data-position="<?= esc($category['position']) ?>">
+									<span class="grip-icon">&#x2630;</span>
+									<?= esc($category['cat_name']) ?>
+									<div>
+										<input type="checkbox" 
+											class="toggle-active" 
+											<?= $category['active'] ? 'checked' : '' ?> 
+										>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+						<button type="submit" class="btn btn-primary mt-3">Enregistrer le carrousel catégories</button>
+					</form>
+				</div>
 			</div>
 		</div>
 

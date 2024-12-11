@@ -7,7 +7,9 @@
     <div class="w-30">
         <div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>
         <input type="hidden" id="hiddenContent" name="content">
-        <button id="saveBtn" class="btn btn-primary">Sauvegarder</button>
+        <div class="page-content">
+            <button id="saveBtn" class="btn btn-primary">Sauvegarder</button>
+        </div>
         <div id="message" style="margin-top: 20px;"></div>
     </div>
 

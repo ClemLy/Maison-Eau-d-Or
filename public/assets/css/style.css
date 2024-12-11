@@ -859,7 +859,25 @@ form {
 .page-content .row {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+}
+
+.page-content .btn-warning {
+    color: white;
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a);
+}
+
+.page-content .btn-warning:hover{
+    color: white;
+    background: linear-gradient(45deg, #b8860b, #d4af37, #c1a15a);
+    transform: scale(1.02);
+}
+
+.page-content .btn-success, .page-content .btn-success:hover{
+    color: white;
+}
+
+.page-content .btn-danger, .page-content .btn-danger:hover{
+    color: white;
 }
 
 /* Chaque carte d'article */
@@ -928,9 +946,19 @@ form {
 
 /* Effet au survol du bouton de lecture */
 .page-content .btn-primary:hover {
+    color : #FFF;
     background: linear-gradient(45deg, #b8860b, #d4af37, #c1a15a);
 }
 
+.page-content .image-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 
 
@@ -1000,10 +1028,6 @@ form {
 .admin .page-container {
     max-width: 70% !important;
 }
-
-
-
-
 
 /* Quill */
 #editor {
