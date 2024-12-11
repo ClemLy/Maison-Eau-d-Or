@@ -78,14 +78,26 @@
 
         <!-- Activer dans la boutique -->
         <div class="form-check mb-3">
-            <input type="checkbox" id="on_sale" name="on_sale" class="form-check-input" value="1" <?= $product['on_sale'] ? 't' : '' ?>>
+            <input
+                    type="checkbox"
+                    id="on_sale"
+                    name="on_sale"
+                    class="form-check-input"
+                    value="<?= $product['on_sale'] ? 'f' : 1 ?>"
+                <?= $product['on_sale'] === 't' ? 'checked' : '' ?>>
             <label for="on_sale" class="form-check-label">Activer sur la boutique ?</label>
         </div>
 
         <!-- Produit mis en avant -->
         <div class="form-check mb-3">
-            <input type="checkbox" id="is_star" name="is_star" class="form-check-input" value="1" <?= $product['is_star'] ? 't' : '' ?>>
-            <label for="is_star" class="form-check-label">Produit vedette</label>
+            <input
+                    type="checkbox"
+                    id="is_star"
+                    name="is_star"
+                    class="form-check-input"
+                    value="1"
+                <?= $product['is_star'] === 't' ? 'checked' : '' ?>
+            >            <label for="is_star" class="form-check-label">Produit vedette</label>
         </div>
 
         <div class="d-grid">
