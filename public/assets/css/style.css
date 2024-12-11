@@ -469,8 +469,17 @@ header li a:hover  {
 }
 
 .btn-outline-primary {
-    width: 30%;
+    background: #fff !important;
+    color: #d4af37 !important;
+    width: 50%;
 }
+
+.btn-outline-primary:hover {
+    background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37)!important;
+    color: #fff !important; /* Utilisez !important si nécessaire pour éviter les conflits */
+    border-color: transparent; /* Facultatif : ajustez si nécessaire */
+}
+
 
 .text-center a {
     display: inline-block;

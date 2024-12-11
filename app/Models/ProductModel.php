@@ -44,8 +44,13 @@ class ProductModel extends Model
     public function getProducts()
     {
         $productsQuery = $this->select('product.*');
-        if ($_SESSION['admin'] != 1) {
-            $productsQuery->where('product.on_sale', 't');
+
+        if (isset($_SESSION['admin'])) {
+            if($_SESSION['admin'] != 1){
+                $productsQuery->where('product.on_sale', 't');
+            }
+        }else{
+            $productsQuery->where('product.on_sale', 't'); 
         }
         $products = $productsQuery->findAll();
 
@@ -78,8 +83,12 @@ class ProductModel extends Model
         // Récupérer le produit avec ses données principales
         $productQuery = $this->select('product.*')
         ->where('product.id_prod', $id_prod);
-        if ($_SESSION['admin'] != 1) {
-            $productQuery->where('product.on_sale', 't');
+        if (isset($_SESSION['admin'])) {
+            if($_SESSION['admin'] != 1){
+                $productQuery->where('product.on_sale', 't');
+            }
+        }else{
+            $productQuery->where('product.on_sale', 't'); 
         }
         $product = $productQuery->first();
 

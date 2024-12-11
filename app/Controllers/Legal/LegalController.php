@@ -110,5 +110,10 @@
                 }
             }
         }
+
+        function messageClient()
+        {
+            return ""
+        }
     }
 ?>
