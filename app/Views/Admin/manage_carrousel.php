@@ -80,28 +80,30 @@
 								<h5 class="modal-title" id="imageModalLabel">Sélectionner une image</h5>
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
-							<div class="modal-body">
-								<div class="mb-3">
-									<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
-									<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
-									<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
-								</div>
-								
-								<div class="mb-3">
-									<label class="form-label">Choisir une image :</label>
-									<div id="media-library" class="row">
-										<?php if (isset($images)): ?>
-											<!-- Boucle PHP pour afficher les images -->
-											<?php foreach ($images as $image): ?>
-												<div class="col-md-3">
-													<div class="card image-card" data-id="<?= $image['id_img'] ?>" style="cursor: pointer;">
-														<img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top">
-													</div>
-												</div>
-											<?php endforeach; ?>
-										<?php endif; ?>
+							<div class="form-container" style="border: none; box-shadow: none; max-width: 100%;">
+								<div class="modal-body">
+									<div class="mb-3">
+										<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
+										<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
+										<button id="uploadBtn" type="button" class="btn btn-black mt-2">Uploader</button>
 									</div>
-									<input type="hidden" id="existing_imgs" name="existing_imgs">
+									
+									<div class="mb-3">
+										<label class="form-label">Choisir une image :</label>
+										<div id="media-library" class="row">
+											<?php if (isset($images)): ?>
+												<!-- Boucle PHP pour afficher les images -->
+												<?php foreach ($images as $image): ?>
+													<div class="col-md-3">
+														<div class="card image-card" data-id="<?= $image['id_img'] ?>" style="cursor: pointer;">
+															<img src="<?= $image['img_path'] ?>" alt="<?= $image['img_name'] ?>" class="card-img-top">
+														</div>
+													</div>
+												<?php endforeach; ?>
+											<?php endif; ?>
+										</div>
+										<input type="hidden" id="existing_imgs" name="existing_imgs">
+									</div>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -298,8 +300,19 @@
 						},
 						body: JSON.stringify({ categories: reorderedItems })
 					})
-							});
-							});
+					.then(response => response.json())
+					.then(data => {
+						if (data.success)
+						{
+							alert('Carrousel catégories mis à jour avec succès.');
+						}
+						else
+						{
+							alert('Erreur : ' + data.message);
+						}
+					})
+				});
+			});
 		</script>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

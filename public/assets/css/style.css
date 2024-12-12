@@ -723,6 +723,12 @@ form {
     border-color: #000;
 }
 
+.form-container .btn-close:hover {
+    color: var(--bs-btn-close-color);
+    text-decoration: none;
+    opacity: var(--bs-btn-close-hover-opacity);
+}
+
 
 /* Historique */
 
@@ -1038,32 +1044,6 @@ form {
     padding-top: 10px;
     font-style: italic;
 }
-
-/*.upload-section {
-    max-width: 50%;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 100px;
-}
-
-.upload-section label {
-    font-weight: bold;
-    color: #333;
-}
-
-.upload-section .form-control {
-    font-size: 0.9rem;
-    padding: 5px 10px;
-}
-
-.upload-section #uploadBtn {
-    padding: 5px 15px;
-    font-size: 0.9rem;
-}*/
 
 
 /* Articles Admin */
