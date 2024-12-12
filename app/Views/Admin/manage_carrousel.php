@@ -289,8 +289,6 @@
 						position: index + 1 // Ordre dans la liste
 					}));
 
-					console.log(JSON.stringify(reorderedItems));
-
 					// Envoi des données au serveur
 					fetch('<?= site_url('admin/carrousel/modifierCategorie'); ?>', {
 						method: 'POST',
