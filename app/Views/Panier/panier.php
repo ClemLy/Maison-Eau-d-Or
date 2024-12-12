@@ -33,15 +33,15 @@
                                 <td><?= esc($item['p_name']) ?></td>
                                 <td><?= number_format($item['p_price'], 2, ',', ' ') ?> €</td>
                                 <td>
-                                <div class="input-group" style="width: 150px;">
-                                    <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, -1, <?= $item['id_prod']?>)">-</button>
-                                    <input type="number" class="form-control text-center" name="quantity" value="<?= $item['quantity']?>" min="1" max="10" readonly>
-                                    <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, 1, <?= $item['id_prod']?>)">+</button>
-                                </div>
-                                    <!-- <form action="<?= site_url('panier/modifier/' . $item['id_prod']) ?>" method="post" class="d-inline">
-                                        <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="1" max="99" class="form-control w-50 d-inline">
-                                        <button type="submit" class="btn btn-sm btn-primary">Modifier</button>
-                                    </form> -->
+                                    <div class="input-group" style="width: 150px;">
+                                        <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, -1, <?= $item['id_prod']?>)">-</button>
+                                        <input type="number" class="form-control text-center" name="quantity" value="<?= $item['quantity']?>" min="1" max="99" readonly>
+                                        <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, 1, <?= $item['id_prod']?>)">+</button>
+
+                                        <button onclick="window.location.reload()" class="btn btn-black ms-3">
+                                            <i class="bi bi-cart"></i> Modifier
+                                        </button>
+                                    </div>
                                 </td>
                                 <td><?= number_format($item['p_price'] * $item['quantity'], 2, ',', ' ') ?> €</td>
                                 <td>
