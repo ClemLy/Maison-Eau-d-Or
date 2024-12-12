@@ -6,8 +6,7 @@
 
 <form method="post" action="<?= site_url('admin/blog/modifier/')?>">
 	<!-- Formulaire d'upload -->
-	<div class="upload-section">
-
+	<div class="form-container" style="max-width: 60%;">
 		<div class="mb-3">
 			<label for="art_title" class="form-label">Titre de l'article</label>
 			<input type="text" id="art_title" name="art_title" class="form-control"
@@ -17,7 +16,7 @@
 		<div class="mb-3">
 			<label for="new_img" class="form-label">Uploader une nouvelle image :</label>
 			<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
-			<button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
+			<button id="uploadBtn" type="button" class="btn btn-black mt-2" style="max-width: 20%;">Uploader</button>
 		</div>
 
 		<div class="mb-3">
@@ -48,7 +47,9 @@
 
 			<div id="editor"><?= isset($currentContent) ? esc($currentContent, 'html') : '' ?></div>
 			<input type="hidden" id="hiddenContent" name="content">
-			<button id="saveBtn" class="btn btn-primary">Sauvegarder</button>
+			<div class="page-content">
+				<button id="saveBtn" class="btn btn-primary">Sauvegarder</button>
+			</div>
 			<div id="message" style="margin-top: 20px;"></div>
 		</div>
 

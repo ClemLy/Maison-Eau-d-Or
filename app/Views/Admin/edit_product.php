@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Modifier un produit</h1>
 
+    <div class="form-container mt-2" style="max-width: 80%;">
     <form action="/admin/produit/modifier" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
         <!-- Nom du produit -->
         <div class="mb-3">
@@ -22,9 +23,9 @@
 
         <!-- Catégories -->
         <label for="categories-container" class="form-label">Catégories :</label>
-        <div class="input-group mb-3">
-            <input type="text" id="new-category" class="form-control" placeholder="Nouvelle catégorie">
-            <button type="button" id="add-category-btn" class="btn btn-primary">Ajouter</button>
+        <div class="input-group mb-3 align-items-baseline">
+            <input type="text" id="new-category" class="form-control me-3" style="max-width: 20%" placeholder="Nouvelle catégorie">
+            <button type="button" id="add-category-btn" class="btn btn-black p-0" style="width:40px; height: 40px;">+</button>
         </div>
 
         <div class="mb-3">
@@ -47,7 +48,7 @@
         <div class="mb-3">
             <label for="new_img" class="form-label">Uploader une nouvelle image :</label>
             <input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
-            <button id="uploadBtn" type="button" class="btn btn-primary mt-2">Uploader</button>
+            <button id="uploadBtn" type="button" class="btn btn-black mt-2" style="max-width: 20%;">Uploader</button>
         </div>
 
         <div class="mb-3">
@@ -106,6 +107,7 @@
 
         <input type="hidden" name="id_prod" value="<?= $product['id_prod'] ?>">
     </form>
+    </div>
 </div>
 
 

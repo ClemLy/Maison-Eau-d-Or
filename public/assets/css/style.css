@@ -638,6 +638,23 @@ form {
     transform: scale(1.02); /* Légère augmentation de la taille */
 }
 
+.form-container .btn-black {
+    background: #000 !important;
+    border: 2px solid !important;
+    border-color: #000 !important;
+    color: white !important;
+    font-weight: bold !important;
+    border-radius: 40px !important;
+    padding: 5px 10px !important;
+}
+
+.form-container .btn-black:hover {
+    background: white !important;
+    border: 2px solid !important;
+    border-color: #000 !important;
+    color: #000 !important;
+}
+
 /* Bouton retour secondaire */
 .form-container a.btn-secondary {
     display: inline-flex;
@@ -680,6 +697,31 @@ form {
     color: #b8860b;
 }
 
+.form-container .category-tag, .form-container .remove-category {
+    background: none;
+    color: black;
+    text-decoration: underline
+}
+
+.form-container .category-tag:hover,
+.form-container .category-tag:hover .remove-category {
+    color: #d4af37;
+}
+
+.form-container .image-card:hover {
+    border: 2px solid #d4af37;
+}
+
+.form-container .border-primary {
+    border: 4px solid #ccc !important;
+    border-radius: 8px;
+    width: 70%;
+}
+
+.form-container .form-check-input:checked {
+    background-color: black;
+    border-color: #000;
+}
 
 
 /* Historique */
@@ -997,7 +1039,7 @@ form {
     font-style: italic;
 }
 
-.upload-section {
+/*.upload-section {
     max-width: 50%;
     margin: 0 auto;
     padding: 20px;
@@ -1021,7 +1063,7 @@ form {
 .upload-section #uploadBtn {
     padding: 5px 15px;
     font-size: 0.9rem;
-}
+}*/
 
 
 /* Articles Admin */

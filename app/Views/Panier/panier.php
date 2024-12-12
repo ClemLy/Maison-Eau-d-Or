@@ -33,10 +33,15 @@
                                 <td><?= esc($item['p_name']) ?></td>
                                 <td><?= number_format($item['p_price'], 2, ',', ' ') ?> €</td>
                                 <td>
-                                    <form action="<?= site_url('panier/modifier/' . $item['id_prod']) ?>" method="post" class="d-inline">
+                                <div class="input-group" style="width: 150px;">
+                                    <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, -1, <?= $item['id_prod']?>)">-</button>
+                                    <input type="number" class="form-control text-center" name="quantity" value="<?= $item['quantity']?>" min="1" max="10" readonly>
+                                    <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, 1, <?= $item['id_prod']?>)">+</button>
+                                </div>
+                                    <!-- <form action="<?= site_url('panier/modifier/' . $item['id_prod']) ?>" method="post" class="d-inline">
                                         <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="1" max="100" class="form-control w-50 d-inline">
                                         <button type="submit" class="btn btn-sm btn-primary">Modifier</button>
-                                    </form>
+                                    </form> -->
                                 </td>
                                 <td><?= number_format($item['p_price'] * $item['quantity'], 2, ',', ' ') ?> €</td>
                                 <td>
