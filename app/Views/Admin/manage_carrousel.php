@@ -87,7 +87,6 @@
 										<input type="file" id="new_img" name="new_img" class="form-control" accept="image/*">
 										<button id="uploadBtn" type="button" class="btn btn-black mt-2">Uploader</button>
 									</div>
-									
 									<div class="mb-3">
 										<label class="form-label">Choisir une image :</label>
 										<div id="media-library" class="row">

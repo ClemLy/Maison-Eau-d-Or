@@ -1119,3 +1119,54 @@ form {
     display: flex;
     flex-wrap: wrap;
 }
+
+/* Style pour page Account */
+
+.account table {
+    width: 100%;
+}
+
+.account td {
+    padding: 10px;
+}
+
+.account ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.account li {
+    padding: 10px;
+}
+
+.account-list{
+    margin-top: 50px;
+}
+
+.account-list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.account-list-item:hover a {
+    color: #d4af37!important;
+}
+
+.account-list-item a {
+    color: #000!important;
+    text-decoration: none;
+}
+
+.account-list-item a:hover {
+    text-decoration: underline;
+}
+
+.account-list-item a {
+    color: #000!important;
+    text-decoration: none;
+}
+
+.account-list-item i {
+    font-size: 2rem;
+    color: #000000;
+}

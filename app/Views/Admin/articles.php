@@ -2,7 +2,7 @@
     <div class="page-container">
         <div class="page-content">
             <div class="container mt-5">
-                <h1 class="text-center mb-4">Liste des articles</h1>
+                <h1 class="text-center mb-4"> Gestion du Blog </h1>
                 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <a href="<?= base_url('admin/blog/ajouter') ?>" class="btn btn-primary" >Ajouter un article</a>
