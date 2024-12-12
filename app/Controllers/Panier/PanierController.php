@@ -135,7 +135,6 @@
 				]);
 			}
 
-			// Récupérer les articles du panier de l'utilisateur
 			$cartModel = new CartModel();
 			$cartItems = $cartModel->select('cart.id_cart, product.p_name, product.p_price, cart.quantity, product.id_prod, image.img_path')
 								->join('product', 'product.id_prod = cart.id_prod')
@@ -144,7 +143,6 @@
 								->where('cart.id_user', $id_user)
 								->findAll();
 
-			// Retourner les articles du panier en réponse JSON
 			return $this->response->setJSON([
 				'success' => true,
 				'cartItems' => $cartItems
@@ -155,19 +153,16 @@
 		{
 			$id_user = session()->get('id_user');
 
-			// Vérification de la connexion de l'utilisateur
 			if (!$id_user) {
-				return redirect()->to('/connexion');  // Redirige l'utilisateur vers la page de connexion
+				return redirect()->to('/connexion'); 
 			}
 
 			$cartModel = new CartModel();
 			
-			// Supprimer l'élément du panier
 			$cartModel->where('id_user', $id_user)
 					->where('id_prod', $id_prod)
 					->delete();
 
-			// Récupérer les éléments mis à jour du panier
 			$cartItems = $cartModel->select('cart.id_cart, product.p_name, product.p_price, cart.quantity, product.id_prod, image.img_path')
 								->join('product', 'product.id_prod = cart.id_prod')
 								->join('product_image', 'product_image.id_prod = product.id_prod')
@@ -175,33 +170,13 @@
 								->where('cart.id_user', $id_user)
 								->findAll();
 
-			// Retourner les éléments du panier mis à jour en JSON
 			return $this->response->setJSON([
 				'success' => true,
-				'cartItems' => $cartItems, // Les produits du panier mis à jour
+				'cartItems' => $cartItems,
 				'message' => 'Produit supprimé du panier.'
 			]);
 		}
 
-
-
-
-		// public function supprimer($id_prod)
-		// {
-		// 	$cartModel = new CartModel();
-
-		// 	$id_user = session()->get('id_user'); 
-		// 	if (!$id_user) 
-		// 	{
-		// 		return redirect()->to('/');
-		// 	}
-
-		// 	$cartModel->where('id_user', $id_user)
-		// 			->where('id_prod', $id_prod)
-		// 			->delete();
-
-		// 	return redirect()->to('/panier');
-		// }
 		public function vider()
 		{
 			$cartModel = new CartModel();
@@ -222,7 +197,6 @@
 			$id_user = session()->get('id_user');
 			$cartModel = new \App\Models\CartModel();
 		
-			// Calculer la quantité totale d'articles
 			$cartItems = $cartModel
 				->select('quantity')
 				->where('id_user', $id_user)
@@ -256,6 +230,60 @@
 			return redirect()->to('/panier');
 		}
 
+		public function modifierSideMenu()
+		{
+			$cartModel = new CartModel();
+			$id_user = session()->get('id_user');
+		
+			// Récupère les données JSON
+			$data = $this->request->getJSON(true);
+			$id_prod = $data['id_prod'] ?? null;
+			$quantity = $data['quantity'] ?? null;
+		
+			// Logs pour debug
+			log_message('info', 'Données reçues : ' . json_encode($data));
+			log_message('info', 'ID Produit : ' . $id_prod . ', Quantité : ' . $quantity);
+		
+			// Vérifie si l'utilisateur est authentifié
+			if (!$id_user) {
+				return $this->response->setJSON([
+					'success' => false,
+					'message' => 'Utilisateur non authentifié.',
+				]);
+			}
+		
+			// Vérifie que les données nécessaires sont fournies
+			if (empty($id_prod) || empty($quantity)) {
+				return $this->response->setJSON([
+					'success' => false,
+					'message' => 'Produit ou quantité non spécifiés.',
+				]);
+			}
+		
+			// Valide la quantité
+			if ($quantity < 1 || $quantity > 99) {
+				return $this->response->setJSON([
+					'success' => false,
+					'message' => 'Quantité invalide.',
+				]);
+			}
+		
+			// Met à jour le panier
+			$cartModel->where('id_user', $id_user)
+					  ->where('id_prod', $id_prod)
+					  ->set('quantity', $quantity)
+					  ->update();
+		
+			return $this->response->setJSON([
+				'success' => true,
+				'message' => 'Quantité mise à jour.',
+			]);
+		}
+		
+		
 
 	}
+
+	
 ?>
+

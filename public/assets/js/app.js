@@ -249,12 +249,20 @@ function updateCartDisplay() {
                         cartItemElement.classList.add('cart-item', 'd-flex', 'align-items-center', 'mb-3');
                         cartItemElement.setAttribute('data-id-prod', item.id_prod);
                         cartItemElement.innerHTML = `
-                            <img src="${item.img_path}" alt="Produit" class="cart-item-img">
+                            <a href="/boutique/produit/${item.id_prod}">
+                                <img src="${item.img_path}" alt="Produit" class="cart-item-img">
+                            </a>
                             <div class="cart-item-info ms-3">
                                 <h6 class="cart-item-title mb-1">${item.p_name}</h6>
                                 <p class="cart-item-price mb-1">${parseFloat(item.p_price).toFixed(2)} €</p>
-                                <p class="cart-item-quantity">Qté : ${item.quantity}</p>
+                                <div class="input-group" style="width: 150px;">
+                                    <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, -1, ${item.id_prod})">-</button>
+                                    <input type="number" class="form-control text-center" name="quantity" value="${item.quantity}" min="1" max="99" readonly>
+                                    <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, 1, ${item.id_prod})">+</button>
+                                </div>
                             </div>
+
+
                             <a href="#" class="btn ms-auto text-danger" aria-label="Remove" onclick="removeItem(${item.id_prod}, event)">
                                 <i class="bi bi-trash"></i>
                             </a>
@@ -314,3 +322,32 @@ function updateTotal(cartItems) {
         </div>
     `;
 }
+
+
+function updateValueSideMenu(button, change, idProd) {
+    const input = button.parentElement.querySelector('input[name="quantity"]');
+    const newQuantity = parseInt(input.value) + change;
+
+    if (newQuantity < 1 || newQuantity > 99) {
+        return;
+    }
+
+    input.value = newQuantity;
+
+    console.log('Données envoyées :', {
+        id_prod: idProd,
+        quantity: newQuantity,
+    });
+
+    fetch('/panier/modifier', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify({ id_prod: idProd, quantity: newQuantity }),
+    });
+    
+}
+
+
+
