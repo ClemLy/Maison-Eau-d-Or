@@ -129,7 +129,7 @@
                         <div class="d-flex align-items-center mt-3">
                             <div class="input-group" style="width: 150px;">
                                 <button class="btn btn-outline-dark btn-sm" type="button" id="decrement" onclick="updateValue(-1)">-</button>
-                                <input type="number" class="form-control text-center" id="numberInput" name="quantity" value="1" min="1" max="10" readonly>
+                                <input type="number" class="form-control text-center" id="numberInput" name="quantity" value="1" min="1" max="100" readonly>
                                 <button class="btn btn-outline-dark btn-sm" type="button" id="increment" onclick="updateValue(1)">+</button>
                             </div>
                         </div>

@@ -18,54 +18,53 @@ class AdminController extends BaseController
         $adminRoutes = [
             'Produits' => [
                 [
+                    'logo'  => 'bi bi-pencil-square',
                     'url'   => '/admin/produits',
-                    'label' => 'Liste des produits',
+                    'label' => 'Gestions des produits',
                 ],
                 [
+                    'logo'  => 'bi bi-plus-square',
                     'url'   => '/admin/produit/ajouter',
                     'label' => 'Ajouter un produit',
                 ],
-                [
-                    'url'   => '/admin/produit/modifier/{id}',
-                    'label' => 'Modifier un produit (exemple)',
-                ],
             ],
-            'Catégories' => [
+            'Communication' => [
                 [
-                    'url'   => '/admin/categories',
-                    'label' => 'Liste des catégories',
+                    'logo'  => 'bi bi-chat-left-text',
+                    'url'   => '/admin/blog',
+                    'label' => 'Gestion du blog',
                 ],
                 [
-                    'url'   => '/admin/categorie/ajouter',
-                    'label' => 'Ajouter une catégorie',
-                ],
-            ],
-            'Commandes' => [
-                [
-                    'url'   => '/admin/commandes',
-                    'label' => 'Liste des commandes',
-                ],
-            ],
-            'Blog' => [
-                [
-                    'url'   => '/admin/blog/ajouter',
-                    'label' => 'Ajouter un article',
+                    'logo'  => 'bi bi-newspaper',
+                    'url'   => '/admin/blog',
+                    'label' => 'Ajouter un article sur le blog',
                 ],
                 [
-                    'url'   => '/admin/blog/{id}',
-                    'label' => 'Voir les articles',
+                    'logo'  => 'bi bi-question-square',
+                    'url'   => '/admin/faq/modifier',
+                    'label' => 'Modifier la FAQ',
                 ],
-            ],
-            'FAQ' => [
                 [
-                    'url'   => '/admin/faq/ajouter',
-                    'label' => 'Ajouter une question',
+                    'logo'  => 'bi bi-info-circle',
+                    'url'   => '/admin/a-propos/modifier',
+                    'label' => 'Modifier À propos',
                 ],
             ],
             'Autres' => [
                 [
-                    'url'   => '/admin/a-propos/modifier',
-                    'label' => 'Modifier la page "À propos"',
+                    'logo'  => 'bi bi-house-gear',
+                    'url'   => '/admin/carrousel',
+                    'label' => 'Modifier les carrousels',
+                ],
+                [
+                    'logo'  => 'bi bi-list-ul',
+                    'url'   => '/admin/commandes',
+                    'label' => 'Liste des commandes',
+                ],
+                [
+                    'logo'  => 'bi bi-images',
+                    'url'   => '/admin/gestionImage',
+                    'label' => 'Gestion des images',
                 ],
             ],
         ];

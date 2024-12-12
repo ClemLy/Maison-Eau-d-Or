@@ -79,11 +79,11 @@ $cartItems = $cartModel
 							<ul class="dropdown-menu" aria-labelledby="adminDropdown">
 								<li>
 									<a class="dropdown-item" href="<?= site_url('admin/produits'); ?>">Gestion Produits	</a>
+									<a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a>
+									<a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a>
+									<a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a>
 									<a class="dropdown-item" href="<?= site_url('admin/carrousel'); ?>">Gestion Carrousel</a>
 									<a class="dropdown-item" href="<?= site_url('admin/commandes'); ?>">Gestion Commandes</a>
-									<a class="dropdown-item" href="<?= site_url('admin/blog'); ?>">Gestion Blog</a>
-									<a class="dropdown-item" href="<?= site_url('admin/a-propos/modifier'); ?>">Modifier À Propos</a>
-									<a class="dropdown-item" href="<?= site_url('admin/faq/modifier'); ?>">Modifier FAQ</a>
 									<a class="dropdown-item" href="<?= site_url('admin/gestionImage'); ?>">Gestion Images</a>
 								</li>
 							</ul>

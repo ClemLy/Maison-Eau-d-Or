@@ -122,7 +122,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const panierSideMenu = document.getElementById('panier_sideMenu');
-            console.log("Fdp");
             if (panierSideMenu) {
                 // Initialiser l'Offcanvas avec le backdrop activé
                 let offcanvas = new bootstrap.Offcanvas(panierSideMenu, {
