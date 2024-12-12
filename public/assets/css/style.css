@@ -478,6 +478,30 @@ header li a:hover  {
     padding: 20px 0;
 }
 
+.product-banner {
+    background-color: rgba(0, 0, 0, 0.7); /* Bandeau semi-transparent */
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.product-banner h5.product-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-banner p.product-price {
+    margin: 0;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+
+
 .text-center a {
     font-size: 16px;
     color: #007bff;

@@ -17,6 +17,7 @@
     }
 </style>
 
+
 <div class="container-fluid">
     <!-- Carrousel Image d'accueil -->
     <div id="carouselImgAcceuil" class="carousel slide mx-auto" data-bs-ride="carousel">
@@ -56,47 +57,66 @@
     <hr class="mt-0">
 
     <!-- Carrousel Produits -->
-    <?php if (isset($selectedProducts) && !empty($selectedProducts)): ?>
-        <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <?php
-                $activeClass = 'active';
-                foreach ($selectedProducts as $index => $product) {
-                    echo '<button type="button" data-bs-target="#carouselProduits" data-bs-slide-to="' . $index . '" class="' . $activeClass . '" aria-label="Slide ' . ($index + 1) . '"></button>';
-                    $activeClass = ''; // Seul le premier bouton doit être actif
-                }
-                ?>
-            </div>
+    <div class="col-md-3">
+        <?php if (isset($selectedProducts) && !empty($selectedProducts)): ?>
+            <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <?php
+                        $activeClass = 'active';
+                        foreach ($selectedProducts as $index => $product)
+                        {
+                            echo '<button type="button" data-bs-target="#carouselProduits" data-bs-slide-to="' . $index . '" class="' . $activeClass . '" aria-label="Slide ' . ($index + 1) . '"></button>';
+                            $activeClass = ''; // Seul le premier bouton doit être actif
+                        }
+                    ?>
+                </div>
 
-            <div class="carousel-inner">
-                <?php
-                $activeClass = 'active'; // Le premier produit sera actif
-                foreach ($selectedProducts as $product) {
-                    echo '<div class="carousel-item ' . $activeClass . '">';
-                    echo '<img src="' . esc($product['img_path']) . '" class="d-block w-100" alt="' . esc($product['p_name']) . '">';
-                    echo '<div class="carousel-caption d-none d-md-block">';
-                    // echo '<h5>' . esc($product['p_name']) . '</h5>';
-                    // echo '<p>' . esc($product['description']) . '</p>';
-                    echo '</div>';
-                    echo '</div>';
-                    $activeClass = ''; // Seul le premier produit doit être actif
-                }
-                ?>
-            </div>
+                <div class="carousel-inner">
+                    <?php
+                        $activeClass = 'active'; // Le premier produit sera actif
 
-            <!-- Contrôles du carrousel -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduits" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Précédent</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselProduits" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Suivant</span>
-            </button>
-        </div>
-    <?php else: ?>
-        <p>Aucun produit disponible dans cette catégorie.</p>
-    <?php endif; ?>
+                  
+              
+                        foreach ($selectedProducts as $product) {
+
+                            // Récupérer la chaîne des images
+                            $imgPathsString = $product['img_paths'];
+                            
+                            // Supprimer les accolades et séparer les images par des virgules
+                            $imgPathsArray = explode(',', trim($imgPathsString, '{}'));
+                            
+                            // Récupérer la première image
+                            $firstImage = $imgPathsArray[0];
+                            
+                            // Afficher l'élément carousel avec la première image
+                            echo '<div class="carousel-item ' . $activeClass . '">';
+                            echo '<img src="' . esc($firstImage) . '" class="d-block w-100 img-fluid" alt="' . esc($product['p_name']) . '">';
+                            echo '<div class="product-banner">'; // Bandeau sous l'image
+                            echo '<h5 class="product-name">' . esc($product['p_name']) . '</h5>';
+                            echo '<p class="product-price">' . number_format($product['p_price'], 2, ',', ' ') . ' €</p>';
+                            echo '</div>';
+                            echo '</div>';
+                        
+                            // Après le premier produit, la classe 'active' sera supprimée
+                            $activeClass = '';
+                        }
+                    ?>
+                </div>
+
+                <!-- Contrôles du carrousel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduits" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselProduits" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Suivant</span>
+                </button>
+            </div>
+        <?php else: ?>
+            <p>Aucun produit disponible dans cette catégorie.</p>
+        <?php endif; ?>
+    </div>
 
 
 

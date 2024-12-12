@@ -238,7 +238,7 @@
 							<p style=\"color: #333; font-size: 14px; line-height: 1.5; text-align: left; \"> Cher ".$user['first_name'].",</p>
 							<p style=\"color: #333; font-size: 14px; line-height: 1.5; text-align: left; \"> Un nouvel article a été publié sur notre blog : <b>".$data['title']."</b>  </p>
 							<a href=\"".site_url('blog/' . $blogModel->insertID())."\" style=\"text-align: center; display: inline-block; background-color: #d4af37; color: #fff; text-decoration: none; padding: 10px 20px; font-size: 16px; border-radius: 20px;margin-top: 30px;\"> Accéder à l'article </a>
-							<p style=\"color: #333; font-size: 11px; line-height: 1.5; text-align: left; margin-top: 50px;\"> Pour vous désinscrire des newletters et ne plus recevoir de mail publicitaire, connecter vous <a href=\"".site_url('/account/update')."\"> ici puis décocher l'inscription aux newletters. </a> </p>
+							<p style=\"color: #333; font-size: 11px; line-height: 1.5; text-align: left; margin-top: 50px;\"> Pour vous désinscrire des newletters et ne plus recevoir de mail publicitaire, connectez-vous <a href=\"".site_url('/account/update')."\">  </a> ici puis décochez l'inscription aux newletters.</p>
 						</td>
 					  </tr>
 					  <!-- Footer -->
