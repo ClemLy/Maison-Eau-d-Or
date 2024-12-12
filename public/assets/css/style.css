@@ -210,8 +210,9 @@ input[type="number"] {
 
 hr {
     height: 2px;
+    width: 80vw;
     border: none !important;
-    margin: 0 auto;
+    margin: 0 ;
     background: 
     linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
 }
@@ -406,14 +407,48 @@ header li a:hover  {
 
 
 /* Home */
-.categories-vedette h3 a{
-    text-decoration : none;
+.categories-vedette h3 a {
+    text-decoration: none;
     background: linear-gradient(45deg, #d4af37, #b8860b, #c1a15a, #d4af37);
     -webkit-background-clip: text;
     color: transparent;
-    display: inline;
-
+    display: inline-block;
+    position: relative;
 }
+
+.categories-vedette h3 a.active {
+    color: #d4af37;
+}
+
+.categories-vedette h3 a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 4px;
+    background-color: #d4af37;
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .categories-vedette {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .categories-vedette h3 {
+        margin-bottom: 0.5rem;
+    }
+
+    .categories-vedette h3 a {
+        font-size: 1.2rem;
+    }
+}
+
+
+
 .container-fluid {
     display: flex;
     flex-direction: column;

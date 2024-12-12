@@ -38,7 +38,7 @@
     </div>
 
 
-    <div class="categories-vedette d-flex justify-content-around py-4">
+    <div class="categories-vedette d-flex justify-content-around pb-0 mt-5">
         <?php if (!empty($categories)): ?>
             <?php foreach ($categories as $categ): ?>
                 <h3>
@@ -53,7 +53,7 @@
         <?php endif; ?>
     </div>
 
-    <hr>
+    <hr class="mt-0">
 
     <!-- Carrousel Produits -->
     <?php if (isset($selectedProducts) && !empty($selectedProducts)): ?>
@@ -109,11 +109,10 @@
     <!-- Section Produit Vedette -->
 
     <?php if (isset($starProduct) && !empty($starProduct)) { ?>
-        <div class="text-center mt-5">
-            <h2 class="texte-doree">Notre produit vedette</h2>
-            <hr>
-
-            <div class="row align-items-center produit-vedette mt-4">
+        <h2 class="texte-doree mt-5">Notre produit vedette</h2>
+        <hr>
+        <div class="text-center mt-0">
+            <div class="row align-items-center produit-vedette mt-0">
                 <!-- Colonne de l'image -->
                 <div class="col-md-6 d-flex justify-content-center div-img-vedette">
                 <img src="<?= esc($starProduct['img_path']); ?>" class="product-image" alt="Produit Vedette">
