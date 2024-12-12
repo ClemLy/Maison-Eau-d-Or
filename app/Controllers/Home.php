@@ -33,14 +33,19 @@ class Home extends BaseController
         $productsByCategory = [];
         foreach ($categories as $category)
         {
-            // Récupérer les produits pour chaque catégorie
-            $products = $productModel
-                ->select('product.*, image.img_path')
-                ->join('product_category', 'product.id_prod = product_category.id_prod')
-                ->join('product_image', 'product.id_prod = product_image.id_prod')
-                ->join('image', 'image.id_img = product_image.id_img')
-                ->where('product_category.id_cat', $category['id_cat'])
-                ->findAll();
+// Récupérer les produits pour chaque catégorie, y compris les images
+        $products = $productModel
+            ->select('product.*, array_agg(image.img_path) as img_paths') // Utiliser array_agg pour grouper les images
+            ->join('product_category', 'product.id_prod = product_category.id_prod')
+            ->join('product_image', 'product.id_prod = product_image.id_prod')
+            ->join('image', 'product_image.id_img = image.id_img')
+            ->where('product_category.id_cat', $category['id_cat'])
+            ->where('product.on_sale', 't')
+            ->groupBy('product.id_prod') // Regrouper par produit
+            ->get()
+            ->getResultArray();
+
+                
 
             // Si des produits sont trouvés, les ajouter à la liste, sinon, mettre un tableau vide
             $productsByCategory[$category['id_cat']] = !empty($products) ? $products : [];
@@ -49,8 +54,13 @@ class Home extends BaseController
         // Récupérer l'ID de la catégorie sélectionnée, ou la première catégorie par défaut
         $selectedCategoryId = isset($_GET['category_id']) ? (int) $_GET['category_id'] : $defaultCategoryId;
 
+        $selectedProducts = [];
+
+
         // Si la catégorie sélectionnée a des produits, les afficher, sinon afficher un tableau vide
         $selectedProducts = isset($productsByCategory[$selectedCategoryId]) ? $productsByCategory[$selectedCategoryId] : [];
+
+
         
 
         // Récupérer les images du carrousel principal
