@@ -60,27 +60,27 @@
         <div id="carouselProduits" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <?php
-                $activeClass = 'active';
-                foreach ($selectedProducts as $index => $product) {
-                    echo '<button type="button" data-bs-target="#carouselProduits" data-bs-slide-to="' . $index . '" class="' . $activeClass . '" aria-label="Slide ' . ($index + 1) . '"></button>';
-                    $activeClass = ''; // Seul le premier bouton doit être actif
-                }
+                    $activeClass = 'active';
+                    foreach ($selectedProducts as $index => $product)
+                    {
+                        echo '<button type="button" data-bs-target="#carouselProduits" data-bs-slide-to="' . $index . '" class="' . $activeClass . '" aria-label="Slide ' . ($index + 1) . '"></button>';
+                        $activeClass = ''; // Seul le premier bouton doit être actif
+                    }
                 ?>
             </div>
 
             <div class="carousel-inner">
                 <?php
-                $activeClass = 'active'; // Le premier produit sera actif
-                foreach ($selectedProducts as $product) {
-                    echo '<div class="carousel-item ' . $activeClass . '">';
-                    echo '<img src="' . esc($product['img_path']) . '" class="d-block w-100" alt="' . esc($product['p_name']) . '">';
-                    echo '<div class="carousel-caption d-none d-md-block">';
-                    // echo '<h5>' . esc($product['p_name']) . '</h5>';
-                    // echo '<p>' . esc($product['description']) . '</p>';
-                    echo '</div>';
-                    echo '</div>';
-                    $activeClass = ''; // Seul le premier produit doit être actif
-                }
+                    $activeClass = 'active'; // Le premier produit sera actif
+                    foreach ($selectedProducts as $product)
+                    {
+                        echo '<div class="carousel-item ' . $activeClass . '">';
+                        echo '<img src="' . esc($product['img_path']) . '" class="d-block w-100 img-fluid" alt="' . esc($product['p_name']) . '">';
+                        echo '<div class="carousel-caption d-none d-md-block">';
+                        echo '</div>';
+                        echo '</div>';
+                        $activeClass = ''; // Seul le premier produit doit être actif
+                    }
                 ?>
             </div>
 
