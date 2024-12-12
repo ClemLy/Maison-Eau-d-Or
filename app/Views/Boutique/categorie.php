@@ -22,7 +22,7 @@
                             <form action="<?= site_url('/panier/ajouter/' . $product['id_prod']) ?>" method="post" class="d-flex flex-row add-to-cart-form">
                                 <div class="input-group" style="width: 150px;">
                                     <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValue(this, -1)">-</button>
-                                    <input type="number" class="form-control text-center" name="quantity" value="1" min="1" max="100" readonly>
+                                    <input type="number" class="form-control text-center" name="quantity" value="1" min="1" max="99" readonly>
                                     <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValue(this, 1)">+</button>
                                 </div>
                                 <button type="submit" class="btn btn-dark ms-3 btn-gold-hover" data-bs-toggle="offcanvas" data-bs-target="#panier_sideMenu">

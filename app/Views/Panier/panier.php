@@ -39,7 +39,7 @@
                                     <button class="btn btn-outline-dark btn-sm" type="button" onclick="updateValueSideMenu(this, 1, <?= $item['id_prod']?>)">+</button>
                                 </div>
                                     <!-- <form action="<?= site_url('panier/modifier/' . $item['id_prod']) ?>" method="post" class="d-inline">
-                                        <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="1" max="100" class="form-control w-50 d-inline">
+                                        <input type="number" name="quantity" value="<?= $item['quantity'] ?>" min="1" max="99" class="form-control w-50 d-inline">
                                         <button type="submit" class="btn btn-sm btn-primary">Modifier</button>
                                     </form> -->
                                 </td>
