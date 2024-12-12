@@ -22,7 +22,43 @@
 
     <div class="row">
         <div class="col-md-5">
-            <img src="<?= esc($product['images'][0]['img_path']) ?>" class="img-fluid product-image" alt="<?= esc($product['p_name']) ?>" style="max-height: 500px; object-fit: cover;">
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <?php foreach ($product['images'] as $index => $image): ?>
+                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                            <img src="<?= esc($image['img_path']) ?>" 
+                                class="d-block w-100 img-fluid" 
+                                alt="<?= esc($product['p_name']) ?>" 
+                                style="width: 50vw; height: 50vh; object-fit: fill;">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <?php if (count($product['images']) > 1): ?>
+                    <!-- Boutons de navigation -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    
+                    <!-- Indicateurs -->
+                    <div class="carousel-indicators">
+                        <?php foreach ($product['images'] as $index => $image): ?>
+                            <button type="button" 
+                                    data-bs-target="#productCarousel" 
+                                    data-bs-slide-to="<?= $index ?>" 
+                                    class="<?= $index === 0 ? 'active' : '' ?>" 
+                                    aria-current="<?= $index === 0 ? 'true' : 'false' ?>" 
+                                    aria-label="Slide <?= $index + 1 ?>"></button>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+        </div>
+
         </div>
         <div class="col-md-6 product-card-produit">
             <h1 class="mb-3 product-title texte-doree"><?= esc($product['p_name']) ?></h1>
