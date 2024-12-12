@@ -168,9 +168,9 @@
 					  <!-- Content -->
 					  <tr>
 						<td align=\"center\" style=\"text-align: center; padding: 20px;\">
-						  <h2 style=\"color: #000; font-size: 24px; margin: 0;\">Confirmez votre compte</h2>
+						  <h2 style=\"color: #000; font-size: 24px; margin: 0;\">Confirmer votre compte</h2>
 						  <p style=\"color: #333; font-size: 16px; line-height: 1.5;\">Afin de valider votre inscription, veuillez cliquer sur le lien ci-dessous.</p>
-						  <a href=\"". site_url('activate/' . $data['activ_token'])."\" style=\"display: inline-block; background-color: #d4af37; color: #fff; text-decoration: none; padding: 10px 20px; font-size: 16px; border-radius: 20px;\">Confirmez mon compte</a>
+						  <a href=\"". site_url('activate/' . $data['activ_token'])."\" style=\"display: inline-block; background-color: #d4af37; color: #fff; text-decoration: none; padding: 10px 20px; font-size: 16px; border-radius: 20px;\">Confirmer mon compte</a>
 						</td>
 					  </tr>
 					  <!-- Footer -->
