@@ -321,7 +321,10 @@ class AdminController extends BaseController
             $order['products'] = $orderProductModel->getProductsByOrder($order['id_order']);
         }
 
-        $data = ['orders' => $orders];
+        $data = [
+            'pageTitle' => 'Historique',
+            'orders' => $orders
+        ];
 
         echo view('commun/header');
         echo view('Admin/read_historique', $data);

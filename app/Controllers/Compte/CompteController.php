@@ -187,7 +187,10 @@
 				$order['products'] = $orderProductModel->getProductsByOrder($order['id_order']);
 			}
 
-			$data = ['orders' => $orders];
+			$data = [
+				'pageTitle' => 'Historique',
+				'orders' => $orders
+			];
 
 			echo view('commun/header');
 			echo view('Compte/historique', $data);

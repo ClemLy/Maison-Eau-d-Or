@@ -18,6 +18,7 @@
             $products = $productModel->getProducts();
 
 			$data = [
+				'pageTitle' => 'Boutique',
 				'categories' => $categories,
 				'products' => $products,
 			];
@@ -50,6 +51,7 @@
 
 
 			$data = [
+				'pageTitle' => 'Boutique',
 				'categories' => $categories,
 				'category' => $category,
 				'products' => $products
@@ -72,6 +74,7 @@
 			$relatedProducts = $productModel->getProductCategories($id_prod);
 									
 			$data = [
+				'pageTitle' => 'Boutique',
 				'categories' => $categories,
 				'product' => $product,
 				'relatedProducts' => $relatedProducts
