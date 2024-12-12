@@ -54,7 +54,7 @@
                     </p>
 
                     <div class="text-start">
-                        <a href="<?= site_url('order/pdf/' . $order['id_order']) ?>" class="btn history-order-button btn-gold-hover">
+                        <a href="<?= site_url('order/pdf/' . $order['id_order']) ?>" class="btn history-order-button btn-gold-hover" style="color:#FFF;">
                             Afficher bon de commande
                         </a>
                     </div>

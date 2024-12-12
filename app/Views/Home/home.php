@@ -153,7 +153,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-black mt-3 btn-gold-hover" data-bs-toggle="offcanvas" data-bs-target="#panier_sideMenu">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
+                        <button class="btn btn-black mt-3 btn-gold-hover" data-bs-toggle="offcanvas" data-bs-target="#panier_sideMenu"  style="color:#FFF!important;">Ajouter au panier <i class="fas fa-shopping-cart"></i></button>
                     </form>
 
                 </div>
